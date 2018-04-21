@@ -12,7 +12,7 @@ to minimize the size of the generated Docker image.
 
 # Requirements
 
-Docker must be installed. That's it. You do not need a Java JDK or Maven.
+Docker must be installed. That's it. You do not need a Java JDK or Maven installed.
 
 
 # Usage and Demo
