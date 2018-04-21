@@ -7,6 +7,11 @@ The Docker build uses a [multi-stage build setup](https://docs.docker.com/develo
 to minimize the size of the generated Docker image.
 
 
+# Requirements
+
+Docker must be installed. That's it. You do not need a Java JDK or Maven.
+
+
 # Usage and Demo
 
 **Step 1:** Create the Docker image `miguno/java-docker-build:latest` according to [Dockerfile](Dockerfile).
