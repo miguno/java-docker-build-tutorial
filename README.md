@@ -46,9 +46,9 @@ You can also build, test, package, and run the Java application locally (without
 if you have JDK 8+ and Maven installed.
 
 ```shell
-# Build, test, package the application
+# Build, test, package the application locally
 $ mvn package
 
-# Run the application
+# Run the application locally
 $ java -jar target/app.jar
 ```
