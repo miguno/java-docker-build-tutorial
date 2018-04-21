@@ -11,6 +11,7 @@ to minimize the size of the generated Docker image.
 
 **Step 1:** Create the Docker image `miguno/java-docker-build:latest` according to [Dockerfile](Dockerfile).
 This step uses Maven to build, test, and package the Java application according to [pom.xml](pom.xml).
+The resulting image is 87MB in size.
 
 ```shell
 # This may take a few minutes.
