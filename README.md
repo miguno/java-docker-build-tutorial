@@ -23,7 +23,7 @@ according to [pom.xml](pom.xml).  The resulting image is 87MB in size.
 
 ```shell
 # This may take a few minutes.
-$ ./build_image.sh
+$ ./create_image.sh
 ```
 
 > Example output:
@@ -37,7 +37,7 @@ $ ./build_image.sh
 **Step 2:** Start a container for the Docker image.
 
 ```shell
-$ ./run_image.sh
+$ ./start_container.sh
 ```
 
 > Example output:
