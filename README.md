@@ -29,7 +29,6 @@ $ docker build -t miguno/java-docker-build-tutorial:latest .
 **Step 2:** Start a container for the Docker image.
 
 ```shell
-$ ./start_container.sh
 $ docker run -p 8123:8123 miguno/java-docker-build-tutorial:latest
 ```
 
