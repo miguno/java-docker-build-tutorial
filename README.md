@@ -23,30 +23,15 @@ according to [pom.xml](pom.xml).  The resulting image is 87MB in size.
 
 ```shell
 # This may take a few minutes.
-$ ./create_image.sh
+$ docker build -t miguno/java-docker-build:latest .
 ```
-
-> Example output:
->
-> ```
-> Building image 'miguno/java-docker-build:latest'
-> ...
-> Successfully tagged miguno/java-docker-build:latest
-> ```
 
 **Step 2:** Start a container for the Docker image.
 
 ```shell
 $ ./start_container.sh
+$ docker run -p 8123:8123 miguno/java-docker-build:latest
 ```
-
-> Example output:
->
-> ```
-> Starting container for image 'miguno/java-docker-build:latest', exposing port 8123/tcp
-> ...
-> Endpoint is available at http://0.0.0.0:8123/status
-> ```
 
 **Step 3:** Open another terminal and access the example API endpoint.
 
