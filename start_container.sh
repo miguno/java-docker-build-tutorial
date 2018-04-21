@@ -1,6 +1,6 @@
 #!/bin/bash
 
-declare -r IMAGE_NAME="miguno/java-docker-build"
+declare -r IMAGE_NAME="miguno/java-docker-build-tutorial"
 declare -r IMAGE_TAG="latest"
 declare -r APP_PORT="8123"
 

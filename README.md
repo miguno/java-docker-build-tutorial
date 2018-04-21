@@ -17,20 +17,20 @@ Docker must be installed. That's it. You do not need a Java JDK or Maven.
 
 # Usage and Demo
 
-**Step 1:** Create the Docker image `miguno/java-docker-build:latest` according to [Dockerfile](Dockerfile).
+**Step 1:** Create the Docker image according to [Dockerfile](Dockerfile).
 This step uses Maven to build, test, and package the [Java application](src/main/java/com/miguno/App.java)
 according to [pom.xml](pom.xml).  The resulting image is 87MB in size.
 
 ```shell
 # This may take a few minutes.
-$ docker build -t miguno/java-docker-build:latest .
+$ docker build -t miguno/java-docker-build-tutorial:latest .
 ```
 
 **Step 2:** Start a container for the Docker image.
 
 ```shell
 $ ./start_container.sh
-$ docker run -p 8123:8123 miguno/java-docker-build:latest
+$ docker run -p 8123:8123 miguno/java-docker-build-tutorial:latest
 ```
 
 **Step 3:** Open another terminal and access the example API endpoint.
