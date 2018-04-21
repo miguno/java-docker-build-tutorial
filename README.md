@@ -1,5 +1,7 @@
 # Tutorial: Create a Docker image for a Java application
 
+[![Build Status](https://travis-ci.org/miguno/java-docker-build-tutorial.svg?branch=master)](https://travis-ci.org/miguno/java-docker-build-tutorial)
+
 A template project to create a Docker image for a Java application.
 The example application exposes an HTTP endpoint.
 
