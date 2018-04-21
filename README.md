@@ -9,6 +9,8 @@ The example application exposes an HTTP endpoint.
 The Docker build uses a [multi-stage build setup](https://docs.docker.com/develop/develop-images/multistage-build/)
 to minimize the size of the generated Docker image.
 
+> **Golang developer?** Check out https://github.com/miguno/golang-docker-build-tutorial
+
 
 # Requirements
 
