@@ -42,9 +42,13 @@ $ curl http://localhost:8123/status
 
 # Notes
 
-You can also build, test, and package the Java application locally (without Docker)
+You can also build, test, package, and run the Java application locally (without Docker)
 if you have JDK 8+ and Maven installed.
 
 ```shell
+# Build, test, package the application
 $ mvn package
+
+# Run the application
+$ java -jar target/app.jar
 ```
