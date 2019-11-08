@@ -16,3 +16,4 @@ COPY --from=builder /usr/src/myapp/target/app.jar .
 
 EXPOSE 8123
 ENTRYPOINT ["java", "-jar", "./app.jar"]
+
