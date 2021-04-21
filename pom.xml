@@ -20,7 +20,7 @@
 
   <properties>
     <java.version>8</java.version>
-    <jersey.version>2.27</jersey.version>
+    <jersey.version>2.34</jersey.version>
     <junit.version>5.7.1</junit.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
