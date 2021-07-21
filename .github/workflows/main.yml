@@ -56,8 +56,8 @@ jobs:
       env:
         ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
         ECR_REPOSITORY: java
-        IMAGE_TAG: samplejava.latest
+        IMAGE_TAG: ${{ github.sha }}
     - name: Build and push
       run: |
-        docker build --pull -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
