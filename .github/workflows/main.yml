@@ -39,6 +39,7 @@ jobs:
       
   codeqljobs:
     name: Analyze
+    needs: testjobs
     runs-on: ubuntu-latest
     permissions:
       actions: read
@@ -86,6 +87,8 @@ jobs:
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v1
   uploadresultsjobs:
+    name: sarif results
+    needs: codeqljobs
     runs-on: ubuntu-latest
     permissions:
       security-events: write
