@@ -37,30 +37,6 @@ jobs:
     - name: Test with Maven
       run: mvn -B test --file pom.xml
       
-  deployjobs:
-    name: deploy
-    needs: testjobs
-    runs-on: ubuntu-latest
-    steps:
-    - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v1
-      with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: ap-south-1
-    - name: Login to Amazon ECR
-      id: login-ecr
-      uses: aws-actions/amazon-ecr-login@v1
-    - name: Build, tag, and push image to Amazon ECR
-      uses: actions/checkout@v2
-    - name: Build and push
-      env:
-        ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
-        ECR_REPOSITORY: java
-        IMAGE_TAG: samplejava.latest
-      run: |
-        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
   codeqljobs:
     name: Analyze
     runs-on: ubuntu-latest
@@ -109,3 +85,17 @@ jobs:
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v1
+  uploadresultsjobs:
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+    steps:
+      # This step checks out a copy of your repository.
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Upload SARIF file
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          # Path to SARIF file relative to the root of the repository
+          sarif_file: results.sarif
+    
