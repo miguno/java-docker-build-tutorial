@@ -36,69 +36,17 @@ jobs:
         distribution: 'adopt'
     - name: Test with Maven
       run: mvn -B test --file pom.xml
-      
-  codeqljobs:
-    name: Analyze
-    needs: testjobs
+  notifyjobs:
+    name: notify
+    needs: buildjobs
     runs-on: ubuntu-latest
-    permissions:
-      actions: read
-      contents: read
-      security-events: write
-
-    strategy:
-      fail-fast: false
-      matrix:
-        language: [ 'java' ]
-        # CodeQL supports [ 'cpp', 'csharp', 'go', 'java', 'javascript', 'python' ]
-        # Learn more:
-        # https://docs.github.com/en/free-pro-team@latest/github/finding-security-vulnerabilities-and-errors-in-your-code/configuring-code-scanning#changing-the-languages-that-are-analyzed
-
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
-    # Initializes the CodeQL tools for scanning.
-    - name: Initialize CodeQL
-      uses: github/codeql-action/init@v1
+    - name: Send a message to Microsoft Teams
+      uses: aliencube/microsoft-teams-actions@v0.8.0
       with:
-        languages: ${{ matrix.language }}
-        # If you wish to specify custom queries, you can do so here or in a config file.
-        # By default, queries listed here will override any specified in a config file.
-        # Prefix the list here with "+" to use these queries and those in the config file.
-        # queries: ./path/to/local/query, your-org/your-repo/queries@main
-
-    # Autobuild attempts to build any compiled languages  (C/C++, C#, or Java).
-    # If this step fails, then you should remove it and run the build manually (see below)
-    - name: Autobuild
-      uses: github/codeql-action/autobuild@v1
-
-    # ℹ️ Command-line programs to run using the OS shell.
-    # 📚 https://git.io/JvXDl
-
-    # ✏️ If the Autobuild fails above, remove it and uncomment the following three lines
-    #    and modify them (or add more) to build your code if your project
-    #    uses a compiled language
-
-    #- run: |
-    #   make bootstrap
-    #   make release
-
-    - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v1
-  uploadresultsjobs:
-    name: sarif results
-    needs: codeqljobs
-    runs-on: ubuntu-latest
-    permissions:
-      security-events: write
-    steps:
-      # This step checks out a copy of your repository.
-      - name: Checkout repository
-        uses: actions/checkout@v2
-      - name: Upload SARIF file
-        uses: github/codeql-action/upload-sarif@v1
-        with:
-          # Path to SARIF file relative to the root of the repository
-          sarif_file: results.sarif
+        webhook_uri: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
+        title: CI pipeline
+        text: successfully done the build and test job
+   
+  
     
