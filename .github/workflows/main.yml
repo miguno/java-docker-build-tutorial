@@ -47,9 +47,9 @@ jobs:
       with:
         webhook_uri: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
         title: CI pipeline
-        text: successfully done the build and test job
-        status: ${{ job.status == 'success' && needs.testsjob.result == 'success' }}
-        theme_color: 17a2b8
+        text: Build and test is successfull
+        notification-summary: ${{ job.status == 'success' && needs.testsjob.result == 'success' }}
+        theme_color: 28a745
    
   
     
