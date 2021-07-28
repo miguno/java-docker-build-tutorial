@@ -43,10 +43,13 @@ jobs:
     steps:
     - name: Send a message to Microsoft Teams
       uses: aliencube/microsoft-teams-actions@v0.8.0
+      if: always()
       with:
         webhook_uri: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
         title: CI pipeline
         text: successfully done the build and test job
+        status: ${{ job.status == 'success' && needs.testsjob.result == 'success' }}
+        theme_color: 17a2b8
    
   
     
