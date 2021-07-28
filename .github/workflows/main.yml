@@ -38,7 +38,7 @@ jobs:
       run: mvn -B test --file pom.xml
   notifyjobs:
     name: notify
-    needs: buildjobs
+    needs: testjobs
     runs-on: ubuntu-latest
     steps:
     - name: Send a message to Microsoft Teams
