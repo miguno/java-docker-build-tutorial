@@ -50,6 +50,6 @@ jobs:
         if: always()
         with:
           webhook_uri: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
-          status: ${{ job.status == 'success' && needs.testsjob.result == 'success' }}
+          status: ${{ success() && needs.testsjob.result == 'success' }}
   
     
