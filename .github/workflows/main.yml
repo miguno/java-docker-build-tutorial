@@ -48,10 +48,9 @@ jobs:
         title: CI pipeline
         text: Build and test is successfull
         theme_color: 28a745
-        #sections: '[{ "activityImage": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png", "activityTitle": "GitHub Action invoked",  "activitySubtitle": "Event triggered by ${{ github.event.head_commit.author.name }}", "activityText": "Commit message: [${{ github.event.head_commit.message}}](${{ github.event.head_commit.url }})" }]'
-        sections: '[{"activityImage": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png", "activityTitle": "Approve or Decline the workflow", "activitySubtitle": "Event triggered by ${{ github.event.head_commit.author.name }}"}]'
-        #actions: '[{ "@type": "OpenUri", "name": "View Status", "targets": [{ "os": "default", "uri": "${{ github.event.head_commit.url }}" }] }]'
-        actions: '[{ "@type": "OpenUri", "name": "Approve", "name": "Decline" "targets": [{ "os": "default", , "uri": "${{ github.event.approve_button.url }}" }] }]'
-        view-status-action-text: ${{ job.status == 'success' && needs.testsjob.result == 'success' }}
+        sections: '[{ "activityImage": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png", "activityTitle": "GitHub Action invoked",  "activitySubtitle": "Event triggered by ${{ github.event.head_commit.author.name }}", "activityText": "Commit message: [${{ github.event.head_commit.message}}](${{ github.event.head_commit.url }})" }]'
+        #sections: '[{"activityImage": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png", "activityTitle": "Approve or Decline the workflow", "activitySubtitle": "Event triggered by ${{ github.event.head_commit.author.name }}"}]'
+        actions: '[{ "@type": "OpenUri", "name": "View Status", "targets": [{ "os": "default", "uri": "${{ github.event.head_commit.url }}" }] }]'
+        #actions: '[{ "@type": "OpenUri", "name": "Approve", "name": "Decline" "targets": [{ "os": "default", , "uri": "${{ github.event.approve_button.url }}" }] }]'
   
     
