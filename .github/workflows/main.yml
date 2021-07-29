@@ -43,11 +43,11 @@ jobs:
     if: always()
     steps:
       - name: Tear Down
-        run: exit 0
+        run: exit 1
         
       - name: Notify via microsoft teams
         uses: aliencube/microsoft-teams-actions@v0.8.0
-        if: failure()
+        if: always()
         with:
           webhook_uri: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
           status: ${{ job.status == 'success' && needs.testsjob.result == 'success' }}
