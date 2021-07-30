@@ -23,6 +23,10 @@ jobs:
         distribution: 'adopt'
     - name: Build with Maven
       run:  mvn -B package --file pom.xml
+    - uses: actions/upload-artifact@v2
+      with:
+        name: my-artifact
+        path: path/to/artifact/
   testjobs:
     name: test
     needs: buildjobs
@@ -52,14 +56,15 @@ jobs:
         #sections: '[{"activityImage": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png", "activityTitle": "Approve or Decline the workflow", "activitySubtitle": "Event triggered by ${{ github.event.head_commit.author.name }}"}]'
         actions: '[{ "@type": "OpenUri", "name": "View Status", "targets": [{ "os": "default", "uri": "${{ github.event.head_commit.url }}" }] }]'
         #actions: '[{ "@type": "OpenUri", "name": "Approve", "name": "Decline" "targets": [{ "os": "default", , "uri": "${{ github.event.approve_button.url }}" }] }]'
-  stagingjob:
-    needs: buildjobs
+  DeployStaging:
+    name: Deploy to Staging
+    needs: testjobs
     runs-on: ubuntu-latest
+    environment:
+      name: staging
+      url: ${{ steps.deploy_staging.outputs.webapp-url }}
     steps:
-    - name: Deploy to staging
-      env:
-         name: staging
-         url: ${{ steps.deploy_staging.outputs.webapp-url }}
-
+      - name: Deploy
+        run: echo I am deploying
   
     
