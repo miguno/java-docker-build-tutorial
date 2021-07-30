@@ -55,10 +55,11 @@ jobs:
   stagingjob:
     needs: buildjobs
     runs-on: ubuntu-latest
-    name: Deploy to staging
-    environment:
-      name: staging
-      url: ${{ steps.deploy_staging.outputs.webapp-url }}
+    steps:
+    - name: Deploy to staging
+      env:
+         name: staging
+         url: ${{ steps.deploy_staging.outputs.webapp-url }}
 
   
     
