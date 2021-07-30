@@ -23,10 +23,7 @@ jobs:
         distribution: 'adopt'
     - name: Build with Maven
       run:  mvn -B package --file pom.xml
-    - uses: actions/upload-artifact@v2
-      with:
-        name: my-artifact
-        path: path/to/artifact/
+      
   notification:
     needs: build
     runs-on: ubuntu-latest
