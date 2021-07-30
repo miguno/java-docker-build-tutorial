@@ -10,7 +10,7 @@ on:
     branches: [ master ]
 
 jobs:
-  buildjobs:
+  build:
     name: build
     runs-on: ubuntu-latest
 
@@ -27,10 +27,12 @@ jobs:
       with:
         name: my-artifact
         path: path/to/artifact/
-  testjobs:
+  QA:
     name: test
-    needs: buildjobs
+    needs: build
     runs-on: ubuntu-latest
+    environment:
+      name: QA
     steps: 
     - uses: actions/checkout@v2
     - name: Set up JDK 11
@@ -41,7 +43,7 @@ jobs:
     - name: Test with Maven
       run: mvn -B test --file pom.xml
   notifyjobs:
-    needs: testjobs
+    needs: QA
     runs-on: ubuntu-latest
     steps:
     - name: Send a message to Microsoft Teams
@@ -58,11 +60,10 @@ jobs:
         #actions: '[{ "@type": "OpenUri", "name": "Approve", "name": "Decline" "targets": [{ "os": "default", , "uri": "${{ github.event.approve_button.url }}" }] }]'
   DeployStaging:
     name: Deploy to Staging
-    needs: testjobs
+    needs: QA
     runs-on: ubuntu-latest
     environment:
       name: staging
-      url: ${{ steps.deploy_staging.outputs.webapp-url }}
     steps:
       - name: Deploy
         run: echo I am deploying
