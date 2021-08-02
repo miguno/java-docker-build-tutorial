@@ -6,7 +6,7 @@ RUN java -version
 
 COPY . /usr/src/myapp/
 WORKDIR /usr/src/myapp/
-RUN apk --no-cache add maven && mvn --version
+RUN apt-get --no-cache add maven && mvn --version
 RUN mvn package
 
 # Stage 2 (to create a downsized "container executable", ~87MB)
