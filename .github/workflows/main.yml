@@ -75,7 +75,7 @@ jobs:
       name: staging
     steps:
       - name: Login to Docker Hub
-        run: docker login docker.io "${{ secrets.Docker_Username }}" --password "${{ secrets.Docker_Password }}"
+        run: docker login docker.io --username "${{ secrets.Docker_Username }}" --password "${{ secrets.Docker_Password }}"
       - name: Build the Docker Image 
         run: docker build . --file Dockerfile --tag  hasinireddy24/samplenodejs
     
