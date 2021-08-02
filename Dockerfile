@@ -1,7 +1,7 @@
 # Multi-stage build setup (https://docs.docker.com/develop/develop-images/multistage-build/)
 
 # Stage 1 (to create a "build" image, ~140MB)
-FROM openjdk:8-jdk-alpine3.7 AS builder
+FROM openjdk:11
 RUN java -version
 
 COPY . /usr/src/myapp/
