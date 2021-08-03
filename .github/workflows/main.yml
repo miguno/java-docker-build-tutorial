@@ -4,7 +4,6 @@
 name: Java CI with Maven
 
 on:
-  workflow_dispatch:
   push:
     branches: [ master ]
   pull_request:
@@ -64,10 +63,6 @@ jobs:
         title: CI pipeline
         text: Test is successful waiting for the approval to deploy
         theme_color: 28a745
-        #sections: '[{ "activityImage": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png", "activityTitle": "GitHub Action invoked",  "activitySubtitle": "Event triggered by ${{ github.event.head_commit.author.name }}", "activityText": "Commit message: [${{ github.event.head_commit.message}}](${{ github.event.head_commit.url }})" }]'
-        #sections: '[{"activityImage": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png", "activityTitle": "Approve or Decline the workflow", "activitySubtitle": "Event triggered by ${{ github.event.head_commit.author.name }}"}]'
-        #actions: '[{ "@type": "OpenUri", "name": "View Status", "targets": [{ "os": "default", "uri": "${{ github.event.head_commit.url }}" }] }]'
-        #actions: '[{ "@type": "OpenUri", "name": "Approve", "name": "Decline" "targets": [{ "os": "default", , "uri": "${{ github.event.approve_button.url }}" }] }]'
   DeployStaging:
     name: Deploy to Staging
     needs: QA
