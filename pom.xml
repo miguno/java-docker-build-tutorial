@@ -24,6 +24,11 @@
     <junit.version>5.7.1</junit.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
+	<properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+</properties>
 
   <dependencyManagement>
     <dependencies>
