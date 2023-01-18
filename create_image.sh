@@ -12,4 +12,6 @@ echo "Building image '$IMAGE_NAME:$IMAGE_TAG'"
 # Force x86_64 as the platform.  This workaround is needed on Apple Silicon
 # machines.  Details at https://stackoverflow.com/questions/70736928/.
 declare -r DOCKER_OPTIONS="--platform linux/x86_64/v8"
-docker build $DOCKER_OPTIONS -t "$IMAGE_NAME":"$IMAGE_TAG" .
+# Use BuildKit, i.e. `buildx build` instead of just `build`
+# https://docs.docker.com/build/
+docker buildx build $DOCKER_OPTIONS -t "$IMAGE_NAME":"$IMAGE_TAG" .
