@@ -1,4 +1,4 @@
-# Multi-stage build setup (https://docs.docker.com/develop/develop-images/multistage-build/)
+# Multi-stage build setup (https://docs.docker.com/build/building/multi-stage/)
 
 # Stage 1 (to create a "build" image, ~140MB)
 FROM eclipse-temurin:17-jdk-alpine AS builder
