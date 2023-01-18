@@ -7,6 +7,8 @@ RUN java -version
 COPY . /usr/src/myapp/
 WORKDIR /usr/src/myapp/
 RUN set -Eeux \
+    && apk update \
+    && apk upgrade \
     && apk --no-cache add maven \
     # smoke test
     && mvn --version
