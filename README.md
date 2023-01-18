@@ -6,22 +6,28 @@
 A template project to create a Docker image for a Java application.
 The example application exposes an HTTP endpoint.
 
-The Docker build uses a [multi-stage build setup](https://docs.docker.com/develop/develop-images/multistage-build/)
-to minimize the size of the generated Docker image.
-
 > **Golang developer?** Check out https://github.com/miguno/golang-docker-build-tutorial
 
+Features:
+
+* The Docker build uses a
+  [multi-stage build setup](https://docs.docker.com/develop/develop-images/multistage-build/)
+  to minimize the size of the generated Docker image.
+* Java 17 (Eclipse Temurin)
+* Junit 5 for demonstrating how to integrate unit testing
+* Maven for build management
 
 # Requirements
 
-Docker must be installed. That's it. You do not need a Java JDK or Maven installed.
-
+Docker must be installed on your local machine.  That's it.  You do not need a
+Java JDK or Maven installed.
 
 # Usage and Demo
 
 **Step 1:** Create the Docker image according to [Dockerfile](Dockerfile).
-This step uses Maven to build, test, and package the [Java application](src/main/java/com/miguno/App.java)
-according to [pom.xml](pom.xml).  The resulting image is 87MB in size.
+This step uses Maven to build, test, and package the
+[Java application](src/main/java/com/miguno/App.java) according to
+[pom.xml](pom.xml).  The resulting image is 87MB in size.
 
 ```shell
 # Alternatively, run `./create_image.sh`.
@@ -45,13 +51,13 @@ $ curl http://localhost:8123/status
 
 # Notes
 
-You can also build, test, package, and run the Java application locally (without Docker)
-if you have JDK 17+ and Maven installed.
+You can also build, test, package, and run the Java application locally
+(without Docker) if you have JDK 17+ and Maven installed.
 
 ```shell
 # Build, test, package the application locally
-$ mvn package
+$ mvn clean package
 
-# Run the application locally
+# Run the example application locally
 $ java -jar target/app.jar
 ```
