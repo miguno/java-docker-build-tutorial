@@ -25,12 +25,14 @@ according to [pom.xml](pom.xml).  The resulting image is 87MB in size.
 
 ```shell
 # This may take a few minutes.
-$ docker build -t miguno/java-docker-build-tutorial:latest .
+# Alternatively, run `./create_image.sh`.
+$ docker build --platform linux/x86_64/v8 -t miguno/java-docker-build-tutorial:latest .
 ```
 
 **Step 2:** Start a container for the Docker image.
 
 ```shell
+# Alternatively, run `./start_container.sh`.
 $ docker run -p 8123:8123 miguno/java-docker-build-tutorial:latest
 ```
 
@@ -41,11 +43,10 @@ $ curl http://localhost:8123/status
 {"status": "idle"}
 ```
 
-
 # Notes
 
 You can also build, test, package, and run the Java application locally (without Docker)
-if you have JDK 8+ and Maven installed.
+if you have JDK 17+ and Maven installed.
 
 ```shell
 # Build, test, package the application locally
