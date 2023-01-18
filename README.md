@@ -52,7 +52,8 @@ miguno/java-docker-build-tutorial   latest    1403a608d055   4 minutes ago   176
 $ docker run -p 8123:8123 miguno/java-docker-build-tutorial:latest
 ```
 
-**Step 3:** Open another terminal and access the example API endpoint.
+**Step 3:** Open another terminal and access the example API endpoint of the
+running container.
 
 ```shell
 $ curl http://localhost:8123/status
