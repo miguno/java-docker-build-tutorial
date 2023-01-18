@@ -12,7 +12,8 @@ Features:
 
 * The Docker build uses a
   [multi-stage build setup](https://docs.docker.com/build/building/multi-stage/)
-  to minimize the size of the generated Docker image, which is 176MB.
+  to minimize the size of the generated Docker image, which is 176MB
+* Supports [Docker BuildKit](https://docs.docker.com/build/)
 * Java 17 (Eclipse Temurin)
 * Junit 5 for demonstrating how to integrate unit testing
 * Maven for build management
