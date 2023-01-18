@@ -24,8 +24,8 @@ This step uses Maven to build, test, and package the [Java application](src/main
 according to [pom.xml](pom.xml).  The resulting image is 87MB in size.
 
 ```shell
-# This may take a few minutes.
 # Alternatively, run `./create_image.sh`.
+# ***Creating an image may take a few minutes!***
 $ docker build --platform linux/x86_64/v8 -t miguno/java-docker-build-tutorial:latest .
 ```
 
