@@ -30,7 +30,6 @@ This step uses Maven to build, test, and package the
 [pom.xml](pom.xml).  The resulting image is 170MB in size.
 
 ```shell
-# Alternatively, run `./create_image.sh`.
 # ***Creating an image may take a few minutes!***
 $ docker build --platform linux/x86_64/v8 -t miguno/java-docker-build-tutorial:latest .
 
@@ -42,7 +41,6 @@ $ docker buildx build --platform linux/x86_64/v8 -t miguno/java-docker-build-tut
 **Step 2:** Start a container for the Docker image.
 
 ```shell
-# Alternatively, run `./start_container.sh`.
 $ docker run -p 8123:8123 miguno/java-docker-build-tutorial:latest
 ```
 
