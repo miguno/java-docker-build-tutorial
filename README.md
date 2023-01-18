@@ -34,8 +34,9 @@ This step uses Maven to build, test, and package the
 # ***Creating an image may take a few minutes!***
 $ docker build --platform linux/x86_64/v8 -t miguno/java-docker-build-tutorial:latest .
 
-# You can also build with the new BuildKit:
-$ DOCKER_BUILDKIT=1 docker build --platform linux/x86_64/v8 -t miguno/java-docker-build-tutorial:latest .
+# You can also build with the new BuildKit.
+# https://docs.docker.com/build/
+$ docker buildx build --platform linux/x86_64/v8 -t miguno/java-docker-build-tutorial:latest .
 ```
 
 **Step 2:** Start a container for the Docker image.
