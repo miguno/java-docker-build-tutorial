@@ -28,7 +28,8 @@ Java JDK or Maven installed.
 **Step 1:** Create the Docker image according to [Dockerfile](Dockerfile).
 This step uses Maven to build, test, and package the
 [Java application](src/main/java/com/miguno/App.java) according to
-[pom.xml](pom.xml).  The resulting image is 176MB in size.
+[pom.xml](pom.xml).  The resulting image is 176MB in size, of which 170MB are
+the underlying `eclipse-temurin` image.
 
 ```shell
 # ***Creating an image may take a few minutes!***
