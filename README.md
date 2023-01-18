@@ -27,7 +27,7 @@ Java JDK or Maven installed.
 **Step 1:** Create the Docker image according to [Dockerfile](Dockerfile).
 This step uses Maven to build, test, and package the
 [Java application](src/main/java/com/miguno/App.java) according to
-[pom.xml](pom.xml).  The resulting image is 170MB in size.
+[pom.xml](pom.xml).  The resulting image is 176MB in size.
 
 ```shell
 # ***Creating an image may take a few minutes!***
@@ -36,6 +36,14 @@ $ docker build --platform linux/x86_64/v8 -t miguno/java-docker-build-tutorial:l
 # You can also build with the new BuildKit.
 # https://docs.docker.com/build/
 $ docker buildx build --platform linux/x86_64/v8 -t miguno/java-docker-build-tutorial:latest .
+```
+
+Optionally, you can check the size of the generated Docker image:
+
+```shell
+$ docker images miguno/java-docker-build-tutorial
+REPOSITORY                          TAG       IMAGE ID       CREATED         SIZE
+miguno/java-docker-build-tutorial   latest    1403a608d055   4 minutes ago   176MB
 ```
 
 **Step 2:** Start a container for the Docker image.
