@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 declare -r IMAGE_NAME="miguno/java-docker-build-tutorial"
 declare -r IMAGE_TAG="latest"
