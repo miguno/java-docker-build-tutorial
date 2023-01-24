@@ -15,7 +15,7 @@ Features:
   to minimize the size of the generated Docker image, which is 176MB
 * Supports [Docker BuildKit](https://docs.docker.com/build/)
 * Java 17 (Eclipse Temurin)
-* Junit 5 for demonstrating how to integrate unit testing
+* [JUnit 5](https://github.com/junit-team/junit5) for demonstrating how to integrate unit testing
 * Maven for build management
 * [GitHub Actions workflows](https://github.com/miguno/java-docker-build-tutorial/actions) for
   [Maven](https://github.com/miguno/java-docker-build-tutorial/actions/workflows/maven.yml)
