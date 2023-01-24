@@ -11,6 +11,12 @@ default:
 evaluate:
     @just --evaluate
 
+# print system information such as OS and architecture
+system-info:
+  @echo "architecture: {{arch()}}"
+  @echo "os: {{os()}}"
+  @echo "os family: {{os_family()}}"
+
 # create a docker image (requires Docker)
 docker-image-create:
     @echo "Creating a docker image ..."
