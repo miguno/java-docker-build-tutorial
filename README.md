@@ -21,6 +21,12 @@ Features:
   [Maven](https://github.com/miguno/java-docker-build-tutorial/actions/workflows/maven.yml)
   and
   [Docker](https://github.com/miguno/java-docker-build-tutorial/actions/workflows/docker-image.yml)
+* Optionally, uses
+  [just](https://github.com/casey/just)
+  ![](https://img.shields.io/github/stars/casey/just)
+  for running common commands conveniently, see [justfile](justfile).
+* Uses [.env](.env) as central configuration to set variables used by
+  [justfile](justfile) and other helper scripts in this project.
 
 # Requirements
 
@@ -64,6 +70,29 @@ running container.
 ```shell
 $ curl http://localhost:8123/status
 {"status": "idle"}
+```
+
+# Usage with just
+
+If you have [just](https://github.com/casey/just) installed, you can run the
+commands above more conveniently:
+
+```shell
+$ just
+Available recipes:
+    default             # print available targets
+    docker-image-create # create a docker image (requires Docker)
+    docker-image-run    # run the docker image (requires Docker)
+    docker-image-size   # size of the docker image (requires Docker)
+    evaluate            # evaluate and print all just variables
+    send-request-to-app # send request to the app's HTTP endpoint (requires running container)
+    system-info         # print system information such as OS and architecture
+```
+
+Example:
+
+```shell
+$ just docker-image-create
 ```
 
 # Notes
