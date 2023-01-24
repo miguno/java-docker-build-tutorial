@@ -17,6 +17,10 @@ Features:
 * Java 17 (Eclipse Temurin)
 * Junit 5 for demonstrating how to integrate unit testing
 * Maven for build management
+* [GitHub Actions workflows](https://github.com/miguno/java-docker-build-tutorial/actions) for
+  [Maven](https://github.com/miguno/java-docker-build-tutorial/actions/workflows/maven.yml)
+  and
+  [Docker](https://github.com/miguno/java-docker-build-tutorial/actions/workflows/docker-image.yml)
 
 # Requirements
 
