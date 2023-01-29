@@ -75,7 +75,7 @@ $ curl http://localhost:8123/status
 # Usage with just
 
 If you have [just](https://github.com/casey/just) installed, you can run the
-commands above more conveniently:
+commands above more conveniently as per this project's [justfile](justfile):
 
 ```shell
 $ just
