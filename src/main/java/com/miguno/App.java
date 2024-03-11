@@ -17,6 +17,9 @@ public class App {
     // create a resource config that scans for JAX-RS resources and providers in com.miguno package
     final ResourceConfig rc = new ResourceConfig().packages("com.miguno");
 
+    // disable WADL
+    rc.property("jersey.config.server.wadl.disableWadl", true);
+
     // create and start a new instance of grizzly http server
     // exposing the Jersey application at BASE_URI
     return GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI), rc);
@@ -24,7 +27,6 @@ public class App {
 
   public static void main(String[] args) {
     startServer();
-    System.out.println(String.format("Jersey app started with WADL available at %sapplication.wadl", BASE_URI));
     System.out.println(String.format("Endpoint is available at %sstatus", BASE_URI));
   }
 }
