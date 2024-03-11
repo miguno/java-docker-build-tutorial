@@ -20,7 +20,7 @@
 
   <properties>
     <java.version>17</java.version>
-    <jersey.version>2.38</jersey.version>
+    <jersey.version>2.41</jersey.version>
     <junit.version>5.9.2</junit.version>
     <jaxb-api.version>2.3.1</jaxb-api.version>
     <maven.compiler.release>${java.version}</maven.compiler.release>
