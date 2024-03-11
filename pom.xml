@@ -20,8 +20,9 @@
 
   <properties>
     <java.version>17</java.version>
-    <jersey.version>2.41</jersey.version>
+    <jersey.version>3.1.5</jersey.version>
     <junit.version>5.10.2</junit.version>
+    <jakarta.activation-api.version>2.1.3</jakarta.activation-api.version>
     <jaxb-api.version>2.3.1</jaxb-api.version>
     <maven.compiler.release>${java.version}</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -62,6 +63,12 @@
           <artifactId>javax.inject</artifactId>
         </exclusion>
       </exclusions>
+    </dependency>
+
+    <dependency>
+      <groupId>jakarta.activation</groupId>
+      <artifactId>jakarta.activation-api</artifactId>
+      <version>${jakarta.activation-api.version}</version>
     </dependency>
 
     <dependency>
