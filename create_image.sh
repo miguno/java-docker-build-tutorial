@@ -12,9 +12,9 @@ echo "Building image '$DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG'..."
 # TIP: Add `--progress=plain` to see the full docker output when you are
 # troubleshooting the build setup of your image.
 #
-# Force x86_64 as the platform.  This workaround is needed on Apple Silicon
-# machines.  Details at https://stackoverflow.com/questions/70736928/.
-declare -r DOCKER_OPTIONS="--platform linux/x86_64/v8"
+# Force amd64 as the platform.  This workaround is needed on Apple Silicon
+# machines.  Details at https://stackoverflow.com/questions/72152446/.
+declare -r DOCKER_OPTIONS="--platform linux/amd64"
 # Use BuildKit, i.e. `buildx build` instead of just `build`
 # https://docs.docker.com/build/
 docker buildx build $DOCKER_OPTIONS -t "$DOCKER_IMAGE_NAME":"$DOCKER_IMAGE_TAG" .
