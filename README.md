@@ -1,4 +1,6 @@
 # Project Template: Create a Docker image for a Java application
+
+[![GitHub forks](https://img.shields.io/github/forks/miguno/java-docker-build-tutorial)](https://github.com/miguno/java-docker-build-tutorial/fork)
 [![Docker workflow status](https://github.com/miguno/java-docker-build-tutorial/actions/workflows/docker-image.yml/badge.svg)](https://github.com/miguno/java-docker-build-tutorial/actions/workflows/docker-image.yml)
 [![Maven workflow status](https://github.com/miguno/java-docker-build-tutorial/actions/workflows/maven.yml/badge.svg)](https://github.com/miguno/java-docker-build-tutorial/actions/workflows/maven.yml)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
@@ -10,27 +12,27 @@ The example application exposes an HTTP endpoint.
 
 Features:
 
-* The Docker build uses a
+- The Docker build uses a
   [multi-stage build setup](https://docs.docker.com/build/building/multi-stage/)
   to minimize the size of the generated Docker image, which is 176MB
-* Supports [Docker BuildKit](https://docs.docker.com/build/)
-* Java 17 (Eclipse Temurin)
-* [JUnit 5](https://github.com/junit-team/junit5) for demonstrating how to integrate unit testing
-* Maven for build management
-* [GitHub Actions workflows](https://github.com/miguno/java-docker-build-tutorial/actions) for
+- Supports [Docker BuildKit](https://docs.docker.com/build/)
+- Java 17 (Eclipse Temurin)
+- [JUnit 5](https://github.com/junit-team/junit5) for demonstrating how to integrate unit testing
+- Maven for build management
+- [GitHub Actions workflows](https://github.com/miguno/java-docker-build-tutorial/actions) for
   [Maven](https://github.com/miguno/java-docker-build-tutorial/actions/workflows/maven.yml)
   and
   [Docker](https://github.com/miguno/java-docker-build-tutorial/actions/workflows/docker-image.yml)
-* Optionally, uses
+- Optionally, uses
   [just](https://github.com/casey/just)
   ![](https://img.shields.io/github/stars/casey/just)
   for running common commands conveniently, see [justfile](justfile).
-* Uses [.env](.env) as central configuration to set variables used by
+- Uses [.env](.env) as central configuration to set variables used by
   [justfile](justfile) and other helper scripts in this project.
 
 # Requirements
 
-Docker must be installed on your local machine.  That's it.  You do not need a
+Docker must be installed on your local machine. That's it. You do not need a
 Java JDK or Maven installed.
 
 # Usage and Demo
@@ -38,7 +40,7 @@ Java JDK or Maven installed.
 **Step 1:** Create the Docker image according to [Dockerfile](Dockerfile).
 This step uses Maven to build, test, and package the
 [Java application](src/main/java/com/miguno/App.java) according to
-[pom.xml](pom.xml).  The resulting image is 176MB in size, of which 170MB are
+[pom.xml](pom.xml). The resulting image is 176MB in size, of which 170MB are
 the underlying `eclipse-temurin` image.
 
 ```shell
