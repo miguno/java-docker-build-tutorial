@@ -28,7 +28,7 @@ public class App {
     public static void main(String[] args) {
         HttpServer server = startServer();
         if (server.isStarted()) {
-            System.out.println(String.format("Endpoint is available at %sstatus", BASE_URI));
+            System.out.printf("Endpoint is available at %sstatus%n", BASE_URI);
         }
     }
 }
