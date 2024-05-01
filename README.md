@@ -14,7 +14,8 @@ Features:
 
 - The Docker build uses a
   [multi-stage build setup](https://docs.docker.com/build/building/multi-stage/)
-  to minimize the size of the generated Docker image, which is 176MB
+  including a downsized JRE (built inside Docker via `jlink`)
+  to minimize the size of the generated Docker image, which is **102MB**.
 - Supports [Docker BuildKit](https://docs.docker.com/build/)
 - Java 17 (Eclipse Temurin)
 - [JUnit 5](https://github.com/junit-team/junit5) for demonstrating how to integrate unit testing
@@ -40,8 +41,8 @@ Java JDK or Maven installed.
 **Step 1:** Create the Docker image according to [Dockerfile](Dockerfile).
 This step uses Maven to build, test, and package the
 [Java application](src/main/java/com/miguno/App.java) according to
-[pom.xml](pom.xml). The resulting image is 176MB in size, of which 170MB are
-the underlying `eclipse-temurin` image.
+[pom.xml](pom.xml). The resulting image is 102MB in size, of which 44MB are
+the underlying `alpine` image.
 
 ```shell
 # ***Creating an image may take a few minutes!***
@@ -57,7 +58,7 @@ Optionally, you can check the size of the generated Docker image:
 ```shell
 $ docker images miguno/java-docker-build-tutorial
 REPOSITORY                          TAG       IMAGE ID       CREATED         SIZE
-miguno/java-docker-build-tutorial   latest    1403a608d055   4 minutes ago   176MB
+miguno/java-docker-build-tutorial   latest    6eeb79c07157   4 minutes ago   102MB
 ```
 
 **Step 2:** Start a container for the Docker image.
@@ -109,3 +110,10 @@ $ mvn clean package
 # Run the example application locally
 $ java -jar target/app.jar
 ```
+
+# References
+
+- [How to reduce Java Docker image size](https://blog.monosoul.dev/2022/04/25/reduce-java-docker-image-size/)
+  (with `jlink`)
+- [Creating your own runtime using jlink](https://adoptium.net/blog/2021/10/jlink-to-produce-own-runtime/)
+- [Using Jlink in Dockerfiles instead of a JRE](https://adoptium.net/blog/2021/08/using-jlink-in-dockerfiles/)
