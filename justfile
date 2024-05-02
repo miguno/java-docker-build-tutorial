@@ -17,6 +17,14 @@ system-info:
   @echo "os: {{os()}}"
   @echo "os family: {{os_family()}}"
 
+# build the native application locally (requires GraalVM)
+build-native:
+    @./mvnw install -Dnative
+
+# run the application locally (in Quarkus development mode) with hot reload
+dev:
+    @./mvnw quarkus:dev
+
 # create a docker image (requires Docker)
 docker-image-create:
     @echo "Creating a docker image ..."
@@ -31,10 +39,15 @@ docker-image-run:
     @echo "Running container from docker image ..."
     @./start_container.sh
 
+# package the application to create an uber jar
+package:
+    @./mvnw package
+
+# run the application locally.
+run: package
+    @java -jar target/app-runner.jar
+
 # send request to the app's HTTP endpoint (requires running container)
 send-request-to-app:
-    curl http://localhost:8123/greeting
+    curl http://localhost:8123/status
 
-# Run the application locally
-run:
-    @./mvnw spring-boot:run

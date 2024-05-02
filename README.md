@@ -6,7 +6,7 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 A template project to create a Docker image for a Java application.
-The example application uses Spring Boot to expose an HTTP endpoint.
+The example application uses Quarkus to expose an HTTP endpoint.
 
 > **Golang developer?** Check out https://github.com/miguno/golang-docker-build-tutorial
 
@@ -15,7 +15,7 @@ Features:
 - The Docker build uses a
   [multi-stage build setup](https://docs.docker.com/build/building/multi-stage/)
   including a downsized JRE (built inside Docker via `jlink`)
-  to minimize the size of the generated Docker image, which is **122MB**.
+  to minimize the size of the generated Docker image, which is **117MB**.
 - Supports [Docker BuildKit](https://docs.docker.com/build/)
 - Java 17 (Eclipse Temurin)
 - [JUnit 5](https://github.com/junit-team/junit5) for demonstrating how to integrate unit testing
@@ -71,8 +71,8 @@ $ docker run -p 8123:8123 miguno/java-docker-build-tutorial:latest
 running container.
 
 ```shell
-$ curl http://localhost:8123/greeting
-{"id":1,"name":"Hello, World!"}
+$ curl http://localhost:8123/status
+{"status":"idle"}
 ```
 
 # Usage with just
@@ -111,10 +111,10 @@ on Windows).
 $ ./mvnw clean package
 
 # Run the application locally.
-$ java -jar target/app.jar
+$ java -jar target/app-runner.jar
 
 # Alternatively, you can run the application via Maven.
-$ ./mvnw spring-boot:run
+$ ./mvnw quarkus:dev
 ```
 
 # References
