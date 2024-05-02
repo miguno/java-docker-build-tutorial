@@ -17,6 +17,9 @@ Features:
   including a downsized JRE (built inside Docker via `jlink`)
   to minimize the size of the generated Docker image, which is **131MB**.
 - Supports [Docker BuildKit](https://docs.docker.com/build/)
+- Java 21 (Eclipse Temurin)
+- [JUnit 5](https://github.com/junit-team/junit5) for testing
+- Maven for build management, using [Maven Wrapper](https://github.com/apache/maven-wrapper)
 - Supports GraalVM to create
   [native images](https://www.graalvm.org/latest/reference-manual/native-image/)
   (think: native binaries that do not require a JRE to be installed) for the
@@ -24,9 +27,6 @@ Features:
   intentionally does not use these native app images because the majority of
   Java developers do not use GraalVM. If you do want to use native images,
   please modify [Dockerfile](Dockerfile) accordingly.
-- Java 21 (Eclipse Temurin)
-- [JUnit 5](https://github.com/junit-team/junit5) for demonstrating how to integrate unit testing
-- Maven for build management, using [Maven Wrapper](https://github.com/apache/maven-wrapper)
 - [GitHub Actions workflows](https://github.com/miguno/java-docker-build-tutorial/actions) for
   [Maven](https://github.com/miguno/java-docker-build-tutorial/actions/workflows/maven.yml)
   and
