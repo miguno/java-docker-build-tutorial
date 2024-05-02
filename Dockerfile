@@ -41,25 +41,26 @@ ENV PATH="${JAVA_HOME}/bin:${PATH}"
 RUN apk --no-cache add ca-certificates
 
 # Add app user.
-ARG APP_USER=appuser
-ARG APP_USER_ID=1000
-ARG APP_GROUP=apps
-ARG APP_GROUP_ID=1000
-RUN addgroup --gid $APP_GROUP_ID $APP_GROUP
-RUN adduser --no-create-home --disabled-password --ingroup $APP_GROUP --uid $APP_USER_ID $APP_USER
+ARG USER_NAME="appuser"
+ARG USER_ID="1000"
+ARG GROUP_NAME="apps"
+ARG GROUP_ID="1000"
+RUN addgroup --gid $GROUP_ID $GROUP_NAME && \
+    adduser --no-create-home --disabled-password --ingroup $GROUP_NAME --uid $USER_ID $USER_NAME
 
 # Configure work directory.
 ARG APP_DIR=/app
 RUN mkdir $APP_DIR && \
-    chown -R $APP_USER:$APP_GROUP $APP_DIR
+    chown -R $USER_NAME:$GROUP_NAME $APP_DIR
 WORKDIR $APP_DIR
 
 # Copy downsized JRE from builder image.
 COPY --from=builder /minimal-jre $JAVA_HOME
 
 # Copy packaged app from builder image.
-COPY --from=builder --chown=$APP_USER:$APP_GROUP /usr/src/myapp/target/app.jar .
+COPY --from=builder --chown=$USER_NAME:$GROUP_NAME /usr/src/myapp/target/app.jar .
 
-USER $APP_USER:$APP_GROUP
+# Run the application.
+USER $USER_NAME:$GROUP_NAME
 EXPOSE 8123
 ENTRYPOINT ["java", "-jar", "./app.jar"]
