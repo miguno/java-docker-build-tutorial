@@ -85,3 +85,7 @@ send-request-to-app:
 # run the test suite
 test:
     @./mvnw test
+
+# run the test suite for the native application (requires GraalVM)
+test-native:
+    @./mvnw verify -Dnative
