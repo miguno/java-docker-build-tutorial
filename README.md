@@ -15,7 +15,7 @@ Features:
 - The Docker build uses a
   [multi-stage build setup](https://docs.docker.com/build/building/multi-stage/)
   including a downsized JRE (built inside Docker via `jlink`)
-  to minimize the size of the generated Docker image, which is **117MB**.
+  to minimize the size of the generated Docker image, which is **131MB**.
 - Supports [Docker BuildKit](https://docs.docker.com/build/)
 - Supports GraalVM to create
   [native images](https://www.graalvm.org/latest/reference-manual/native-image/)
@@ -24,7 +24,7 @@ Features:
   intentionally does not use these native app images because the majority of
   Java developers do not use GraalVM. If you do want to use native images,
   please modify [Dockerfile](Dockerfile) accordingly.
-- Java 17 (Eclipse Temurin)
+- Java 21 (Eclipse Temurin)
 - [JUnit 5](https://github.com/junit-team/junit5) for demonstrating how to integrate unit testing
 - Maven for build management, using [Maven Wrapper](https://github.com/apache/maven-wrapper)
 - [GitHub Actions workflows](https://github.com/miguno/java-docker-build-tutorial/actions) for
@@ -114,7 +114,7 @@ $ just docker-image-create
 # Notes
 
 You can also build, test, package, and run the Java application locally
-(without Docker) if you have JDK 17+ installed. You do not need to have Maven
+(without Docker) if you have JDK 21+ installed. You do not need to have Maven
 installed, because this repository contains the
 [Maven Wrapper](https://github.com/apache/maven-wrapper) `mvnw` (use `mvnw.cmd`
 on Windows).

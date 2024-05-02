@@ -6,7 +6,7 @@
 ###############################################################################
 # Stage 1 (to create a "build" image, ~360MB)                                 #
 ###############################################################################
-FROM eclipse-temurin:17-jdk-alpine AS builder
+FROM eclipse-temurin:21-jdk-alpine AS builder
 
 # Smoke test to verify if java is available.
 RUN java -version
@@ -29,7 +29,7 @@ WORKDIR /usr/src/myapp/
 RUN ./mvnw package
 
 ###############################################################################
-# Stage 2 (to create a downsized "container executable", ~117MB)              #
+# Stage 2 (to create a downsized "container executable", ~131MB)              #
 ###############################################################################
 FROM alpine:latest
 ENV JAVA_HOME=/jre
