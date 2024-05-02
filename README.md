@@ -23,10 +23,12 @@ Features:
 - Supports GraalVM to create
   [native images](https://www.graalvm.org/latest/reference-manual/native-image/)
   (think: native binaries that do not require a JRE to be installed) for the
-  example application. To keep things simple, the Docker setup of this project
-  intentionally does not use these native app images because the majority of
-  Java developers do not use GraalVM. If you do want to use native images,
-  please modify [Dockerfile](Dockerfile) accordingly.
+  example application. See
+  [Building a Native Exectuable](https://quarkus.io/guides/building-native-image)
+  in the Quarkus documentation. To keep things simple, the Docker setup of this
+  project intentionally does not use these native app images because the
+  majority of Java developers do not use GraalVM. If you do want to use native
+  images, please modify [Dockerfile](Dockerfile) accordingly.
 - [GitHub Actions workflows](https://github.com/miguno/java-docker-build-tutorial/actions) for
   [Maven](https://github.com/miguno/java-docker-build-tutorial/actions/workflows/maven.yml)
   and
