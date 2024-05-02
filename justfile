@@ -34,3 +34,7 @@ docker-image-run:
 # send request to the app's HTTP endpoint (requires running container)
 send-request-to-app:
     curl http://localhost:8123/greeting
+
+# Run the application locally
+run:
+    @./mvnw spring-boot:run

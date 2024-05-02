@@ -107,11 +107,14 @@ installed, because this repository contains the
 on Windows).
 
 ```shell
-# Build, test, package the application locally
+# Build, test, package the application locally.
 $ ./mvnw clean package
 
-# Run the example application locally
+# Run the application locally.
 $ java -jar target/app.jar
+
+# Alternatively, you can run the application via Maven.
+$ ./mvnw spring-boot:run
 ```
 
 # References
