@@ -63,3 +63,6 @@ run:
 send-request-to-app:
     curl http://localhost:8123/status
 
+# run the test suite
+test:
+    @./mvnw test

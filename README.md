@@ -84,6 +84,7 @@ commands above more conveniently as per this project's [justfile](justfile):
 $ just
 Available recipes:
     build-native        # build the native application locally (requires GraalVM)
+    clean               # clean (remove) the build artifacts
     default             # print available targets
     dev                 # run the application locally (in Quarkus development mode) with hot reload
     docker-image-create # create a docker image (requires Docker)
@@ -94,6 +95,7 @@ Available recipes:
     run                 # run the application locally.
     send-request-to-app # send request to the app's HTTP endpoint (requires running container)
     system-info         # print system information such as OS and architecture
+    test                # run the test suite
 ```
 
 Example:
