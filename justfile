@@ -39,13 +39,25 @@ docker-image-run:
     @echo "Running container from docker image ..."
     @./start_container.sh
 
+# clean (remove) the build artifacts
+clean:
+    @./mvnw clean
+
 # package the application to create an uber jar
 package:
     @./mvnw package
 
 # run the application locally.
-run: package
-    @java -jar target/app-runner.jar
+run:
+    #!/usr/bin/env bash
+    APP_JAR="target/app-runner.jar"
+    if [ ! -f "$APP_JAR" ]; then
+        just package
+    else
+        echo "Using existing application jar at $APP_JAR."
+        echo "If you want to recompile, run \`./mvnw package\` (or \`just package\`) manually."
+    fi
+    java -jar "$APP_JAR"
 
 # send request to the app's HTTP endpoint (requires running container)
 send-request-to-app:
