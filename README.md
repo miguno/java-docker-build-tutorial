@@ -83,11 +83,15 @@ commands above more conveniently as per this project's [justfile](justfile):
 ```shell
 $ just
 Available recipes:
+    build-native        # build the native application locally (requires GraalVM)
     default             # print available targets
+    dev                 # run the application locally (in Quarkus development mode) with hot reload
     docker-image-create # create a docker image (requires Docker)
     docker-image-run    # run the docker image (requires Docker)
     docker-image-size   # size of the docker image (requires Docker)
     evaluate            # evaluate and print all just variables
+    package             # package the application to create an uber jar
+    run                 # run the application locally.
     send-request-to-app # send request to the app's HTTP endpoint (requires running container)
     system-info         # print system information such as OS and architecture
 ```
@@ -113,7 +117,7 @@ $ ./mvnw clean package
 # Run the application locally.
 $ java -jar target/app-runner.jar
 
-# Alternatively, you can run the application via Maven.
+# Alternatively, you can run the application in development mode with hot reloading.
 $ ./mvnw quarkus:dev
 ```
 
