@@ -26,14 +26,10 @@ RUN jlink \
 # Build and package the app.
 COPY . /usr/src/myapp/
 WORKDIR /usr/src/myapp/
-RUN set -Eeux \
-    && apk --no-cache add maven \
-    # Smoke test to verify if maven is available.
-    && mvn --version
-RUN mvn package
+RUN ./mvnw package
 
 ###############################################################################
-# Stage 2 (to create a downsized "container executable", ~102MB)              #
+# Stage 2 (to create a downsized "container executable", ~122MB)              #
 ###############################################################################
 FROM alpine:latest
 ENV JAVA_HOME=/jre

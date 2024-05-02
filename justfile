@@ -33,4 +33,4 @@ docker-image-run:
 
 # send request to the app's HTTP endpoint (requires running container)
 send-request-to-app:
-    curl http://localhost:8123/status
+    curl http://localhost:8123/greeting

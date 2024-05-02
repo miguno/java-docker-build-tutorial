@@ -6,7 +6,7 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 A template project to create a Docker image for a Java application.
-The example application exposes an HTTP endpoint.
+The example application uses Spring Boot to expose an HTTP endpoint.
 
 > **Golang developer?** Check out https://github.com/miguno/golang-docker-build-tutorial
 
@@ -15,11 +15,11 @@ Features:
 - The Docker build uses a
   [multi-stage build setup](https://docs.docker.com/build/building/multi-stage/)
   including a downsized JRE (built inside Docker via `jlink`)
-  to minimize the size of the generated Docker image, which is **102MB**.
+  to minimize the size of the generated Docker image, which is **122MB**.
 - Supports [Docker BuildKit](https://docs.docker.com/build/)
 - Java 17 (Eclipse Temurin)
 - [JUnit 5](https://github.com/junit-team/junit5) for demonstrating how to integrate unit testing
-- Maven for build management
+- Maven for build management, using [Maven Wrapper](https://github.com/apache/maven-wrapper)
 - [GitHub Actions workflows](https://github.com/miguno/java-docker-build-tutorial/actions) for
   [Maven](https://github.com/miguno/java-docker-build-tutorial/actions/workflows/maven.yml)
   and
@@ -71,8 +71,8 @@ $ docker run -p 8123:8123 miguno/java-docker-build-tutorial:latest
 running container.
 
 ```shell
-$ curl http://localhost:8123/status
-{"status": "idle"}
+$ curl http://localhost:8123/greeting
+{"id":1,"name":"Hello, World!"}
 ```
 
 # Usage with just
@@ -101,11 +101,14 @@ $ just docker-image-create
 # Notes
 
 You can also build, test, package, and run the Java application locally
-(without Docker) if you have JDK 17+ and Maven installed.
+(without Docker) if you have JDK 17+ installed. You do not need to have Maven
+installed, because this repository contains the
+[Maven Wrapper](https://github.com/apache/maven-wrapper) `mvnw` (use `mvnw.cmd`
+on Windows).
 
 ```shell
 # Build, test, package the application locally
-$ mvn clean package
+$ ./mvnw clean package
 
 # Run the example application locally
 $ java -jar target/app.jar

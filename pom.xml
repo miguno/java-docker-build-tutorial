@@ -3,12 +3,18 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>3.2.5</version>
+    <relativePath/> <!-- lookup parent from repository -->
+  </parent>
   <groupId>com.miguno</groupId>
   <artifactId>java-docker-build</artifactId>
   <packaging>jar</packaging>
   <version>1.0.0-SNAPSHOT</version>
   <name>java-docker-build</name>
+  <description>A template project to create a minimal Docker image for a Java application </description>
 
   <licenses>
     <license>
@@ -50,6 +56,17 @@
   <dependencies>
 
     <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
       <groupId>org.glassfish.jersey.containers</groupId>
       <artifactId>jersey-container-grizzly2-http</artifactId>
     </dependency>
@@ -86,7 +103,19 @@
   </dependencies>
 
   <build>
+
+    <!--
+      For `mvn package`: Hardcode the output jar's filename to `app.jar`,
+      rather than something like `java-docker-build-1.0.0-SNAPSHOT.jar`.
+    -->
+    <finalName>app</finalName>
+
     <plugins>
+
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
 
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -111,6 +140,7 @@
         </dependencies>
       </plugin>
 
+      <!--
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-shade-plugin</artifactId>
@@ -127,13 +157,14 @@
             <configuration>
               <transformers>
                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                  <mainClass>com.miguno.App</mainClass>
+                  <mainClass>com.miguno.javadockerbuild.App</mainClass>
                 </transformer>
               </transformers>
             </configuration>
           </execution>
         </executions>
       </plugin>
+      -->
 
     </plugins>
   </build>
