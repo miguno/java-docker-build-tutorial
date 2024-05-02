@@ -22,7 +22,6 @@
   <properties>
     <compiler-plugin.version>3.13.0</compiler-plugin.version>
     <java.version>17</java.version>
-    <junit.version>5.10.2</junit.version>
     <maven.compiler.parameters>true</maven.compiler.parameters>
     <maven.compiler.release>${java.version}</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -41,14 +40,6 @@
         <version>${quarkus.platform.version}</version>
         <type>pom</type>
         <scope>import</scope>
-      </dependency>
-
-      <dependency>
-	    <groupId>org.junit</groupId>
-	    <artifactId>junit-bom</artifactId>
-	    <version>${junit.version}</version>
-	    <type>pom</type>
-	    <scope>import</scope>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -71,11 +62,6 @@
       <scope>test</scope>
     </dependency>
 
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter</artifactId>
-      <scope>test</scope>
-    </dependency>
   </dependencies>
 
   <build>
@@ -108,17 +94,15 @@
         <version>${surefire-plugin.version}</version>
         <configuration>
           <systemPropertyVariables>
+          <!-- Make sure tests use the correct logmanager. -->
             <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
+            <!--
+              `maven.home` is set to ensure that custom settings from
+              `${maven.home}/conf/settings.xml` is applied (if any).
+            -->
             <maven.home>${maven.home}</maven.home>
           </systemPropertyVariables>
         </configuration>
-        <dependencies>
-          <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-	        <version>${junit.version}</version>
-          </dependency>
-        </dependencies>
       </plugin>
 
       <plugin>
