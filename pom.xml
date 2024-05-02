@@ -20,7 +20,7 @@
 
   <properties>
     <java.version>17</java.version>
-    <jersey.version>3.1.5</jersey.version>
+    <jersey.version>3.1.6</jersey.version>
     <junit.version>5.10.2</junit.version>
     <jakarta.activation-api.version>2.1.3</jakarta.activation-api.version>
     <jaxb-api.version>2.3.1</jaxb-api.version>
