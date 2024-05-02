@@ -3,6 +3,11 @@
 # Load environment variables from `.env` file.
 set dotenv-load
 
+project_dir := justfile_directory()
+build_dir := project_dir + "/target"
+app_uber_jar := build_dir + "/app-runner.jar"
+app_native_image := build_dir + "/app-runner"
+
 # print available targets
 default:
     @just --list --justfile {{justfile()}}
@@ -19,7 +24,9 @@ system-info:
 
 # build the native application locally (requires GraalVM)
 build-native:
-    @./mvnw install -Dnative
+    @echo "Producing a native app image via GraalVM ..."
+    @echo "See https://quarkus.io/guides/building-native-image#configuring-graalvm"
+    @./mvnw install -Dnative && echo "The native app image was successfully created at: {{app_native_image}}"
 
 # run the application locally (in Quarkus development mode) with hot reload
 dev:
@@ -47,17 +54,29 @@ clean:
 package:
     @./mvnw package
 
-# run the application locally.
+# run the application locally
 run:
     #!/usr/bin/env bash
-    APP_JAR="target/app-runner.jar"
+    APP_JAR="{{app_uber_jar}}"
     if [ ! -f "$APP_JAR" ]; then
         just package
     else
-        echo "Using existing application jar at $APP_JAR."
-        echo "If you want to recompile, run \`./mvnw package\` (or \`just package\`) manually."
+        echo "Using existing application uber jar at $APP_JAR."
+        echo "If you want to recompile the uber jar, run \`./mvnw package\` (or \`just package\`) manually."
     fi
     java -jar "$APP_JAR"
+
+# run the native application locally (requires GraalVM)
+run-native:
+    #!/usr/bin/env bash
+    APP_BINARY="{{app_native_image}}"
+    if [ ! -f "$APP_BINARY" ]; then
+        just build-native
+    else
+        echo "Using existing application native image at $APP_BINARY."
+        echo "If you want to recompile the native image, run \`./mvnw install -Dnative\` (or \`just build-native\`)."
+    fi
+    "$APP_BINARY"
 
 # send request to the app's HTTP endpoint (requires running container)
 send-request-to-app:

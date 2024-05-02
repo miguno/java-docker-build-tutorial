@@ -129,7 +129,9 @@
         </property>
       </activation>
       <properties>
-        <quarkus.package.type>native</quarkus.package.type>
+        <!-- Do not skip integration tests. -->
+        <skipITs>false</skipITs>
+        <quarkus.native.enabled>true</quarkus.native.enabled>
       </properties>
       <build>
         <plugins>

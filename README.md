@@ -17,6 +17,13 @@ Features:
   including a downsized JRE (built inside Docker via `jlink`)
   to minimize the size of the generated Docker image, which is **117MB**.
 - Supports [Docker BuildKit](https://docs.docker.com/build/)
+- Supports GraalVM to create
+  [native images](https://www.graalvm.org/latest/reference-manual/native-image/)
+  (think: native binaries that do not require a JRE to be installed) for the
+  example application. To keep things simple, the Docker setup of this project
+  intentionally does not use these native app images because the majority of
+  Java developers do not use GraalVM. If you do want to use native images,
+  please modify [Dockerfile](Dockerfile) accordingly.
 - Java 17 (Eclipse Temurin)
 - [JUnit 5](https://github.com/junit-team/junit5) for demonstrating how to integrate unit testing
 - Maven for build management, using [Maven Wrapper](https://github.com/apache/maven-wrapper)
