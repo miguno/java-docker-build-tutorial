@@ -5,14 +5,13 @@
 # `-o pipefail`: Prevent errors in a pipeline (`|`) from being masked
 set -uo pipefail
 
-declare -r APP_PORT=8123
+# Import environment variables from .env
+set -o allexport && source .env && set +o allexport
 
 # Force amd64 as the platform.  This workaround is needed on Apple Silicon
 # machines.  Details at https://stackoverflow.com/questions/72152446/.
 declare -r DOCKER_OPTIONS="--platform linux/amd64"
 
-# Import environment variables from .env
-set -o allexport && source .env && set +o allexport
 echo "Starting container for image '$DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG', exposing port ${APP_PORT}/tcp"
 echo "- Run 'curl http://localhost:${APP_PORT}/status' to send a test request to the containerized app."
 echo "- Enter Ctrl-C to stop the container."
