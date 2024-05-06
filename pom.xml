@@ -223,8 +223,6 @@
 
             <!--
                 https://spotbugs.github.io/spotbugs-maven-plugin/
-                https://spotbugs.readthedocs.io/en/latest/maven.html
-                https://github.com/find-sec-bugs/find-sec-bugs/wiki/Maven-configuration
                 Run `./mvnw spotbugs:help` for usage.
             -->
             <plugin>
@@ -316,7 +314,6 @@
             </activation>
             <properties>
                 <quarkus.native.enabled>true</quarkus.native.enabled>
-                <!-- Do not skip integration tests. -->
                 <skipITs>false</skipITs>
             </properties>
         </profile>
