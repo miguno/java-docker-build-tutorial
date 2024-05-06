@@ -18,7 +18,8 @@ Features:
   to minimize the size of the generated Docker image, which is **131MB**.
 - Supports [Docker BuildKit](https://docs.docker.com/build/)
 - Java 21 (Eclipse Temurin)
-- [JUnit 5](https://github.com/junit-team/junit5) for testing
+- [JUnit 5](https://github.com/junit-team/junit5) for testing,
+  [SpotBugs](https://github.com/spotbugs/spotbugs) for static code analysis
 - Maven for build management, using [Maven Wrapper](https://github.com/apache/maven-wrapper)
 - Supports GraalVM to create
   [native images](https://www.graalvm.org/latest/reference-manual/native-image/)
@@ -92,19 +93,28 @@ commands above more conveniently as per this project's [justfile](justfile):
 ```shell
 $ just
 Available recipes:
+    audit               # audit the code
     build-native        # build the native application locally (requires GraalVM)
     clean               # clean (remove) the build artifacts
+    compile             # compile the project
     default             # print available targets
-    dev                 # run the application locally (in Quarkus development mode) with hot reload
+    dev                 # run the application locally (in Quarkus development mode) with live reload
     docker-image-create # create a docker image (requires Docker)
     docker-image-run    # run the docker image (requires Docker)
     docker-image-size   # size of the docker image (requires Docker)
     evaluate            # evaluate and print all just variables
+    infer               # static code analysis via infer (requires https://github.com/facebook/infer)
     package             # package the application to create an uber jar
-    run                 # run the application locally.
-    send-request-to-app # send request to the app's HTTP endpoint (requires running container)
+    run                 # run the application locally
+    run-native          # run the native application locally (requires GraalVM)
+    send-request-to-app # send request to the app's HTTP endpoint (requires Docker and running app container)
+    site                # generate site incl. reports for spotbugs, dependencies, licenses
+    spotbugs            # static code analysis with spotbugs
     system-info         # print system information such as OS and architecture
-    test                # run the test suite
+    test                # run unit tests
+    test-integration    # run integration tests (without unit tests)
+    verify              # run all tests, plus static code analysis with spotbugs
+    verify-native       # same as 'verify', but for the native application (requires GraalVM)
 ```
 
 Example:
