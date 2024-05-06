@@ -2,162 +2,165 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.miguno</groupId>
-  <artifactId>java-docker-build</artifactId>
-  <packaging>jar</packaging>
-  <version>1.0.0-SNAPSHOT</version>
-  <name>java-docker-build</name>
-  <description>A template project to create a minimal Docker image for a Java application </description>
+    <groupId>com.miguno</groupId>
+    <artifactId>java-docker-build</artifactId>
+    <packaging>jar</packaging>
+    <version>1.0.0-SNAPSHOT</version>
+    <name>java-docker-build</name>
+    <description>A template project to create a minimal Docker image for a Java application</description>
 
-  <licenses>
-    <license>
-      <name>Apache License 2.0</name>
-      <url>https://www.apache.org/licenses/LICENSE-2.0.html</url>
-      <distribution>repo</distribution>
-    </license>
-  </licenses>
+    <licenses>
+        <license>
+            <name>Apache License 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.html</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
 
-  <properties>
-    <compiler-plugin.version>3.13.0</compiler-plugin.version>
-    <java.version>21</java.version>
-    <maven.compiler.parameters>true</maven.compiler.parameters>
-    <maven.compiler.release>${java.version}</maven.compiler.release>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <quarkus.analytics.disabled>true</quarkus.analytics.disabled>
-    <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
-    <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
-    <quarkus.platform.version>3.10.0</quarkus.platform.version>
-    <surefire-plugin.version>3.2.5</surefire-plugin.version>
-  </properties>
+    <properties>
+        <compiler-plugin.version>3.13.0</compiler-plugin.version>
+        <java.version>21</java.version>
+        <maven.compiler.parameters>true</maven.compiler.parameters>
+        <maven.compiler.release>${java.version}</maven.compiler.release>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <quarkus.analytics.disabled>true</quarkus.analytics.disabled>
+        <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
+        <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
+        <quarkus.platform.version>3.10.0</quarkus.platform.version>
+        <surefire-plugin.version>3.2.5</surefire-plugin.version>
+    </properties>
 
-  <dependencyManagement>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>${quarkus.platform.group-id}</groupId>
+                <artifactId>${quarkus.platform.artifact-id}</artifactId>
+                <version>${quarkus.platform.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <dependencies>
-      <dependency>
-        <groupId>${quarkus.platform.group-id}</groupId>
-        <artifactId>${quarkus.platform.artifact-id}</artifactId>
-        <version>${quarkus.platform.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-rest-jackson</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-junit5</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
-  </dependencyManagement>
 
-  <dependencies>
-    <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-rest-jackson</artifactId>
-    </dependency>
+    <build>
+        <!--
+          For `mvn package`: Set the name of the packaged (uber / fat) jar.
 
-    <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-junit5</artifactId>
-      <scope>test</scope>
-    </dependency>
+          Normally, you would set this to "app.jar". But with Quarkus, do not add
+          the ".jar" filename suffix. If fileName is "app", Quarkus will by default
+          use the output filename "app-runner.jar".  For Quarkus, you must also
+          set `quarkus.package.jar.type=uber-jar` in
+          `src/main/resources/application.properties`.
+          https://quarkus.io/guides/maven-tooling#uber-jar-maven
+        -->
+        <finalName>app</finalName>
 
-    <dependency>
-      <groupId>io.rest-assured</groupId>
-      <artifactId>rest-assured</artifactId>
-      <scope>test</scope>
-    </dependency>
-
-  </dependencies>
-
-  <build>
-    <!--
-      For `mvn package`: Set the name of the packaged (uber / fat) jar.
-
-      Normally, you would set this to "app.jar". But with Quarkus, do not add
-      the ".jar" filename suffix. If fileName is "app", Quarkus will by default
-      use the output filename "app-runner.jar".  For Quarkus, you must also
-      set `quarkus.package.jar.type=uber-jar` in
-      `src/main/resources/application.properties`.
-      https://quarkus.io/guides/maven-tooling#uber-jar-maven
-    -->
-    <finalName>app</finalName>
-
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>${compiler-plugin.version}</version>
-        <configuration>
-          <source>${java.version}</source>
-          <target>${java.version}</target>
-        </configuration>
-      </plugin>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>${surefire-plugin.version}</version>
-        <configuration>
-          <systemPropertyVariables>
-          <!-- Make sure tests use the correct logmanager. -->
-            <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
-            <!--
-              `maven.home` is set to ensure that custom settings from
-              `${maven.home}/conf/settings.xml` is applied (if any).
-            -->
-            <maven.home>${maven.home}</maven.home>
-          </systemPropertyVariables>
-        </configuration>
-      </plugin>
-
-      <plugin>
-        <groupId>${quarkus.platform.group-id}</groupId>
-        <artifactId>quarkus-maven-plugin</artifactId>
-        <version>${quarkus.platform.version}</version>
-        <executions>
-          <execution>
-            <goals>
-              <goal>build</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
-
-  <profiles>
-    <profile>
-      <id>native</id>
-      <activation>
-        <property>
-          <name>native</name>
-        </property>
-      </activation>
-      <properties>
-        <!-- Do not skip integration tests. -->
-        <skipITs>false</skipITs>
-        <quarkus.native.enabled>true</quarkus.native.enabled>
-      </properties>
-      <build>
         <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-failsafe-plugin</artifactId>
-            <version>${surefire-plugin.version}</version>
-            <executions>
-              <execution>
-                <goals>
-                  <goal>integration-test</goal>
-                  <goal>verify</goal>
-                </goals>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${compiler-plugin.version}</version>
                 <configuration>
-                  <systemPropertyVariables>
-                    <native.image.path>${project.build.directory}/${project.build.finalName}-runner</native.image.path>
-                    <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
-                    <maven.home>${maven.home}</maven.home>
-                  </systemPropertyVariables>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                 </configuration>
-              </execution>
-            </executions>
-          </plugin>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${surefire-plugin.version}</version>
+                <configuration>
+                    <systemPropertyVariables>
+                        <!-- Make sure tests use the correct logmanager. -->
+                        <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
+                        <!--
+                          `maven.home` is set to ensure that custom settings from
+                          `${maven.home}/conf/settings.xml` is applied (if any).
+                        -->
+                        <maven.home>${maven.home}</maven.home>
+                    </systemPropertyVariables>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>${quarkus.platform.group-id}</groupId>
+                <artifactId>quarkus-maven-plugin</artifactId>
+                <version>${quarkus.platform.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
-      </build>
-    </profile>
-  </profiles>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>native</id>
+            <activation>
+                <property>
+                    <name>native</name>
+                </property>
+            </activation>
+            <properties>
+                <!-- Do not skip integration tests. -->
+                <skipITs>false</skipITs>
+                <quarkus.native.enabled>true</quarkus.native.enabled>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <version>${surefire-plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>integration-test</goal>
+                                    <goal>verify</goal>
+                                </goals>
+                                <configuration>
+                                    <systemPropertyVariables>
+                                        <native.image.path>
+                                            ${project.build.directory}/${project.build.finalName}-runner
+                                        </native.image.path>
+                                        <java.util.logging.manager>org.jboss.logmanager.LogManager
+                                        </java.util.logging.manager>
+                                        <maven.home>${maven.home}</maven.home>
+                                    </systemPropertyVariables>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 </project>
