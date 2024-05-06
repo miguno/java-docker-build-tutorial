@@ -26,6 +26,7 @@
         <maven.compiler.release>${java.version}</maven.compiler.release>
         <maven.reports-plugin.version>3.5.0</maven.reports-plugin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <quarkus.analytics.disabled>true</quarkus.analytics.disabled>
         <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
         <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
