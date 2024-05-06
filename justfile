@@ -22,6 +22,16 @@ system-info:
   @echo "os: {{os()}}"
   @echo "os family: {{os_family()}}"
 
+# audit the code
+audit:
+    #!/usr/bin/env bash
+    echo "Running static code analysis with spotbugs"
+    just spotbugs
+    if command -v infer &>/dev/null; then
+        echo "Running static code analysis with infer"
+        just infer
+    fi
+
 # build the native application locally (requires GraalVM)
 build-native:
     @echo "Producing a native app image via GraalVM ..."
@@ -57,9 +67,6 @@ clean:
 # static code analysis via infer (requires https://github.com/facebook/infer)
 infer:
     @infer run -- ./mvnw clean compile
-
-# run integration tests (alias for 'test-integration')
-integration-test: test-integration
 
 # package the application to create an uber jar
 package:
@@ -105,11 +112,11 @@ spotbugs: compile
 test:
     @./mvnw test
 
-# run integration tests, including static code analysis with spotbugs
+# run integration tests (without unit tests)
 test-integration:
-    @./mvnw integration-test
+    @./mvnw failsafe:integration-test
 
-# run unit tests and integration tests
+# run all tests, plus static code analysis with spotbugs
 verify:
     @./mvnw verify
 
