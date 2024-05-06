@@ -21,10 +21,10 @@ public class LoggingFilter implements ContainerRequestFilter {
 
     @Override
     public void filter(ContainerRequestContext context) {
-        // Uncomment to enable HTTP request logging.
-        //final String method = context.getMethod();
-        //final String path = info.getPath();
-        //final String address = request.remoteAddress().toString();
-        //LOG.infof("Request %s %s from IP %s", method, path, address);
+        // Log incoming HTTP requests
+        final String method = context.getMethod();
+        final String path = info.getPath();
+        final String address = request.remoteAddress().toString();
+        LOG.infof("Request %s %s from IP %s", method, path, address);
     }
 }
