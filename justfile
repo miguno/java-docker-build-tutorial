@@ -54,6 +54,10 @@ compile:
 clean:
     @./mvnw clean
 
+# run static analysis via infer (requires https://github.com/facebook/infer)
+infer:
+    @infer run -- ./mvnw clean compile
+
 # package the application to create an uber jar
 package:
     @./mvnw package
