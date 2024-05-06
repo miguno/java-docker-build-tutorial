@@ -8,6 +8,12 @@ set -uo pipefail
 # Import environment variables from .env
 set -o allexport && source .env && set +o allexport
 
+# Check requirements
+if ! command -v docker &> /dev/null; then
+    echo "ERROR: 'docker' command not available. Is Docker installed?"
+    exit 1
+fi
+
 echo "Building image '$DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG'..."
 # TIP: Add `--progress=plain` to see the full docker output when you are
 # troubleshooting the build setup of your image.

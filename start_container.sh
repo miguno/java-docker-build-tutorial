@@ -8,6 +8,12 @@ set -uo pipefail
 # Import environment variables from .env
 set -o allexport && source .env && set +o allexport
 
+# Check requirements
+if ! command -v docker &> /dev/null; then
+    echo "ERROR: 'docker' command not available. Is Docker installed?"
+    exit 1
+fi
+
 # Force amd64 as the platform.  This workaround is needed on Apple Silicon
 # machines.  Details at https://stackoverflow.com/questions/72152446/.
 declare -r DOCKER_OPTIONS="--platform linux/amd64"
