@@ -21,6 +21,17 @@
         </license>
     </licenses>
 
+    <developers>
+        <developer>
+            <id>miguno</id>
+            <name>Michael G. Noll</name>
+            <roles>
+                <role>author</role>
+            </roles>
+            <timezone>Europe/Berlin</timezone>
+        </developer>
+    </developers>
+
     <scm>
         <url>https://github.com/miguno/java-docker-build-tutorial</url>
         <connection>scm:git:git://github.com:miguno/java-docker-build-tutorial.git</connection>
