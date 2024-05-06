@@ -10,6 +10,7 @@
     <version>1.0.0-SNAPSHOT</version>
     <name>java-docker-build</name>
     <description>A template project to create a minimal Docker image for a Java application</description>
+    <url>https://github.com/miguno/java-docker-build-tutorial</url>
 
     <licenses>
         <license>
