@@ -116,6 +116,10 @@ test:
 test-integration:
     @./mvnw failsafe:integration-test
 
+# upgrade mvnw a.k.a. maven wrapper
+upgrade-mvnw:
+    @./mvnw wrapper:wrapper
+
 # run all tests, plus static code analysis with spotbugs
 verify:
     @./mvnw verify
