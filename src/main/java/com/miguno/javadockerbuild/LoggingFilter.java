@@ -1,14 +1,12 @@
 package com.miguno.javadockerbuild;
 
+import io.vertx.core.http.HttpServerRequest;
 import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.container.ContainerRequestFilter;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.UriInfo;
 import jakarta.ws.rs.ext.Provider;
-
 import org.jboss.logging.Logger;
-
-import io.vertx.core.http.HttpServerRequest;
 
 @Provider
 public class LoggingFilter implements ContainerRequestFilter {
