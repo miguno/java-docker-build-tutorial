@@ -24,11 +24,16 @@
         <java.version>21</java.version>
         <maven.compiler.parameters>true</maven.compiler.parameters>
         <maven.compiler.release>${java.version}</maven.compiler.release>
+        <maven.reports-plugin.version>3.5.0</maven.reports-plugin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <quarkus.analytics.disabled>true</quarkus.analytics.disabled>
         <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
         <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
         <quarkus.platform.version>3.10.0</quarkus.platform.version>
+        <spotbugs.version>4.8.5</spotbugs.version>
+        <spotbugs-maven-plugin.version>4.8.5.0</spotbugs-maven-plugin.version>
+        <!-- spotbugs plugin for security audits of web apps -->
+        <findsecbugs.version>1.12.0</findsecbugs.version>
         <surefire-plugin.version>3.2.5</surefire-plugin.version>
     </properties>
 
@@ -117,8 +122,91 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <!--
+                https://spotbugs.github.io/spotbugs-maven-plugin/
+                https://spotbugs.readthedocs.io/en/latest/maven.html
+                https://github.com/find-sec-bugs/find-sec-bugs/wiki/Maven-configuration
+                Run `./mvnw spotbugs:help` for usage.
+            -->
+            <plugin>
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs-maven-plugin</artifactId>
+                <version>${spotbugs-maven-plugin.version}</version>
+                <dependencies>
+                    <!-- overwrite dependency on spotbugs to specify the version of spotbugs -->
+                    <dependency>
+                        <groupId>com.github.spotbugs</groupId>
+                        <artifactId>spotbugs</artifactId>
+                        <version>${spotbugs.version}</version>
+                    </dependency>
+                </dependencies>
+                <!-- IMPORTANT: Should match spotbugs configuration for `<reporting>` below. -->
+                <configuration>
+                    <effort>Max</effort>
+                    <threshold>Low</threshold>
+                    <failOnError>true</failOnError>
+                    <includeFilterFile>spotbugs-include.xml</includeFilterFile>
+                    <excludeFilterFile>spotbugs-exclude.xml</excludeFilterFile>
+                    <plugins>
+                        <!-- https://github.com/find-sec-bugs/find-sec-bugs -->
+                        <plugin>
+                            <groupId>com.h3xstream.findsecbugs</groupId>
+                            <artifactId>findsecbugs-plugin</artifactId>
+                            <version>${findsecbugs.version}</version>
+                        </plugin>
+                    </plugins>
+
+                    <!-- XML output settings are not needed in the `<reporting>` section. -->
+                    <xmlOutput>true</xmlOutput>
+                    <xmlOutputDirectory>${project.basedir}/target/site</xmlOutputDirectory>
+                </configuration>
+                <executions>
+                    <!-- Run `spotbugs:check` when running `./mvnw verify`. -->
+                    <execution>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                        <phase>verify</phase>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>${maven.reports-plugin.version}</version>
+            </plugin>
+
+            <!-- Create a spotbugs report when running `./mvnw site`. -->
+            <plugin>
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs-maven-plugin</artifactId>
+                <version>${spotbugs-maven-plugin.version}</version>
+                <!-- IMPORTANT: Should match spotbugs configuration for `<build>` above. -->
+                <configuration>
+                    <jvmArgs>-Duser.language=en</jvmArgs>
+                    <effort>Max</effort>
+                    <threshold>Low</threshold>
+                    <failOnError>true</failOnError>
+                    <includeFilterFile>spotbugs-include.xml</includeFilterFile>
+                    <excludeFilterFile>spotbugs-exclude.xml</excludeFilterFile>
+                    <plugins>
+                        <!-- https://github.com/find-sec-bugs/find-sec-bugs -->
+                        <plugin>
+                            <groupId>com.h3xstream.findsecbugs</groupId>
+                            <artifactId>findsecbugs-plugin</artifactId>
+                            <version>${findsecbugs.version}</version>
+                        </plugin>
+                    </plugins>
+                </configuration>
+            </plugin>
+        </plugins>
+    </reporting>
 
     <profiles>
         <profile>

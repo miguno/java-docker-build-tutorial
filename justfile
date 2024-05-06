@@ -46,6 +46,10 @@ docker-image-run:
     @echo "Running container from docker image ..."
     @./start_container.sh
 
+# compile the project
+compile:
+    @./mvnw compile
+
 # clean (remove) the build artifacts
 clean:
     @./mvnw clean
@@ -78,9 +82,17 @@ run-native:
     fi
     "$APP_BINARY"
 
+# generate site incl. reports for spotbugs, dependencies, licenses
+site: compile
+    @./mvnw site && echo "Reports are available under {{build_dir}}/site/"
+
 # send request to the app's HTTP endpoint (requires running container)
 send-request-to-app:
     curl http://localhost:8123/status
+
+# run spotbugs checks
+spotbugs: compile
+    @./mvnw spotbugs:check
 
 # run the test suite
 test:
@@ -89,3 +101,7 @@ test:
 # run the test suite for the native application (requires GraalVM)
 test-native:
     @./mvnw verify -Dnative
+
+# verify the project with maven's verify target
+verify:
+    @./mvnw verify
