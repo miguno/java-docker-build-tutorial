@@ -28,7 +28,7 @@ build-native:
     @echo "See https://quarkus.io/guides/building-native-image#configuring-graalvm"
     @./mvnw install -Dnative && echo "The native app image was successfully created at: {{app_native_image}}"
 
-# run the application locally (in Quarkus development mode) with hot reload
+# run the application locally (in Quarkus development mode) with live reload
 dev:
     @./mvnw quarkus:dev
 
@@ -86,7 +86,7 @@ run-native:
 site: compile
     @./mvnw site && echo "Reports are available under {{build_dir}}/site/"
 
-# send request to the app's HTTP endpoint (requires running container)
+# send request to the app's HTTP endpoint (requires Docker and running app container)
 send-request-to-app:
     curl http://localhost:8123/status
 
