@@ -20,22 +20,28 @@
     </licenses>
 
     <properties>
-        <compiler-plugin.version>3.13.0</compiler-plugin.version>
-        <java.version>21</java.version>
-        <maven.compiler.parameters>true</maven.compiler.parameters>
-        <maven.compiler.release>${java.version}</maven.compiler.release>
-        <maven.reports-plugin.version>3.5.0</maven.reports-plugin.version>
+        <!-- Project -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <!-- Java -->
+        <java.version>21</java.version>
+        <release.version>${java.version}</release.version>
+        <maven.compiler.parameters>true</maven.compiler.parameters>
+        <maven.compiler.release>${java.version}</maven.compiler.release>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <!-- Maven plugins -->
+        <maven-project-info-reports-plugin.version>3.5.0</maven-project-info-reports-plugin.version>
+        <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
+        <maven-surefire-plugin.version>3.2.5</maven-surefire-plugin.version>
+        <spotbugs.version>4.8.5</spotbugs.version>
+        <spotbugs-maven-plugin.version>4.8.5.0</spotbugs-maven-plugin.version>
+        <findsecbugs.version>1.12.0</findsecbugs.version> <!-- spotbugs plugin for security audits of web apps -->
+        <!-- Dependencies -->
         <quarkus.analytics.disabled>true</quarkus.analytics.disabled>
         <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
         <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
         <quarkus.platform.version>3.10.0</quarkus.platform.version>
-        <spotbugs.version>4.8.5</spotbugs.version>
-        <spotbugs-maven-plugin.version>4.8.5.0</spotbugs-maven-plugin.version>
-        <!-- spotbugs plugin for security audits of web apps -->
-        <findsecbugs.version>1.12.0</findsecbugs.version>
-        <surefire-plugin.version>3.2.5</surefire-plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -87,17 +93,16 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>${compiler-plugin.version}</version>
+                <version>${maven-compiler-plugin.version}</version>
                 <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
+                    <parameters>${maven.compiler.parameters}</parameters>
                 </configuration>
             </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>${surefire-plugin.version}</version>
+                <version>${maven-surefire-plugin.version}</version>
                 <configuration>
                     <systemPropertyVariables>
                         <!-- Make sure tests use the correct logmanager. -->
@@ -189,7 +194,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-project-info-reports-plugin</artifactId>
-                <version>${maven.reports-plugin.version}</version>
+                <version>${maven-project-info-reports-plugin.version}</version>
             </plugin>
 
             <!-- Create a spotbugs report when running `./mvnw site`. -->
@@ -236,7 +241,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-failsafe-plugin</artifactId>
-                        <version>${surefire-plugin.version}</version>
+                        <version>${maven-surefire-plugin.version}</version>
                         <executions>
                             <execution>
                                 <goals>
