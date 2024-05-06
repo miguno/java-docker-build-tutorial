@@ -20,6 +20,13 @@
         </license>
     </licenses>
 
+    <scm>
+        <url>https://github.com/miguno/java-docker-build-tutorial</url>
+        <connection>scm:git:git://github.com:miguno/java-docker-build-tutorial.git</connection>
+        <developerConnection>scm:git:git@github.com:miguno/java-docker-build-tutorial.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
     <properties>
         <!-- Project -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
