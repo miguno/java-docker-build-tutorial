@@ -54,9 +54,12 @@ compile:
 clean:
     @./mvnw clean
 
-# run static analysis via infer (requires https://github.com/facebook/infer)
+# static code analysis via infer (requires https://github.com/facebook/infer)
 infer:
     @infer run -- ./mvnw clean compile
+
+# run integration tests (alias for 'test-integration')
+integration-test: test-integration
 
 # package the application to create an uber jar
 package:
@@ -94,18 +97,23 @@ site: compile
 send-request-to-app:
     curl http://localhost:8123/status
 
-# run spotbugs checks
+# static code analysis with spotbugs
 spotbugs: compile
     @./mvnw spotbugs:check
 
-# run the test suite
+# run unit tests
 test:
     @./mvnw test
 
-# run the test suite for the native application (requires GraalVM)
-test-native:
-    @./mvnw verify -Dnative
+# run integration tests, including static code analysis with spotbugs
+test-integration:
+    @./mvnw integration-test
 
-# verify the project with maven's verify target
+# run unit tests and integration tests
 verify:
     @./mvnw verify
+
+# same as 'verify', but for the native application (requires GraalVM)
+verify-native:
+    @./mvnw verify -Dnative
+
