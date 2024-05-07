@@ -86,7 +86,7 @@ format-check:
 
 # package the application to create an uber jar
 package:
-    @./mvnw package
+    @./mvnw verify package
 
 # print effective pom.xml
 pom:
