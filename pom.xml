@@ -264,7 +264,7 @@
                 <executions>
                     <!-- Run `spotbugs:check` when running `./mvnw package`. -->
                     <execution>
-                        <id>package-runs-spotbugs</id>
+                        <id>mvn-package-runs-spotbugs</id>
                         <goals>
                             <goal>check</goal>
                         </goals>
