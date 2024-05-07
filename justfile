@@ -134,15 +134,11 @@ spotbugs: compile
 test:
     @./mvnw test
 
-# run integration tests (without unit tests)
-test-integration:
-    @./mvnw failsafe:integration-test
-
 # upgrade mvnw a.k.a. maven wrapper
 upgrade-mvnw:
     @./mvnw wrapper:wrapper
 
-# run all tests, plus coverage check and static code analysis
+# run unit and integration tests, plus coverage check and static code analysis
 verify:
     @./mvnw verify
 
