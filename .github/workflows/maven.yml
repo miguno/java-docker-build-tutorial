@@ -34,6 +34,8 @@ jobs:
       with:
         website: jdk.java.net
         release: 22
+    - name: Print Java version
+      run: java -version
     - name: Verify and Package with Maven
       run: ./mvnw --batch-mode --file pom.xml verify package
 
