@@ -55,6 +55,7 @@
         <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
         <maven-javadoc-plugin.version>3.6.3</maven-javadoc-plugin.version>
         <maven-surefire-plugin.version>3.2.5</maven-surefire-plugin.version>
+        <git-build-hook-maven-plugin.version>3.5.0</git-build-hook-maven-plugin.version>
         <jacoco.version>0.8.12</jacoco.version>
         <spotbugs.version>4.8.5</spotbugs.version>
         <spotbugs-maven-plugin.version>4.8.5.0</spotbugs-maven-plugin.version>
@@ -173,6 +174,13 @@
                     <groupId>com.diffplug.spotless</groupId>
                     <artifactId>spotless-maven-plugin</artifactId>
                     <version>${spotless.version}</version>
+                </plugin>
+
+                <!-- To run git hooks locally as part of maven's lifecycle. -->
+                <plugin>
+                    <groupId>com.rudikershaw.gitbuildhook</groupId>
+                    <artifactId>git-build-hook-maven-plugin</artifactId>
+                    <version>${git-build-hook-maven-plugin.version}</version>
                 </plugin>
 
                 <plugin>
@@ -433,6 +441,26 @@
                         <formatAnnotations/>
                     </java>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>com.rudikershaw.gitbuildhook</groupId>
+                <artifactId>git-build-hook-maven-plugin</artifactId>
+                <version>${git-build-hook-maven-plugin.version}</version>
+                <configuration>
+                    <gitConfig>
+                        <!-- Directory that stores our git hooks. -->
+                        <core.hooksPath>hooks/</core.hooksPath>
+                    </gitConfig>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <!-- Sets git config specified under configuration > gitConfig. -->
+                            <goal>configure</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
