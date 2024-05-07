@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
 
+/** An example unit test for the API endpoint /status. */
 @QuarkusTest
 public class StatusResourceTest {
 

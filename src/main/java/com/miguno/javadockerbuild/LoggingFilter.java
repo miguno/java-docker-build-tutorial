@@ -8,6 +8,7 @@ import jakarta.ws.rs.core.UriInfo;
 import jakarta.ws.rs.ext.Provider;
 import org.jboss.logging.Logger;
 
+/** Controls how incoming HTTP requests to the API endpoints are being logged. */
 @Provider
 public class LoggingFilter implements ContainerRequestFilter {
 
