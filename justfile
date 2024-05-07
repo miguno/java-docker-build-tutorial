@@ -106,7 +106,8 @@ run:
         echo "Using existing application uber jar at $APP_JAR."
         echo "If you want to recompile the uber jar, run \`./mvnw package\` (or \`just package\`) manually."
     fi
-    java -jar "$APP_JAR"
+    declare -r JVM_ARGS="-XX:+UseZGC -XX:+ZGenerational"
+    java $JVM_ARGS -jar "$APP_JAR"
 
 # run the native application locally (requires GraalVM)
 run-native:
@@ -118,6 +119,11 @@ run-native:
         echo "Using existing application native image at $APP_BINARY."
         echo "If you want to recompile the native image, run \`./mvnw install -Dnative\` (or \`just build-native\`)."
     fi
+    # To see garbage collection statistics, run the native binary as follows.
+    #
+    #   "$APP_BINARY" -XX:+PrintGC -XX:+VerboseGC
+    #
+    # See https://quarkus.io/guides/native-reference for further information.
     "$APP_BINARY"
 
 # generate site incl. reports for spotbugs, dependencies, javadocs, licenses

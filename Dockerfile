@@ -59,4 +59,4 @@ COPY --from=builder --chown=$USER_NAME:$GROUP_NAME /usr/src/myapp/target/app-run
 # Run the application.
 USER $USER_NAME:$GROUP_NAME
 EXPOSE 8123
-ENTRYPOINT ["java", "-jar", "./app.jar"]
+ENTRYPOINT ["java", "-XX:+UseZGC", "-XX:+ZGenerational", "-jar", "./app.jar"]
