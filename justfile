@@ -71,6 +71,14 @@ clean:
 infer:
     @infer run -- ./mvnw clean compile
 
+# format sources
+format:
+    @./mvnw spotless:apply
+
+# check formatting of sources (without modifying)
+format-check:
+    @./mvnw spotless:check
+
 # package the application to create an uber jar
 package:
     @./mvnw package
