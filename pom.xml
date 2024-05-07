@@ -124,27 +124,29 @@
                     <version>${maven-compiler-plugin.version}</version>
                 </plugin>
 
+                <!-- To run unit tests. Skip unit tests with `-DskipUTs` on CLI. -->
                 <plugin>
-                    <!-- To run unit tests. Skip unit tests with `-DskipUTs` on CLI. -->
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>${maven-surefire-plugin.version}</version>
                 </plugin>
 
+                <!-- To run integration tests. Skip integration tests with `-DskipITs` on CLI. -->
                 <plugin>
-                    <!-- To run integration tests. Skip integration tests with `-DskipITs` on CLI. -->
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-failsafe-plugin</artifactId>
                     <version>${maven-surefire-plugin.version}</version>
                 </plugin>
 
+                <!-- To generate API documentation (javadocs). -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
                     <version>${maven-javadoc-plugin.version}</version>
                 </plugin>
+
+                <!-- To run static code analysis. -->
                 <plugin>
-                    <!-- To run static code analysis. -->
                     <groupId>com.github.spotbugs</groupId>
                     <artifactId>spotbugs-maven-plugin</artifactId>
                     <version>${spotbugs-maven-plugin.version}</version>
@@ -158,6 +160,20 @@
                     </dependencies>
                 </plugin>
 
+                <!-- To run code coverage checks and reports. -->
+                <plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>${jacoco.version}</version>
+                </plugin>
+
+                <!-- To format and lint the sources. -->
+                <plugin>
+                    <groupId>com.diffplug.spotless</groupId>
+                    <artifactId>spotless-maven-plugin</artifactId>
+                    <version>${spotless.version}</version>
+                </plugin>
+
                 <plugin>
                     <groupId>${quarkus.platform.group-id}</groupId>
                     <artifactId>quarkus-maven-plugin</artifactId>
@@ -169,18 +185,6 @@
                             </goals>
                         </execution>
                     </executions>
-                </plugin>
-
-                <plugin>
-                    <groupId>com.diffplug.spotless</groupId>
-                    <artifactId>spotless-maven-plugin</artifactId>
-                    <version>${spotless.version}</version>
-                </plugin>
-
-                <plugin>
-                    <groupId>org.jacoco</groupId>
-                    <artifactId>jacoco-maven-plugin</artifactId>
-                    <version>${jacoco.version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>
