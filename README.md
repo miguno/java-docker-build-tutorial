@@ -50,7 +50,7 @@ Java JDK or Maven installed.
 
 **Step 1:** Create the Docker image according to [Dockerfile](Dockerfile).
 This step uses Maven to build, test, and package the Java application according
-to [pom.xml](pom.xml). The resulting image is 102MB in size, of which 44MB are
+to [pom.xml](pom.xml). The resulting image is 129MB in size, of which 44MB are
 the underlying `alpine` image.
 
 ```shell
@@ -67,7 +67,7 @@ Optionally, you can check the size of the generated Docker image:
 ```shell
 $ docker images miguno/java-docker-build-tutorial
 REPOSITORY                          TAG       IMAGE ID       CREATED         SIZE
-miguno/java-docker-build-tutorial   latest    6eeb79c07157   4 minutes ago   102MB
+miguno/java-docker-build-tutorial   latest    6eeb79c07157   4 minutes ago   129MB
 ```
 
 **Step 2:** Start a container for the Docker image.
