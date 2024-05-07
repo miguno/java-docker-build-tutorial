@@ -32,6 +32,9 @@ audit:
         just infer
     fi
 
+# alias for 'compile'
+build: compile
+
 # build the native application locally (requires GraalVM)
 build-native:
     @echo "Producing a native app image via GraalVM ..."
