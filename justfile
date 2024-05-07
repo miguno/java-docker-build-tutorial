@@ -59,6 +59,10 @@ docker-image-run:
     @echo "Running container from docker image ..."
     @./start_container.sh
 
+# generate Java documentation
+docs:
+    @./mvnw javadoc:javadoc
+
 # clean (remove) the build artifacts
 clean:
     @./mvnw clean
