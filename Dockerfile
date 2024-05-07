@@ -6,7 +6,7 @@
 ###############################################################################
 # Stage 1 (to create a "build" image)                                         #
 ###############################################################################
-FROM eclipse-temurin:21-jdk-alpine AS builder
+FROM eclipse-temurin:22-jdk-alpine AS builder
 
 # Smoke test to verify if java is available.
 RUN java -version

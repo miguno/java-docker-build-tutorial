@@ -17,7 +17,7 @@ Features:
   including a downsized JRE (built inside Docker via `jlink`)
   to minimize the size of the generated Docker image, which is **131MB**.
 - Supports [Docker BuildKit](https://docs.docker.com/build/)
-- Java 21 (Eclipse Temurin)
+- Java 22 (Eclipse Temurin)
 - [JUnit 5](https://github.com/junit-team/junit5) for testing,
   [Jacoco](https://github.com/jacoco/jacoco) for code coverage,
   [SpotBugs](https://github.com/spotbugs/spotbugs) for static code analysis
@@ -130,7 +130,7 @@ $ just docker-image-create
 # Notes
 
 You can also build, test, package, and run the Java application locally
-(without Docker) if you have JDK 21+ installed. You do not need to have Maven
+(without Docker) if you have JDK 22+ installed. You do not need to have Maven
 installed, because this repository contains the
 [Maven Wrapper](https://github.com/apache/maven-wrapper) `mvnw` (use `mvnw.cmd`
 on Windows).
