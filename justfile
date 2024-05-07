@@ -41,6 +41,19 @@ build-native:
     @echo "See https://quarkus.io/guides/building-native-image#configuring-graalvm"
     @./mvnw install -Dnative && echo "The native app image was successfully created at: {{app_native_image}}"
 
+# clean (remove) the build artifacts
+clean:
+    @./mvnw clean
+
+# compile the project
+compile:
+    @./mvnw compile
+
+# create coverage report
+coverage: verify
+    @./mvnw jacoco:report && \
+        echo "Coverage report is available under {{build_dir}}/site/jacoco/"
+
 # run the application locally (in Quarkus development mode) with live reload
 dev:
     @./mvnw quarkus:dev
@@ -62,19 +75,6 @@ docker-image-run:
 # generate Java documentation
 docs:
     @./mvnw javadoc:javadoc
-
-# clean (remove) the build artifacts
-clean:
-    @./mvnw clean
-
-# compile the project
-compile:
-    @./mvnw compile
-
-# create coverage report
-coverage: verify
-    @./mvnw jacoco:report && \
-        echo "Coverage report is available under {{build_dir}}/site/jacoco/"
 
 # static code analysis with infer (requires https://github.com/facebook/infer)
 infer:
