@@ -57,6 +57,7 @@
         <spotbugs.version>4.8.5</spotbugs.version>
         <spotbugs-maven-plugin.version>4.8.5.0</spotbugs-maven-plugin.version>
         <findsecbugs.version>1.12.0</findsecbugs.version> <!-- spotbugs plugin for security audits of web apps -->
+        <spotless.version>2.43.0</spotless.version>
         <!-- Dependencies -->
         <quarkus.analytics.disabled>true</quarkus.analytics.disabled>
         <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
@@ -161,6 +162,12 @@
                             </goals>
                         </execution>
                     </executions>
+                </plugin>
+
+                <plugin>
+                    <groupId>com.diffplug.spotless</groupId>
+                    <artifactId>spotless-maven-plugin</artifactId>
+                    <version>${spotless.version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -272,6 +279,37 @@
                         <phase>package</phase>
                     </execution>
                 </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>com.diffplug.spotless</groupId>
+                <artifactId>spotless-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>apply</goal>
+                        </goals>
+                        <phase>compile</phase>
+                    </execution>
+                </executions>
+                <configuration>
+                    <!-- Optional: Limit format enforcement to just the files changed by a particular branch. -->
+                    <!-- <ratchetFrom>origin/main</ratchetFrom> -->
+
+                    <!-- Language-specific formatting -->
+                    <java>
+                        <includes>
+                            <include>src/main/java/**/*.java</include>
+                            <include>src/test/java/**/*.java</include>
+                        </includes>
+                        <googleJavaFormat/>
+                        <importOrder>
+                            <order>java|javax,,\#</order>
+                        </importOrder>
+                        <removeUnusedImports/>
+                        <formatAnnotations/>
+                    </java>
+                </configuration>
             </plugin>
         </plugins>
     </build>
