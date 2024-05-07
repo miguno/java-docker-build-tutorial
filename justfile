@@ -72,7 +72,7 @@ coverage: verify
     @./mvnw jacoco:report && \
         echo "Coverage report is available under {{build_dir}}/site/jacoco/"
 
-# static code analysis via infer (requires https://github.com/facebook/infer)
+# static code analysis with infer (requires https://github.com/facebook/infer)
 infer:
     @infer run -- ./mvnw clean compile
 

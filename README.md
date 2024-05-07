@@ -23,14 +23,13 @@ Features:
   [SpotBugs](https://github.com/spotbugs/spotbugs) for static code analysis
 - Maven for build management, using [Maven Wrapper](https://github.com/apache/maven-wrapper)
 - Supports GraalVM to create
-  [native images](https://www.graalvm.org/latest/reference-manual/native-image/)
-  (think: native binaries that do not require a JRE to be installed) for the
-  example application. See
+  [native binaries](https://www.graalvm.org/latest/reference-manual/native-image/)
+  for the example application. See
   [Building a Native Exectuable](https://quarkus.io/guides/building-native-image)
   in the Quarkus documentation. To keep things simple, the Docker setup of this
-  project intentionally does not use these native app images because the
+  project intentionally does not use these native app binaries because the
   majority of Java developers do not use GraalVM. If you do want to use native
-  images, please modify [Dockerfile](Dockerfile) accordingly.
+  binaries, please modify [Dockerfile](Dockerfile) accordingly.
 - [GitHub Actions workflows](https://github.com/miguno/java-docker-build-tutorial/actions) for
   [Maven](https://github.com/miguno/java-docker-build-tutorial/actions/workflows/maven.yml)
   and
@@ -50,9 +49,8 @@ Java JDK or Maven installed.
 # Usage and Demo
 
 **Step 1:** Create the Docker image according to [Dockerfile](Dockerfile).
-This step uses Maven to build, test, and package the
-[Java application](src/main/java/com/miguno/App.java) according to
-[pom.xml](pom.xml). The resulting image is 102MB in size, of which 44MB are
+This step uses Maven to build, test, and package the Java application according
+to [pom.xml](pom.xml). The resulting image is 102MB in size, of which 44MB are
 the underlying `alpine` image.
 
 ```shell
@@ -95,26 +93,31 @@ commands above more conveniently as per this project's [justfile](justfile):
 $ just
 Available recipes:
     audit               # audit the code
+    build               # alias for 'compile'
     build-native        # build the native application locally (requires GraalVM)
     clean               # clean (remove) the build artifacts
     compile             # compile the project
+    coverage            # create coverage report
     default             # print available targets
     dev                 # run the application locally (in Quarkus development mode) with live reload
     docker-image-create # create a docker image (requires Docker)
     docker-image-run    # run the docker image (requires Docker)
     docker-image-size   # size of the docker image (requires Docker)
     evaluate            # evaluate and print all just variables
-    infer               # static code analysis via infer (requires https://github.com/facebook/infer)
+    format              # format sources
+    format-check        # check formatting of sources (without modifying)
+    infer               # static code analysis with infer (requires https://github.com/facebook/infer)
     package             # package the application to create an uber jar
+    pom                 # print effective pom.xml
     run                 # run the application locally
     run-native          # run the native application locally (requires GraalVM)
     send-request-to-app # send request to the app's HTTP endpoint (requires Docker and running app container)
-    site                # generate site incl. reports for spotbugs, dependencies, licenses
+    site                # generate site incl. reports for spotbugs, dependencies, javadocs, licenses
     spotbugs            # static code analysis with spotbugs
     system-info         # print system information such as OS and architecture
     test                # run unit tests
-    test-integration    # run integration tests (without unit tests)
-    verify              # run all tests, plus static code analysis with spotbugs
+    upgrade-mvnw        # upgrade mvnw a.k.a. maven wrapper
+    verify              # run unit and integration tests, plus coverage check and static code analysis
     verify-native       # same as 'verify', but for the native application (requires GraalVM)
 ```
 
@@ -134,7 +137,7 @@ on Windows).
 
 ```shell
 # Build, test, package the application locally.
-$ ./mvnw clean package
+$ ./mvnw clean verify package
 
 # Run the application locally.
 $ java -jar target/app-runner.jar
