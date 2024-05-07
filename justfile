@@ -59,13 +59,18 @@ docker-image-run:
     @echo "Running container from docker image ..."
     @./start_container.sh
 
+# clean (remove) the build artifacts
+clean:
+    @./mvnw clean
+
 # compile the project
 compile:
     @./mvnw compile
 
-# clean (remove) the build artifacts
-clean:
-    @./mvnw clean
+# create coverage report
+coverage: verify
+    @./mvnw jacoco:report && \
+        echo "Coverage report is available under {{build_dir}}/site/jacoco/"
 
 # static code analysis via infer (requires https://github.com/facebook/infer)
 infer:
@@ -82,6 +87,10 @@ format-check:
 # package the application to create an uber jar
 package:
     @./mvnw package
+
+# print effective pom.xml
+pom:
+    @./mvnw help:effective-pom
 
 # run the application locally
 run:
@@ -133,7 +142,7 @@ test-integration:
 upgrade-mvnw:
     @./mvnw wrapper:wrapper
 
-# run all tests, plus static code analysis with spotbugs
+# run all tests, plus coverage check and static code analysis
 verify:
     @./mvnw verify
 

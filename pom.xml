@@ -55,6 +55,7 @@
         <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
         <maven-javadoc-plugin.version>3.6.3</maven-javadoc-plugin.version>
         <maven-surefire-plugin.version>3.2.5</maven-surefire-plugin.version>
+        <jacoco.version>0.8.12</jacoco.version>
         <spotbugs.version>4.8.5</spotbugs.version>
         <spotbugs-maven-plugin.version>4.8.5.0</spotbugs-maven-plugin.version>
         <findsecbugs.version>1.12.0</findsecbugs.version> <!-- spotbugs plugin for security audits of web apps -->
@@ -175,6 +176,12 @@
                     <artifactId>spotless-maven-plugin</artifactId>
                     <version>${spotless.version}</version>
                 </plugin>
+
+                <plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>${jacoco.version}</version>
+                </plugin>
             </plugins>
         </pluginManagement>
 
@@ -197,13 +204,22 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
+                    <!--
+                        `@{argLine}` must be included here, otherwise jacoco may
+                        fail. You can add extra arguments after `@{argLine}`.
+                        https://www.eclemma.org/jacoco/trunk/doc/prepare-agent-mojo.html
+                        https://maven.apache.org/surefire/maven-surefire-plugin/faq.html#late-property-evaluation
+                    -->
+                    <argLine>@{argLine}</argLine>
+                    <!-- `forkCount` (default: 1) must not be zero for jacoco. -->
+                    <forkCount>2</forkCount>
                     <skipTests>${skipUTs}</skipTests>
                     <systemPropertyVariables>
                         <!-- Make sure tests use the correct logmanager. -->
                         <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
                         <!--
                           `maven.home` is set to ensure that custom settings from
-                          `${maven.home}/conf/settings.xml` is applied (if any).
+                          `${maven.home}/conf/settings.xml` are applied (if any).
                         -->
                         <maven.home>${maven.home}</maven.home>
                     </systemPropertyVariables>
@@ -214,6 +230,15 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <configuration>
+                    <!--
+                        `@{argLine}` must be included here, otherwise jacoco may
+                        fail. You can add extra arguments after `@{argLine}`.
+                        https://www.eclemma.org/jacoco/trunk/doc/prepare-agent-mojo.html
+                        https://maven.apache.org/surefire/maven-surefire-plugin/faq.html#late-property-evaluation
+                    -->
+                    <argLine>@{argLine}</argLine>
+                    <!-- `forkCount` (default: 1) must not be zero for jacoco. -->
+                    <forkCount>2</forkCount>
                     <skipTests>${skipTests}</skipTests>
                     <skipITs>${skipITs}</skipITs>
                     <systemPropertyVariables>
@@ -244,6 +269,88 @@
                         <goals>
                             <goal>jar</goal>
                         </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <!--
+                    Usage:
+                    - `./mvnw jacoco:help
+                    - `./mvnw help:describe -Dplugin=org.jacoco:jacoco-maven-plugin -Ddetail`
+                -->
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>default-prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                        <configuration>
+                            <destFile>${project.basedir}/target/jacoco-unit.exec</destFile>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>default-prepare-agent-integration</id>
+                        <goals>
+                            <goal>prepare-agent-integration</goal>
+                        </goals>
+                        <configuration>
+                            <destFile>${project.basedir}/target/jacoco-integration.exec</destFile>
+                            <append>true</append>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>default-report</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>merge</goal>
+                            <goal>report</goal>
+                        </goals>
+                        <configuration>
+                            <!-- merge configuration -->
+                            <destFile>${project.basedir}/target/jacoco.exec</destFile>
+                            <fileSets>
+                                <fileSet>
+                                    <directory>${project.basedir}/target/</directory>
+                                    <includes>
+                                        <include>jacoco-*.exec</include>
+                                    </includes>
+                                </fileSet>
+                            </fileSets>
+                            <!-- report configuration -->
+                            <dataFile>${project.basedir}/target/jacoco.exec</dataFile>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>default-report-integration</id>
+                        <goals>
+                            <goal>report-integration</goal>
+                        </goals>
+                        <configuration>
+                            <dataFile>${project.basedir}/target/jacoco.exec</dataFile>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>default-check</id>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <rule>
+                                    <element>BUNDLE</element>
+                                    <limits>
+                                        <limit>
+                                            <counter>COMPLEXITY</counter>
+                                            <value>COVEREDRATIO</value>
+                                            <minimum>0.60</minimum>
+                                        </limit>
+                                    </limits>
+                                </rule>
+                            </rules>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>

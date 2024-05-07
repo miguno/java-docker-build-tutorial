@@ -19,6 +19,7 @@ Features:
 - Supports [Docker BuildKit](https://docs.docker.com/build/)
 - Java 21 (Eclipse Temurin)
 - [JUnit 5](https://github.com/junit-team/junit5) for testing,
+  [Jacoco](https://github.com/jacoco/jacoco) for code coverage,
   [SpotBugs](https://github.com/spotbugs/spotbugs) for static code analysis
 - Maven for build management, using [Maven Wrapper](https://github.com/apache/maven-wrapper)
 - Supports GraalVM to create
