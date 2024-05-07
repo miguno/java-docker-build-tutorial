@@ -11,20 +11,18 @@ import org.jboss.logging.Logger;
 @Provider
 public class LoggingFilter implements ContainerRequestFilter {
 
-    private static final Logger LOG = Logger.getLogger(LoggingFilter.class);
+  private static final Logger LOG = Logger.getLogger(LoggingFilter.class);
 
-    @Context
-    UriInfo info;
+  @Context UriInfo info;
 
-    @Context
-    HttpServerRequest request;
+  @Context HttpServerRequest request;
 
-    @Override
-    public void filter(ContainerRequestContext context) {
-        // Log incoming HTTP requests
-        final String method = context.getMethod();
-        final String path = info.getPath();
-        final String address = request.remoteAddress().toString();
-        LOG.infof("Request %s %s from IP %s", method, path, address);
-    }
+  @Override
+  public void filter(ContainerRequestContext context) {
+    // Log incoming HTTP requests
+    final String method = context.getMethod();
+    final String path = info.getPath();
+    final String address = request.remoteAddress().toString();
+    LOG.infof("Request %s %s from IP %s", method, path, address);
+  }
 }
