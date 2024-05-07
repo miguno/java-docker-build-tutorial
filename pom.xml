@@ -262,14 +262,6 @@
                     <xmlOutputDirectory>${project.basedir}/target/site</xmlOutputDirectory>
                 </configuration>
                 <executions>
-                    <!-- Run `spotbugs:check` when running `./mvnw verify`. -->
-                    <execution>
-                        <id>verify-runs-spotbugs</id>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                        <phase>verify</phase>
-                    </execution>
                     <!-- Run `spotbugs:check` when running `./mvnw package`. -->
                     <execution>
                         <id>package-runs-spotbugs</id>
