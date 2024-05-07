@@ -15,7 +15,7 @@ Features:
 - The Docker build uses a
   [multi-stage build setup](https://docs.docker.com/build/building/multi-stage/)
   including a downsized JRE (built inside Docker via `jlink`)
-  to minimize the size of the generated Docker image, which is **131MB**.
+  to minimize the size of the generated Docker image, which is **129MB**.
 - Supports [Docker BuildKit](https://docs.docker.com/build/)
 - Java 22 (Eclipse Temurin)
 - [JUnit 5](https://github.com/junit-team/junit5) for testing,
