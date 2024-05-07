@@ -66,6 +66,7 @@
         <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
         <quarkus.platform.version>3.10.0</quarkus.platform.version>
         <!-- Test-related settings -->
+        <argLine>""</argLine> <!-- for surefire and failsafe plugins -->
         <skipTests>false</skipTests>    <!-- To skip all tests with `-DskipTests` on CLI. -->
         <skipITs>${skipTests}</skipITs> <!-- To skip integration tests (failsafe) with `-DskipITs` -->
         <skipUTs>${skipTests}</skipUTs> <!-- To skip unit tests (surefire) with `-DskipUTs` (non-standard property) -->
