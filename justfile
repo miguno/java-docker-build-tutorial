@@ -107,9 +107,11 @@ run-native:
     fi
     "$APP_BINARY"
 
-# generate site incl. reports for spotbugs, dependencies, licenses
+# generate site incl. reports for spotbugs, dependencies, javadocs, licenses
 site: compile
-    @./mvnw site && echo "Reports are available under {{build_dir}}/site/"
+    @./mvnw site && \
+        echo "Reports are available under {{build_dir}}/site/" && \
+        echo "Javadocs are available under {{build_dir}}/site/apidocs/"
 
 # send request to the app's HTTP endpoint (requires Docker and running app container)
 send-request-to-app:
