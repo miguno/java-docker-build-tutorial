@@ -16,13 +16,13 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v4
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
     - name: Set up JDK 22
       # TODO: Switch back to actions/setup-java@v4 once they support JDK 22 for temurin
       #uses: actions/setup-java@v4 # https://github.com/actions/setup-java
@@ -34,8 +34,10 @@ jobs:
       with:
         website: jdk.java.net
         release: 22
+
     - name: Print Java version
       run: java -version
+
     - name: Verify and Package with Maven
       run: ./mvnw --batch-mode --file pom.xml verify package
 
