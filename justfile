@@ -31,6 +31,16 @@ audit:
         just infer
     fi
 
+# benchmark the app's HTTP endpoint with plow (requires https://github.com/six-ddc/plow)
+benchmark-plow:
+    @echo plow -c 100 --duration=30s http://localhost:${APP_PORT}/status
+    @plow      -c 100 --duration=30s http://localhost:${APP_PORT}/status
+
+# benchmark the app's HTTP endpoint with wrk (requires https://github.com/wg/wrk)
+benchmark-wrk:
+    @echo wrk -t 10 -c 100 --latency --duration 30 http://localhost:${APP_PORT}/status
+    @wrk      -t 10 -c 100 --latency --duration 30 http://localhost:${APP_PORT}/status
+
 # alias for 'compile'
 build: compile
 
@@ -113,8 +123,8 @@ site: compile
 
 # send request to the app's HTTP endpoint (requires Docker and running app container)
 send-request-to-app:
-    @echo "curl http://localhost:${APP_PORT}/status"
-    @curl http://localhost:${APP_PORT}/status
+    @echo curl http://localhost:${APP_PORT}/status
+    @curl      http://localhost:${APP_PORT}/status
 
 # static code analysis with spotbugs
 spotbugs: compile
