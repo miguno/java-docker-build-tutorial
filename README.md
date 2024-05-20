@@ -6,7 +6,7 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 A template project to create a Docker image for a Java application.
-The example application uses Quarkus to expose an HTTP endpoint.
+The example application uses Spring Boot to expose an HTTP endpoint.
 
 > **Golang developer?** Check out https://github.com/miguno/golang-docker-build-tutorial
 
@@ -15,21 +15,13 @@ Features:
 - The Docker build uses a
   [multi-stage build setup](https://docs.docker.com/build/building/multi-stage/)
   including a downsized JRE (built inside Docker via `jlink`)
-  to minimize the size of the generated Docker image, which is **129MB**.
+  to minimize the size of the generated Docker image, which is **130MB**.
 - Supports [Docker BuildKit](https://docs.docker.com/build/)
 - Java 22 (Eclipse Temurin)
 - [JUnit 5](https://github.com/junit-team/junit5) for testing,
   [Jacoco](https://github.com/jacoco/jacoco) for code coverage,
   [SpotBugs](https://github.com/spotbugs/spotbugs) for static code analysis
 - Maven for build management, using [Maven Wrapper](https://github.com/apache/maven-wrapper)
-- Supports GraalVM to create
-  [native binaries](https://www.graalvm.org/latest/reference-manual/native-image/)
-  for the example application. See
-  [Building a Native Exectuable](https://quarkus.io/guides/building-native-image)
-  in the Quarkus documentation. To keep things simple, the Docker setup of this
-  project intentionally does not use these native app binaries because the
-  majority of Java developers do not use GraalVM. If you do want to use native
-  binaries, please modify [Dockerfile](Dockerfile) accordingly.
 - [GitHub Actions workflows](https://github.com/miguno/java-docker-build-tutorial/actions) for
   [Maven](https://github.com/miguno/java-docker-build-tutorial/actions/workflows/maven.yml)
   and
@@ -50,7 +42,7 @@ Java JDK or Maven installed.
 
 **Step 1:** Create the Docker image according to [Dockerfile](Dockerfile).
 This step uses Maven to build, test, and package the Java application according
-to [pom.xml](pom.xml). The resulting image is 129MB in size, of which 44MB are
+to [pom.xml](pom.xml). The resulting image is 130MB in size, of which 44MB are
 the underlying `alpine` image.
 
 ```shell
@@ -67,7 +59,7 @@ Optionally, you can check the size of the generated Docker image:
 ```shell
 $ docker images miguno/java-docker-build-tutorial
 REPOSITORY                          TAG       IMAGE ID       CREATED         SIZE
-miguno/java-docker-build-tutorial   latest    6eeb79c07157   4 minutes ago   129MB
+miguno/java-docker-build-tutorial   latest    b03be6e7dac4   4 minutes ago   130MB
 ```
 
 **Step 2:** Start a container for the Docker image.
@@ -99,24 +91,25 @@ Available recipes:
     compile             # compile the project
     coverage            # create coverage report
     default             # print available targets
-    dev                 # run the application locally (in Quarkus development mode) with live reload
     docker-image-create # create a docker image (requires Docker)
     docker-image-run    # run the docker image (requires Docker)
     docker-image-size   # size of the docker image (requires Docker)
+    docs                # generate Java documentation
     evaluate            # evaluate and print all just variables
     format              # format sources
     format-check        # check formatting of sources (without modifying)
     infer               # static code analysis with infer (requires https://github.com/facebook/infer)
+    mvnw-upgrade        # upgrade mvnw a.k.a. maven wrapper
     package             # package the application to create an uber jar
     pom                 # print effective pom.xml
-    run                 # run the application locally
+    run                 # run the application locally with live reload
+    run-jar             # run the application's packaged jar locally (requires 'package' step)
     run-native          # run the native application locally (requires GraalVM)
     send-request-to-app # send request to the app's HTTP endpoint (requires Docker and running app container)
     site                # generate site incl. reports for spotbugs, dependencies, javadocs, licenses
     spotbugs            # static code analysis with spotbugs
     system-info         # print system information such as OS and architecture
     test                # run unit tests
-    upgrade-mvnw        # upgrade mvnw a.k.a. maven wrapper
     verify              # run unit and integration tests, plus coverage check and static code analysis
     verify-native       # same as 'verify', but for the native application (requires GraalVM)
 ```
@@ -140,7 +133,7 @@ on Windows).
 $ ./mvnw clean verify package
 
 # Run the application locally.
-$ java -jar target/app-runner.jar
+$ java -jar target/app.jar
 
 # Alternatively, you can run the application in development mode with hot reloading.
 $ ./mvnw quarkus:dev

@@ -4,6 +4,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.2.5</version> <!-- To set Spring version project-wide. -->
+        <relativePath/> <!-- Lookup parent from repository. -->
+    </parent>
+
     <groupId>com.miguno</groupId>
     <artifactId>java-docker-build</artifactId>
     <packaging>jar</packaging>
@@ -61,60 +68,58 @@
         <spotbugs-maven-plugin.version>4.8.5.0</spotbugs-maven-plugin.version>
         <findsecbugs.version>1.12.0</findsecbugs.version> <!-- spotbugs plugin for security audits of web apps -->
         <spotless.version>2.43.0</spotless.version>
-        <!-- Dependencies -->
-        <quarkus.analytics.disabled>true</quarkus.analytics.disabled>
-        <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
-        <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
-        <quarkus.platform.version>3.10.0</quarkus.platform.version>
         <!-- Test-related settings -->
-        <argLine>""</argLine> <!-- for surefire and failsafe plugins -->
         <skipTests>false</skipTests>    <!-- To skip all tests with `-DskipTests` on CLI. -->
         <skipITs>${skipTests}</skipITs> <!-- To skip integration tests (failsafe) with `-DskipITs` -->
         <skipUTs>${skipTests}</skipUTs> <!-- To skip unit tests (surefire) with `-DskipUTs` (non-standard property) -->
-    </properties>
+        <!--
+            As per Jacoco:
+            https://www.eclemma.org/jacoco/trunk/doc/prepare-agent-mojo.html
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>${quarkus.platform.group-id}</groupId>
-                <artifactId>${quarkus.platform.artifact-id}</artifactId>
-                <version>${quarkus.platform.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
+            This empty property setting for `argLine` is required for our
+            surefire/failsafe setups (which customize `argLine`) to prevent
+            tests failing, e.g. in IntelliJ IDEA, with
+            "Could not find or load main class".
+        -->
+        <argLine/>
+    </properties>
 
     <dependencies>
         <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-rest-jackson</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-junit5</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
 
         <dependency>
-            <groupId>io.rest-assured</groupId>
-            <artifactId>rest-assured</artifactId>
-            <scope>test</scope>
+            <!-- https://docs.spring.io/spring-boot/docs/3.2.5/reference/htmlsingle/#actuator -->
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.spotbugs</groupId>
+            <artifactId>spotbugs-annotations</artifactId>
+            <version>${spotbugs.version}</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>
         <!--
           For `mvn package`: Set the name of the packaged (uber / fat) jar.
-
-          Normally, you would set this to "app.jar". But with Quarkus, do not add
-          the ".jar" filename suffix. If fileName is "app", Quarkus will by default
-          use the output filename "app-runner.jar".  For Quarkus, you must also
-          set `quarkus.package.jar.type=uber-jar` in
-          `src/main/resources/application.properties`.
-          https://quarkus.io/guides/maven-tooling#uber-jar-maven
+          The ".jar" file extension will be added automatically.
         -->
         <finalName>app</finalName>
 
@@ -182,19 +187,6 @@
                     <artifactId>git-build-hook-maven-plugin</artifactId>
                     <version>${git-build-hook-maven-plugin.version}</version>
                 </plugin>
-
-                <plugin>
-                    <groupId>${quarkus.platform.group-id}</groupId>
-                    <artifactId>quarkus-maven-plugin</artifactId>
-                    <version>${quarkus.platform.version}</version>
-                    <executions>
-                        <execution>
-                            <goals>
-                                <goal>build</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
             </plugins>
         </pluginManagement>
 
@@ -223,19 +215,10 @@
                         https://www.eclemma.org/jacoco/trunk/doc/prepare-agent-mojo.html
                         https://maven.apache.org/surefire/maven-surefire-plugin/faq.html#late-property-evaluation
                     -->
-                    <argLine>@{argLine}</argLine>
+                    <argLine>@{argLine} -XX:+EnableDynamicAgentLoading</argLine>
                     <!-- `forkCount` (default: 1) must not be zero for jacoco. -->
-                    <forkCount>2</forkCount>
+                    <forkCount>1</forkCount>
                     <skipTests>${skipUTs}</skipTests>
-                    <systemPropertyVariables>
-                        <!-- Make sure tests use the correct logmanager. -->
-                        <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
-                        <!--
-                          `maven.home` is set to ensure that custom settings from
-                          `${maven.home}/conf/settings.xml` are applied (if any).
-                        -->
-                        <maven.home>${maven.home}</maven.home>
-                    </systemPropertyVariables>
                 </configuration>
             </plugin>
 
@@ -249,19 +232,11 @@
                         https://www.eclemma.org/jacoco/trunk/doc/prepare-agent-mojo.html
                         https://maven.apache.org/surefire/maven-surefire-plugin/faq.html#late-property-evaluation
                     -->
-                    <argLine>@{argLine}</argLine>
+                    <argLine>@{argLine} -XX:+EnableDynamicAgentLoading</argLine>
                     <!-- `forkCount` (default: 1) must not be zero for jacoco. -->
-                    <forkCount>2</forkCount>
+                    <forkCount>1</forkCount>
                     <skipTests>${skipTests}</skipTests>
                     <skipITs>${skipITs}</skipITs>
-                    <systemPropertyVariables>
-                        <!-- Required when building native images, see `<profiles>` below. -->
-                        <native.image.path>
-                            ${project.build.directory}/${project.build.finalName}-runner
-                        </native.image.path>
-                        <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
-                        <maven.home>${maven.home}</maven.home>
-                    </systemPropertyVariables>
                 </configuration>
                 <executions>
                     <execution>
@@ -368,11 +343,6 @@
                 </executions>
             </plugin>
 
-            <plugin>
-                <groupId>${quarkus.platform.group-id}</groupId>
-                <artifactId>quarkus-maven-plugin</artifactId>
-            </plugin>
-
             <!--
                 https://spotbugs.github.io/spotbugs-maven-plugin/
                 Run `./mvnw spotbugs:help` for usage.
@@ -462,6 +432,25 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>pre-integration-test</id>
+                        <goals>
+                            <goal>start</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>post-integration-test</id>
+                        <goals>
+                            <goal>stop</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
@@ -504,20 +493,5 @@
             </plugin>
         </plugins>
     </reporting>
-
-    <profiles>
-        <profile>
-            <id>native</id>
-            <activation>
-                <property>
-                    <name>native</name>
-                </property>
-            </activation>
-            <properties>
-                <quarkus.native.enabled>true</quarkus.native.enabled>
-                <skipITs>false</skipITs>
-            </properties>
-        </profile>
-    </profiles>
 
 </project>

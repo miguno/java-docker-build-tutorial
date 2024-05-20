@@ -54,7 +54,7 @@ WORKDIR $APP_DIR
 COPY --from=builder /minimal-jre $JAVA_HOME
 
 # Copy packaged app from builder image.
-COPY --from=builder --chown=$USER_NAME:$GROUP_NAME /usr/src/myapp/target/app-runner.jar ./app.jar
+COPY --from=builder --chown=$USER_NAME:$GROUP_NAME /usr/src/myapp/target/app.jar ./app.jar
 
 # Run the application.
 USER $USER_NAME:$GROUP_NAME

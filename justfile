@@ -5,8 +5,7 @@ set dotenv-load
 
 project_dir := justfile_directory()
 build_dir := project_dir + "/target"
-app_uber_jar := build_dir + "/app-runner.jar"
-app_native_image := build_dir + "/app-runner"
+app_uber_jar := build_dir + "/app.jar"
 
 # print available targets
 default:
@@ -35,12 +34,6 @@ audit:
 # alias for 'compile'
 build: compile
 
-# build the native application locally (requires GraalVM)
-build-native:
-    @echo "Producing a native app image via GraalVM ..."
-    @echo "See https://quarkus.io/guides/building-native-image#configuring-graalvm"
-    @./mvnw install -Dnative && echo "The native app image was successfully created at: {{app_native_image}}"
-
 # clean (remove) the build artifacts
 clean:
     @./mvnw clean
@@ -53,10 +46,6 @@ compile:
 coverage: verify
     @./mvnw jacoco:report && \
         echo "Coverage report is available under {{build_dir}}/site/jacoco/"
-
-# run the application locally (in Quarkus development mode) with live reload
-dev:
-    @./mvnw quarkus:dev
 
 # create a docker image (requires Docker)
 docker-image-create:
@@ -96,9 +85,16 @@ package:
 pom:
     @./mvnw help:effective-pom
 
-# run the application locally
+# run the application locally with live reload
 run:
+    @./mvnw spring-boot:run
+
+# run the application's packaged jar locally (requires 'package' step)
+run-jar:
     #!/usr/bin/env bash
+    #
+    # OR: `./mvnw spring-boot:run`
+    #
     APP_JAR="{{app_uber_jar}}"
     if [ ! -f "$APP_JAR" ]; then
         just package
@@ -109,23 +105,6 @@ run:
     declare -r JVM_ARGS="-XX:+UseZGC -XX:+ZGenerational"
     java $JVM_ARGS -jar "$APP_JAR"
 
-# run the native application locally (requires GraalVM)
-run-native:
-    #!/usr/bin/env bash
-    APP_BINARY="{{app_native_image}}"
-    if [ ! -f "$APP_BINARY" ]; then
-        just build-native
-    else
-        echo "Using existing application native image at $APP_BINARY."
-        echo "If you want to recompile the native image, run \`./mvnw install -Dnative\` (or \`just build-native\`)."
-    fi
-    # To see garbage collection statistics, run the native binary as follows.
-    #
-    #   "$APP_BINARY" -XX:+PrintGC -XX:+VerboseGC
-    #
-    # See https://quarkus.io/guides/native-reference for further information.
-    "$APP_BINARY"
-
 # generate site incl. reports for spotbugs, dependencies, javadocs, licenses
 site: compile
     @./mvnw site && \
@@ -134,7 +113,7 @@ site: compile
 
 # send request to the app's HTTP endpoint (requires Docker and running app container)
 send-request-to-app:
-    curl http://localhost:8123/status
+    curl http://localhost:${APP_PORT}/status
 
 # static code analysis with spotbugs
 spotbugs: compile
@@ -145,14 +124,10 @@ test:
     @./mvnw test
 
 # upgrade mvnw a.k.a. maven wrapper
-upgrade-mvnw:
+mvnw-upgrade:
     @./mvnw wrapper:wrapper
 
 # run unit and integration tests, plus coverage check and static code analysis
 verify:
     @./mvnw verify
-
-# same as 'verify', but for the native application (requires GraalVM)
-verify-native:
-    @./mvnw verify -Dnative
 
