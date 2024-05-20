@@ -113,7 +113,8 @@ site: compile
 
 # send request to the app's HTTP endpoint (requires Docker and running app container)
 send-request-to-app:
-    curl http://localhost:${APP_PORT}/status
+    @echo "curl http://localhost:${APP_PORT}/status"
+    @curl http://localhost:${APP_PORT}/status
 
 # static code analysis with spotbugs
 spotbugs: compile
