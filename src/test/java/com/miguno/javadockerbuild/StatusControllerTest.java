@@ -19,7 +19,9 @@ public class StatusControllerTest {
 
   @Test
   public void getStatus() throws Exception {
-    String expectedJson = "{\"status\":\"Hello, World!\"}";
+    String expectedJson = """
+                {"status":"Hello, World!"}
+        """;
 
     mvc.perform(MockMvcRequestBuilders.get("/status").accept(MediaType.APPLICATION_JSON))
         .andExpect(status().isOk())

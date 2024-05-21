@@ -16,7 +16,9 @@ public class StatusControllerIT {
   @Test
   public void getStatus() throws Exception {
     ResponseEntity<String> response = template.getForEntity("/status", String.class);
-    String expectedJson = "{\"status\":\"Hello, World!\"}";
+    String expectedJson = """
+           {"status":"Hello, World!"}
+        """;
     JSONAssert.assertEquals(expectedJson, response.getBody(), JSONCompareMode.STRICT);
   }
 }
