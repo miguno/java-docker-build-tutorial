@@ -95,6 +95,10 @@ format-check:
 outdated:
     @./mvnw versions:display-dependency-updates
 
+# list outdated maven plugins
+outdated-plugins:
+    @./mvnw versions:display-plugin-updates
+
 # package the application to create an uber jar
 package:
     @./mvnw verify package
