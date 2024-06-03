@@ -91,6 +91,10 @@ format:
 format-check:
     @./mvnw spotless:check
 
+# list outdated dependencies
+outdated:
+    @./mvnw versions:display-dependency-updates
+
 # package the application to create an uber jar
 package:
     @./mvnw verify package
