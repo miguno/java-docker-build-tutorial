@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+/** The only API endpoint exposed by this example application. */
 @SuppressFBWarnings("SPRING_ENDPOINT")
 @RestController
 public class StatusController {

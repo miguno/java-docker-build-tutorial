@@ -11,6 +11,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+/** Example unit tests for the API endpoint `/status`. */
 @SpringBootTest
 @AutoConfigureMockMvc
 public class StatusControllerTest {
