@@ -57,6 +57,10 @@ coverage: verify
     @./mvnw jacoco:report && \
         echo "Coverage report is available under {{build_dir}}/site/jacoco/"
 
+# list dependency tree of this project
+dependencies:
+    @./mvnw dependency:tree
+
 # create a docker image (requires Docker)
 docker-image-create:
     @echo "Creating a docker image ..."
