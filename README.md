@@ -85,8 +85,9 @@ commands above more conveniently as per this project's [justfile](justfile):
 $ just
 Available recipes:
     audit               # audit the code
+    benchmark-plow      # benchmark the app's HTTP endpoint with plow (requires https://github.com/six-ddc/plow)
+    benchmark-wrk       # benchmark the app's HTTP endpoint with wrk (requires https://github.com/wg/wrk)
     build               # alias for 'compile'
-    build-native        # build the native application locally (requires GraalVM)
     clean               # clean (remove) the build artifacts
     compile             # compile the project
     coverage            # create coverage report
@@ -104,14 +105,12 @@ Available recipes:
     pom                 # print effective pom.xml
     run                 # run the application locally with live reload
     run-jar             # run the application's packaged jar locally (requires 'package' step)
-    run-native          # run the native application locally (requires GraalVM)
     send-request-to-app # send request to the app's HTTP endpoint (requires Docker and running app container)
     site                # generate site incl. reports for spotbugs, dependencies, javadocs, licenses
     spotbugs            # static code analysis with spotbugs
     system-info         # print system information such as OS and architecture
     test                # run unit tests
     verify              # run unit and integration tests, plus coverage check and static code analysis
-    verify-native       # same as 'verify', but for the native application (requires GraalVM)
 ```
 
 Example:
