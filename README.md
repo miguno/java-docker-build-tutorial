@@ -6,7 +6,8 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 A template project to create a Docker image for a Java application.
-The example application uses Spring Boot to expose an HTTP endpoint.
+The [example application](src/main/java/com/miguno/javadockerbuild/App.java)
+uses Spring Boot to expose an HTTP endpoint.
 
 > **Golang developer?** Check out https://github.com/miguno/golang-docker-build-tutorial
 
