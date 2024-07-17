@@ -165,7 +165,10 @@
                     <artifactId>spotbugs-maven-plugin</artifactId>
                     <version>${spotbugs-maven-plugin.version}</version>
                     <dependencies>
-                        <!-- overwrite dependency on spotbugs to specify the version of spotbugs -->
+                        <!--
+                            We overwrite the dependency on spotbugs to specify
+                            the exact version of spotbugs we want.
+                        -->
                         <dependency>
                             <groupId>com.github.spotbugs</groupId>
                             <artifactId>spotbugs</artifactId>
