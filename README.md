@@ -110,7 +110,7 @@ $ curl http://localhost:8123/status
 {"status":"idle"}
 ```
 
-# Notes
+# Local usage without Docker
 
 You can also build, test, package, and run the Java application locally
 (without Docker) if you have JDK 22+ installed. You do not need to have Maven
@@ -125,8 +125,8 @@ $ ./mvnw clean verify package
 # Run the application locally.
 $ java -jar target/app.jar
 
-# Alternatively, you can run the application in development mode with hot reloading.
-$ ./mvnw quarkus:dev
+# Alternatively, run the application locally via Spring Boot's maven targets.
+$ ./mvnw spring-boot:run
 ```
 
 # Appendix: Usage with just
