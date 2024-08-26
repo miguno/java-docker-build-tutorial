@@ -110,7 +110,26 @@ $ curl http://localhost:8123/status
 {"status":"idle"}
 ```
 
-# Usage with just
+# Notes
+
+You can also build, test, package, and run the Java application locally
+(without Docker) if you have JDK 22+ installed. You do not need to have Maven
+installed, because this repository contains the
+[Maven Wrapper](https://github.com/apache/maven-wrapper) `mvnw` (use `mvnw.cmd`
+on Windows).
+
+```shell
+# Build, test, package the application locally.
+$ ./mvnw clean verify package
+
+# Run the application locally.
+$ java -jar target/app.jar
+
+# Alternatively, you can run the application in development mode with hot reloading.
+$ ./mvnw quarkus:dev
+```
+
+# Appendix: Usage with just
 
 If you have [just](https://github.com/casey/just) installed, you can run the
 commands above more conveniently as per this project's [justfile](justfile):
@@ -151,25 +170,6 @@ Example:
 
 ```shell
 $ just docker-image-create
-```
-
-# Notes
-
-You can also build, test, package, and run the Java application locally
-(without Docker) if you have JDK 22+ installed. You do not need to have Maven
-installed, because this repository contains the
-[Maven Wrapper](https://github.com/apache/maven-wrapper) `mvnw` (use `mvnw.cmd`
-on Windows).
-
-```shell
-# Build, test, package the application locally.
-$ ./mvnw clean verify package
-
-# Run the application locally.
-$ java -jar target/app.jar
-
-# Alternatively, you can run the application in development mode with hot reloading.
-$ ./mvnw quarkus:dev
 ```
 
 # References
