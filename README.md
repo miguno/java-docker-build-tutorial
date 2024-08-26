@@ -70,6 +70,38 @@ miguno/java-docker-build-tutorial   latest    b03be6e7dac4   4 minutes ago   130
 $ docker run -p 8123:8123 miguno/java-docker-build-tutorial:latest
 ```
 
+<details>
+  <summary>Example output (click to expand)</summary>
+
+```
+Running container from docker image ...
+Starting container for image 'miguno/java-docker-build-tutorial:latest', exposing port 8123/tcp
+- Run 'curl http://localhost:8123/status' to send a test request to the containerized app.
+- Enter Ctrl-C to stop the container.
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.3.3)
+
+2024-08-26T15:45:08.859Z  INFO 1 --- [main] com.miguno.javadockerbuild.App           : Starting App v1.0.0-SNAPSHOT using Java 22.0.2 with PID 1 (/app/app.jar started by appuser in /app)
+2024-08-26T15:45:08.868Z  INFO 1 --- [main] com.miguno.javadockerbuild.App           : No active profile set, falling back to 1 default profile: "default"
+2024-08-26T15:45:10.930Z  INFO 1 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8123 (http)
+2024-08-26T15:45:10.950Z  INFO 1 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-08-26T15:45:10.951Z  INFO 1 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.28]
+2024-08-26T15:45:10.991Z  INFO 1 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-08-26T15:45:10.992Z  INFO 1 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2004 ms
+2024-08-26T15:45:12.452Z  INFO 1 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+2024-08-26T15:45:12.562Z  INFO 1 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8123 (http) with context path '/'
+2024-08-26T15:45:12.597Z  INFO 1 --- [main] com.miguno.javadockerbuild.App           : Started App in 5.0 seconds (process running for 6.246)
+```
+
+</details>
+
 **Step 3:** Open another terminal and access the example API endpoint of the
 running container.
 
