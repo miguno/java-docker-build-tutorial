@@ -12,6 +12,12 @@ public class StatusController {
 
   private static final String template = "Hello, %s!";
 
+  /**
+   * Returns a greeting to the client.
+   *
+   * @param name The name to greet.
+   * @return A personalized greeting.
+   */
   @GetMapping("/status")
   public Status status(@RequestParam(value = "name", defaultValue = "World") String name) {
     return new Status(String.format(template, name));
