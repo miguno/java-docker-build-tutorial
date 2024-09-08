@@ -1,5 +1,6 @@
-package com.miguno.javadockerbuild;
+package com.miguno.javadockerbuild.controllers;
 
+import com.miguno.javadockerbuild.Status;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;

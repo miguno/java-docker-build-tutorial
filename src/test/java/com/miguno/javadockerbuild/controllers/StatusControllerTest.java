@@ -1,4 +1,4 @@
-package com.miguno.javadockerbuild;
+package com.miguno.javadockerbuild.controllers;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
