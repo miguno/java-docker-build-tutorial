@@ -27,7 +27,8 @@ Features:
   and [/v3/api-docs](http://localhost:8123/v3/api-docs)
 - [Spring Actuator](https://docs.spring.io/spring-boot/reference/actuator/endpoints.html)
   at endpoint [/actuator](http://localhost:8123/actuator), e.g. for
-  [healthchecks](http://localhost:8123/actuator/health)
+  [healthchecks](http://localhost:8123/actuator/health) or [Prometheus
+  metrics](http://localhost:8123/actuator/prometheus)
 - Maven for build management (see [pom.xml](pom.xml)), using
   [Maven Wrapper](https://github.com/apache/maven-wrapper)
 - [GitHub Actions workflows](https://github.com/miguno/java-docker-build-tutorial/actions) for

@@ -57,6 +57,8 @@
         <maven.compiler.release>${java.version}</maven.compiler.release>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
+        <!-- Dependencies (other than Maven plugins) -->
+        <micrometer.version>1.13.3</micrometer.version>
         <!-- Maven plugins -->
         <maven-project-info-reports-plugin.version>3.7.0</maven-project-info-reports-plugin.version>
         <maven-enforcer-plugin.version>3.5.0</maven-enforcer-plugin.version>
@@ -106,6 +108,21 @@
 
         <dependency>
             <!--
+                Exposes metrics via a Prometheus actuator endpoint.
+
+                Adds the following endpoint:
+                1. `/actuator/prometheus`
+
+                https://docs.spring.io/spring-boot/api/rest/actuator/prometheus.html#prometheus
+                https://docs.micrometer.io/micrometer/reference/implementations/prometheus.html
+            -->
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-registry-prometheus</artifactId>
+            <version>${micrometer.version}</version>
+        </dependency>
+
+        <dependency>
+            <!--
                 Integrates Spring Boot and Swagger UI.
                 https://springdoc.org/
 
@@ -117,6 +134,7 @@
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
             <version>${springdoc.version}</version>
         </dependency>
+
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
