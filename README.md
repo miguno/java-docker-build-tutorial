@@ -25,6 +25,9 @@ Features:
 - Swagger UI and OpenAPI v3 integration via [springdoc](https://springdoc.org/)
   at endpoints [/swagger-ui.html](http://localhost:8123/swagger-ui.html) and
   and [/v3/api-docs](http://localhost:8123/v3/api-docs)
+- [Spring Actuator](https://docs.spring.io/spring-boot/reference/actuator/endpoints.html)
+  at endpoint [/actuator](http://localhost:8123/actuator), e.g. for
+  [healthchecks](http://localhost:8123/actuator/health)
 - Maven for build management (see [pom.xml](pom.xml)), using
   [Maven Wrapper](https://github.com/apache/maven-wrapper)
 - [GitHub Actions workflows](https://github.com/miguno/java-docker-build-tutorial/actions) for
