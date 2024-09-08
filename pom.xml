@@ -60,6 +60,7 @@
         <!-- Dependencies (other than Maven plugins) -->
         <micrometer.version>1.13.3</micrometer.version>
         <springdoc.version>2.6.0</springdoc.version>
+        <spring-boot-admin.version>3.3.3</spring-boot-admin.version>
         <!-- Maven plugins -->
         <maven-project-info-reports-plugin.version>3.7.0</maven-project-info-reports-plugin.version>
         <maven-enforcer-plugin.version>3.5.0</maven-enforcer-plugin.version>
@@ -102,6 +103,11 @@
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <optional>true</optional>
         </dependency>
@@ -110,6 +116,29 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <!--
+                Server for https://github.com/codecentric/spring-boot-admin/.
+                In this example project, the server and the client of Spring
+                Boot Admin run in the same application. In production, however,
+                you will typically run the server (think: central monitoring
+                process) separately from the clients, which are your "actual"
+                applications.
+            -->
+            <groupId>de.codecentric</groupId>
+            <artifactId>spring-boot-admin-starter-server</artifactId>
+            <version>${spring-boot-admin.version}</version>
+        </dependency>
+
+        <dependency>
+            <!--
+                Client for https://github.com/codecentric/spring-boot-admin/.
+            -->
+            <groupId>de.codecentric</groupId>
+            <artifactId>spring-boot-admin-starter-client</artifactId>
+            <version>${spring-boot-admin.version}</version>
         </dependency>
 
         <dependency>

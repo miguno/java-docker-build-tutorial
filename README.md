@@ -7,7 +7,8 @@
 
 A template project to create a Docker image for a Java application.
 The [example application](src/main/java/com/miguno/javadockerbuild/App.java)
-uses Spring Boot to expose an HTTP endpoint.
+uses Spring Boot to expose an HTTP endpoint at
+[`/status`](http://localhost:8123/status).
 
 > **Golang developer?** Check out https://github.com/miguno/golang-docker-build-tutorial
 
@@ -16,7 +17,7 @@ Features:
 - The Docker build uses a
   [multi-stage build setup](https://docs.docker.com/build/building/multi-stage/)
   including a downsized JRE (built inside Docker via `jlink`)
-  to minimize the size of the generated Docker image, which is **130MB**.
+  to minimize the size of the generated Docker image, which is **157MB**.
 - Supports [Docker BuildKit](https://docs.docker.com/build/)
 - Java 22 (Eclipse Temurin)
 - [JUnit 5](https://github.com/junit-team/junit5) for testing,
@@ -29,6 +30,15 @@ Features:
   at endpoint [/actuator](http://localhost:8123/actuator), e.g. for
   [healthchecks](http://localhost:8123/actuator/health) or [Prometheus
   metrics](http://localhost:8123/actuator/prometheus)
+- Integrates [Spring Boot
+  Admin](https://github.com/codecentric/spring-boot-admin) at endpoint
+  [`/admin`](http://localhost:8123/admin) to inspect the running application.
+  Login with username `admin` and password `admin`.<br />
+  <a href="https://github.com/miguno/java-docker-build-tutorial/raw/main/images/spring-boot-admin-dashboard.png"><img src="https://github.com/miguno/java-docker-build-tutorial/raw/main/images/spring-boot-admin-dashboard.png" alt="Spring Boot Admin screenshot" width="300"></a><br />
+  Note that, in production, [it is recommended to
+  separate the SBA server](https://docs.spring-boot-admin.com/current/faq.html)
+  from your application (the SBA client), unlike what this project does for
+  demonstration purposes.
 - Maven for build management (see [pom.xml](pom.xml)), using
   [Maven Wrapper](https://github.com/apache/maven-wrapper)
 - [GitHub Actions workflows](https://github.com/miguno/java-docker-build-tutorial/actions) for
@@ -51,7 +61,7 @@ Java JDK or Maven installed.
 
 **Step 1:** Create the Docker image according to [Dockerfile](Dockerfile).
 This step uses Maven to build, test, and package the Java application according
-to [pom.xml](pom.xml). The resulting image is 131MB in size, of which 44MB are
+to [pom.xml](pom.xml). The resulting image is 157MB in size, of which 44MB are
 the underlying `alpine` image.
 
 ```shell
