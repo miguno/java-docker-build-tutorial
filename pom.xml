@@ -142,6 +142,10 @@
         </dependency>
 
         <dependency>
+            <!--
+                Static analysis of Java source code.
+                https://github.com/spotbugs/spotbugs
+            -->
             <groupId>com.github.spotbugs</groupId>
             <artifactId>spotbugs-annotations</artifactId>
             <version>${spotbugs.version}</version>
