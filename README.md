@@ -22,6 +22,9 @@ Features:
 - [JUnit 5](https://github.com/junit-team/junit5) for testing,
   [Jacoco](https://github.com/jacoco/jacoco) for code coverage,
   [SpotBugs](https://github.com/spotbugs/spotbugs) for static code analysis
+- Swagger UI and OpenAPI v3 integration via [springdoc](https://springdoc.org/)
+  at endpoints [/swagger-ui.html](http://localhost:8123/swagger-ui.html) and
+  and [/v3/api-docs](http://localhost:8123/v3/api-docs)
 - Maven for build management (see [pom.xml](pom.xml)), using
   [Maven Wrapper](https://github.com/apache/maven-wrapper)
 - [GitHub Actions workflows](https://github.com/miguno/java-docker-build-tutorial/actions) for

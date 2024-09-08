@@ -67,6 +67,7 @@
         <jacoco.version>0.8.12</jacoco.version>
         <spotbugs.version>4.8.6</spotbugs.version>
         <spotbugs-maven-plugin.version>4.8.6.2</spotbugs-maven-plugin.version>
+        <springdoc.version>2.6.0</springdoc.version>
         <findsecbugs.version>1.12.0</findsecbugs.version> <!-- spotbugs plugin for security audits of web apps -->
         <spotless.version>2.43.0</spotless.version>
         <!-- Test-related settings -->
@@ -101,6 +102,20 @@
             <!-- https://docs.spring.io/spring-boot/reference/actuator/enabling.html#page-title -->
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+        <dependency>
+            <!--
+                Integrates Spring Boot and Swagger UI.
+                https://springdoc.org/
+
+                By default, adds the following two endpoints:
+                1. `/swagger-ui.html` - Swagger UI page (HTML)
+                2. `/v3/api-docs`     - OpenAPI description (JSON)
+            -->
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>${springdoc.version}</version>
         </dependency>
 
         <dependency>
