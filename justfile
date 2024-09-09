@@ -107,16 +107,13 @@ package:
 pom:
     @./mvnw help:effective-pom
 
-# run the application locally with live reload
-run:
+# start the application locally with live reload
+start:
     @./mvnw spring-boot:run
 
-# run the application's packaged jar locally (requires 'package' step)
-run-jar:
+# start the application's packaged jar locally (requires 'package' step)
+start-jar:
     #!/usr/bin/env bash
-    #
-    # OR: `./mvnw spring-boot:run`
-    #
     APP_JAR="{{app_uber_jar}}"
     if [ ! -f "$APP_JAR" ]; then
         just package
