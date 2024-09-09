@@ -140,10 +140,10 @@ on Windows).
 $ ./mvnw clean verify package
 
 # Run the application locally.
-$ java -jar target/app.jar
-
-# Alternatively, run the application locally via Spring Boot's maven targets.
 $ ./mvnw spring-boot:run
+
+# Alternatively, run the application locally via its jar file.
+$ java -jar target/app.jar
 ```
 
 # Appendix: Usage with just
