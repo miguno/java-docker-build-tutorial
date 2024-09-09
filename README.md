@@ -8,7 +8,7 @@
 A template project to create a Docker image for a Java application.
 The [example application](src/main/java/com/miguno/javadockerbuild/App.java)
 uses Spring Boot to expose an HTTP endpoint at
-[`/status`](http://localhost:8123/status).
+[`/welcome`](http://localhost:8123/welcome).
 
 > **Golang developer?** Check out https://github.com/miguno/golang-docker-build-tutorial
 
@@ -93,7 +93,7 @@ $ docker run -p 8123:8123 miguno/java-docker-build-tutorial:latest
 ```
 Running container from docker image ...
 Starting container for image 'miguno/java-docker-build-tutorial:latest', exposing port 8123/tcp
-- Run 'curl http://localhost:8123/status' to send a test request to the containerized app.
+- Run 'curl http://localhost:8123/welcome' to send a test request to the containerized app.
 - Enter Ctrl-C to stop the container.
 
   .   ____          _            __ _ _
@@ -123,8 +123,8 @@ Starting container for image 'miguno/java-docker-build-tutorial:latest', exposin
 running container.
 
 ```shell
-$ curl http://localhost:8123/status
-{"status":"idle"}
+$ curl http://localhost:8123/welcome
+{"welcome":"Hello, World!"}
 ```
 
 # Local usage without Docker

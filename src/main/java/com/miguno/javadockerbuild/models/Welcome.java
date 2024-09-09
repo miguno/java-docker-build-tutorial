@@ -1,3 +1,3 @@
 package com.miguno.javadockerbuild.models;
 
-public record Status(String status) {}
+public record Welcome(String welcome) {}

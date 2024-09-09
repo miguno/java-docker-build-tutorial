@@ -93,8 +93,8 @@ public class SecuritySecureConfig {
                     //// For the Spring Boot Admin client (the "real" app being developed).
                     .requestMatchers(
                         new AntPathRequestMatcher("/"),
-                        // Permit public access to this app's example endpoint at `/status`.
-                        new AntPathRequestMatcher("/status"),
+                        // Permit public access to this app's example endpoint at `/welcome`.
+                        new AntPathRequestMatcher("/welcome"),
                         // Permit public access to Swagger.
                         new AntPathRequestMatcher("/swagger-ui.html"),
                         new AntPathRequestMatcher("/v3/api-docs"),

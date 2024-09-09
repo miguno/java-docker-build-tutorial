@@ -15,7 +15,7 @@ declare -r OS="$(uname -s)"
 declare -r ARCH="$(uname -m)"
 
 # Check requirements
-if ! command -v docker &> /dev/null; then
+if ! command -v docker &>/dev/null; then
     echo "ERROR: 'docker' command not available. Is Docker installed?"
     exit 1
 fi
@@ -28,6 +28,6 @@ if [[ "$OS" = "Darwin" && "$ARCH" = "arm64" ]]; then
 fi
 
 echo "Starting container for image '$DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG', exposing port ${APP_PORT}/tcp"
-echo "- Run 'curl http://localhost:${APP_PORT}/status' to send a test request to the containerized app."
+echo "- Run 'curl http://localhost:${APP_PORT}/welcome' to send a test request to the containerized app."
 echo "- Enter Ctrl-C to stop the container."
 docker run $DOCKER_OPTIONS -p "$APP_PORT:$APP_PORT" "$DOCKER_IMAGE_NAME":"$DOCKER_IMAGE_TAG"

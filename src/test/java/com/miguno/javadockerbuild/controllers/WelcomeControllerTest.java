@@ -11,20 +11,20 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-/** Example unit tests for the API endpoint `/status`. */
+/** Example unit tests for the API endpoint `/welcome`. */
 @SpringBootTest
 @AutoConfigureMockMvc
-public class StatusControllerTest {
+public class WelcomeControllerTest {
 
   @Autowired private MockMvc mvc;
 
   @Test
-  public void getStatus() throws Exception {
+  public void getWelcome() throws Exception {
     String expectedJson = """
-                {"status":"Hello, World!"}
+                {"welcome":"Hello, World!"}
         """;
 
-    mvc.perform(MockMvcRequestBuilders.get("/status").accept(MediaType.APPLICATION_JSON))
+    mvc.perform(MockMvcRequestBuilders.get("/welcome").accept(MediaType.APPLICATION_JSON))
         .andExpect(status().isOk())
         .andExpect(content().json(expectedJson));
   }

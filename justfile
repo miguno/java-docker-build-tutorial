@@ -33,13 +33,13 @@ audit:
 
 # benchmark the app's HTTP endpoint with plow (requires https://github.com/six-ddc/plow)
 benchmark-plow:
-    @echo plow -c 100 --duration=30s http://localhost:${APP_PORT}/status
-    @plow      -c 100 --duration=30s http://localhost:${APP_PORT}/status
+    @echo plow -c 100 --duration=30s http://localhost:${APP_PORT}/welcome
+    @plow      -c 100 --duration=30s http://localhost:${APP_PORT}/welcome
 
 # benchmark the app's HTTP endpoint with wrk (requires https://github.com/wg/wrk)
 benchmark-wrk:
-    @echo wrk -t 10 -c 100 --latency --duration 30 http://localhost:${APP_PORT}/status
-    @wrk      -t 10 -c 100 --latency --duration 30 http://localhost:${APP_PORT}/status
+    @echo wrk -t 10 -c 100 --latency --duration 30 http://localhost:${APP_PORT}/welcome
+    @wrk      -t 10 -c 100 --latency --duration 30 http://localhost:${APP_PORT}/welcome
 
 # alias for 'compile'
 build: compile
@@ -135,8 +135,8 @@ site: compile
 
 # send request to the app's HTTP endpoint (requires Docker and running app container)
 send-request-to-app:
-    @echo curl http://localhost:${APP_PORT}/status
-    @curl      http://localhost:${APP_PORT}/status
+    @echo curl http://localhost:${APP_PORT}/welcome
+    @curl      http://localhost:${APP_PORT}/welcome
 
 # static code analysis with spotbugs
 spotbugs: compile

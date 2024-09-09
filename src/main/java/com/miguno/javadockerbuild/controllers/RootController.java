@@ -39,7 +39,7 @@ public class RootController {
         <p>Enjoy playing around with this application!</p>
         <h2>Example Endpoints</h2>
         <ul>
-          <li><a href="/status"><code>/status</code></a> &mdash; this app's example endpoint</li>
+          <li><a href="/welcome"><code>/welcome</code></a> &mdash; this app's example endpoint</li>
           <li><a href="/actuator/health"><code>/actuator/health</code></a> &mdash; Spring built-in feature</li>
           <li><a href="/actuator/prometheus"><code>/actuator/prometheus</code></a> &mdash; Spring built-in feature</li>
           <li><a href="/admin">Spring Boot Admin dashboard</a> <strong>(requires login, see below)</strong></li>

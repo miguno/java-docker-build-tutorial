@@ -8,17 +8,17 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.ResponseEntity;
 
-/** An example integration test for the API endpoint `/status`. */
+/** An example integration test for the API endpoint `/welcome`. */
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class StatusControllerIT {
+public class WelcomeControllerIT {
 
   @Autowired private TestRestTemplate template;
 
   @Test
-  public void getStatus() throws Exception {
-    ResponseEntity<String> response = template.getForEntity("/status", String.class);
+  public void welcome() throws Exception {
+    ResponseEntity<String> response = template.getForEntity("/welcome", String.class);
     String expectedJson = """
-           {"status":"Hello, World!"}
+           {"welcome":"Hello, World!"}
         """;
     JSONAssert.assertEquals(expectedJson, response.getBody(), JSONCompareMode.STRICT);
   }
