@@ -29,7 +29,7 @@ WORKDIR /usr/src/myapp/
 RUN ./mvnw package
 
 ###############################################################################
-# Stage 2 (to create a downsized "container executable", ~131MB)              #
+# Stage 2 (to create a downsized "container executable", ~157MB)              #
 ###############################################################################
 FROM alpine:latest
 ENV JAVA_HOME=/jre
