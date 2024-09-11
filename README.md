@@ -146,7 +146,40 @@ $ ./mvnw spring-boot:run
 $ java -jar target/app.jar
 ```
 
-# Appendix: Usage with just
+# Appendix
+
+## Hot reloading during development
+
+This project uses
+[spring-boot-devtools](https://docs.spring.io/spring-boot/reference/using/devtools.html)
+for fast, automatic application
+[restarts](https://docs.spring.io/spring-boot/reference/using/devtools.html#using.devtools.restart)
+after code changes.
+
+- Restarts will be triggered whenever files in the classpath changed, e.g.,
+  after you ran `./mvnw compile` or after you re-built the project in your IDE.
+- This feature works both when running the application inside an IDE like
+  IntelliJ IDEA as well as when running the application in a terminal with
+  `./mvnw spring-boot:run`.
+- Be patient. After a file changed, it may take a few seconds for the refresh
+  to happen.
+
+In IntelliJ IDEA, you can also enable automatic project builds for even more
+convenience, using the following settings. Then, whenever you modify a source
+file, IDEA will automatically rebuild the project in the background and thus
+trigger an automatic restart:
+
+- `Settings` > `Build, Execution, Deployment` > `Compiler`:
+  [X] Build project automatically
+- `Settings` > `Advanced Settings`:
+  [X] Allow auto-make to start even if developed application is currently running
+
+**Restart vs. Reload:** If you want true
+[hot reloads](https://docs.spring.io/spring-boot/reference/using/devtools.html#using.devtools.restart.restart-vs-reload)
+that are even faster than automatic restarts, look at tools like
+[JRebel](https://jrebel.com/software/jrebel/).
+
+## Usage with just
 
 If you have [just](https://github.com/casey/just) installed, you can run the
 commands above more conveniently as per this project's [justfile](justfile):
