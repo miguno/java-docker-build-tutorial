@@ -1,4 +1,4 @@
-package com.miguno.javadockerbuild.admin;
+package com.miguno.javadockerbuild.routes;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.springframework.beans.factory.annotation.Value;

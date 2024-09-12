@@ -1,4 +1,4 @@
-package com.miguno.javadockerbuild.admin;
+package com.miguno.javadockerbuild.security;
 
 import java.util.UUID;
 
