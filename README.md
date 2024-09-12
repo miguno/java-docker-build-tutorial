@@ -10,6 +10,8 @@ The [example application](src/main/java/com/miguno/javadockerbuild/App.java)
 uses Spring Boot to expose an HTTP endpoint at
 [`/welcome`](http://localhost:8123/welcome).
 
+> [!TIP]
+>
 > **Golang developer?** Check out https://github.com/miguno/golang-docker-build-tutorial
 
 Features:
