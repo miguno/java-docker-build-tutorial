@@ -30,7 +30,7 @@ import static org.springframework.http.HttpMethod.POST;
 /** Secures the endpoints of this application. */
 @Configuration(proxyBeanMethods = false)
 @EnableWebSecurity
-public class SecuritySecureConfig {
+public class AppSecurityConfiguration {
 
   private final AdminServerProperties adminServer;
 
@@ -47,7 +47,7 @@ public class SecuritySecureConfig {
   private String roleAdminPassword;
 
   @SuppressFBWarnings("EI_EXPOSE_REP2")
-  public SecuritySecureConfig(AdminServerProperties adminServer, SecurityProperties security) {
+  public AppSecurityConfiguration(AdminServerProperties adminServer, SecurityProperties security) {
     this.adminServer = adminServer;
   }
 

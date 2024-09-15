@@ -21,6 +21,7 @@ public class WelcomeController {
    */
   @GetMapping("/welcome")
   public Welcome welcome(@RequestParam(value = "name", defaultValue = "World") String name) {
+    // Note: If you make changes to the URL path, remember to update AppSecurityConfiguration.
     return new Welcome(String.format(template, name));
   }
 }
