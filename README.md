@@ -21,7 +21,8 @@ Features:
   including a downsized JRE (built inside Docker via `jlink`)
   to minimize the size of the generated Docker image, which is **157MB**.
 - Supports [Docker BuildKit](https://docs.docker.com/build/)
-- Java 22 (Eclipse Temurin)
+- Java 22 (Eclipse Temurin) with the [generational ZGC garbage
+  collector](https://docs.oracle.com/en/java/javase/21/gctuning/z-garbage-collector.html)
 - [JUnit 5](https://github.com/junit-team/junit5) for testing,
   [Jacoco](https://github.com/jacoco/jacoco) for code coverage,
   [SpotBugs](https://github.com/spotbugs/spotbugs) for static code analysis
