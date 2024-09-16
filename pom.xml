@@ -73,6 +73,7 @@
         <spotbugs-maven-plugin.version>4.8.6.2</spotbugs-maven-plugin.version>
         <findsecbugs.version>1.12.0</findsecbugs.version> <!-- spotbugs plugin for security audits of web apps -->
         <spotless.version>2.43.0</spotless.version>
+        <therapi.version>0.15.0</therapi.version>
         <!-- Test-related settings -->
         <skipTests>false</skipTests>    <!-- To skip all tests with `-DskipTests` on CLI. -->
         <skipITs>${skipTests}</skipITs> <!-- To skip integration tests (failsafe) with `-DskipITs` -->
@@ -116,6 +117,15 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <!--
+                https://springdoc.org/#javadoc-support
+            -->
+            <groupId>com.github.therapi</groupId>
+            <artifactId>therapi-runtime-javadoc</artifactId>
+            <version>${therapi.version}</version>
         </dependency>
 
         <dependency>
@@ -167,6 +177,11 @@
             -->
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>${springdoc.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-common</artifactId>
             <version>${springdoc.version}</version>
         </dependency>
 
@@ -300,6 +315,19 @@
                     -->
                     <compilerArgument>-proc:full</compilerArgument>
                     <parameters>${maven.compiler.parameters}</parameters>
+
+                    <!--
+                        Integrate Javadoc annotations and comments into
+                        Swagger/OpenAPI>
+                        https://springdoc.org/#javadoc-support
+                    -->
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>com.github.therapi</groupId>
+                            <artifactId>therapi-runtime-javadoc-scribe</artifactId>
+                            <version>${therapi.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
                 </configuration>
             </plugin>
 
