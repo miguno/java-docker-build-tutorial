@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-/** The only API endpoint exposed by this example application. */
+/** The API endpoint exposed by this example application. */
 @SuppressFBWarnings("SPRING_ENDPOINT")
 @RestController
 public class WelcomeController {
