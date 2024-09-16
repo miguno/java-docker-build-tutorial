@@ -28,4 +28,15 @@ public class WelcomeControllerTest {
         .andExpect(status().isOk())
         .andExpect(content().json(expectedJson));
   }
+
+  @Test
+  public void getWelcomeWithPathVariable() throws Exception {
+    String expectedJson = """
+                {"welcome":"Hello, Gandalf!"}
+        """;
+
+    mvc.perform(MockMvcRequestBuilders.get("/welcome/Gandalf").accept(MediaType.APPLICATION_JSON))
+        .andExpect(status().isOk())
+        .andExpect(content().json(expectedJson));
+  }
 }

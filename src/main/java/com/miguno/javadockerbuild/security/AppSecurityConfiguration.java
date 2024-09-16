@@ -94,7 +94,7 @@ public class AppSecurityConfiguration {
                     .requestMatchers(
                         new AntPathRequestMatcher("/"),
                         // Permit public access to this app's example endpoint at `/welcome`.
-                        new AntPathRequestMatcher("/welcome"),
+                        new AntPathRequestMatcher("/welcome/**"),
                         // Permit public access to Swagger.
                         new AntPathRequestMatcher("/swagger-ui.html"),
                         new AntPathRequestMatcher("/v3/api-docs"),
