@@ -143,10 +143,10 @@ on Windows).
 $ ./mvnw clean verify package
 
 # Run the application locally.
-$ ./mvnw spring-boot:run
+$ ./mvnw spring-boot:run -Dspring-boot.run.jvmArguments="-XX:+UseZGC -XX:+ZGenerational"
 
 # Alternatively, run the application locally via its jar file.
-$ java -jar target/app.jar
+$ java -XX:+UseZGC -XX:+ZGenerational -jar target/app.jar
 ```
 
 # Appendix
