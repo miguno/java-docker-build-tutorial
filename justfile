@@ -109,7 +109,10 @@ pom:
 
 # start the application locally with live reload
 start:
-    @./mvnw spring-boot:run
+    #!/usr/bin/env bash
+    declare -r JVM_ARGS="-XX:+UseZGC -XX:+ZGenerational"
+    #./mvnw spring-boot:run $MVN_OPTS
+    ./mvnw spring-boot:run -Dspring-boot.run.jvmArguments="$JVM_ARGS"
 
 # start the application's packaged jar locally (requires 'package' step)
 start-jar:
