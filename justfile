@@ -2,6 +2,8 @@
 
 # Load environment variables from `.env` file.
 set dotenv-load
+# Fail the script if the env file is not found.
+set dotenv-required
 
 project_dir := justfile_directory()
 build_dir := project_dir + "/target"
