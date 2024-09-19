@@ -8,20 +8,24 @@ build_dir := project_dir + "/target"
 app_uber_jar := build_dir + "/app.jar"
 
 # print available targets
+[group("project-agnostic")]
 default:
     @just --list --justfile {{justfile()}}
 
 # evaluate and print all just variables
+[group("project-agnostic")]
 evaluate:
     @just --evaluate
 
 # print system information such as OS and architecture
+[group("project-agnostic")]
 system-info:
   @echo "architecture: {{arch()}}"
   @echo "os: {{os()}}"
   @echo "os family: {{os_family()}}"
 
 # audit the code
+[group("development")]
 audit:
     #!/usr/bin/env bash
     echo "Running static code analysis with spotbugs"
@@ -32,82 +36,101 @@ audit:
     fi
 
 # benchmark the app's HTTP endpoint with plow (requires https://github.com/six-ddc/plow)
+[group("benchmarking")]
 benchmark-plow:
     @echo plow -c 100 --duration=30s http://localhost:${APP_PORT}/welcome
     @plow      -c 100 --duration=30s http://localhost:${APP_PORT}/welcome
 
 # benchmark the app's HTTP endpoint with wrk (requires https://github.com/wg/wrk)
+[group("benchmarking")]
 benchmark-wrk:
     @echo wrk -t 10 -c 100 --latency --duration 30 http://localhost:${APP_PORT}/welcome
     @wrk      -t 10 -c 100 --latency --duration 30 http://localhost:${APP_PORT}/welcome
 
 # alias for 'compile'
+[group("development")]
 build: compile
 
 # clean (remove) the build artifacts
+[group("development")]
 clean:
     @./mvnw clean
 
 # compile the project
+[group("development")]
 compile:
     @./mvnw compile
 
 # create coverage report
+[group("development")]
 coverage: verify
     @./mvnw jacoco:report && \
         echo "Coverage report is available under {{build_dir}}/site/jacoco/"
 
 # list dependency tree of this project
+[group("development")]
 dependencies:
     @./mvnw dependency:tree
 
 # create a docker image (requires Docker)
+[group("docker")]
 docker-image-create:
     @echo "Creating a docker image ..."
     @./create_image.sh
 
 # size of the docker image (requires Docker)
+[group("docker")]
 docker-image-size:
     @docker images $DOCKER_IMAGE_NAME
 
 # run the docker image (requires Docker)
+[group("docker")]
 docker-image-run:
     @echo "Running container from docker image ..."
     @./start_container.sh
 
 # generate Java documentation
+[group("development")]
 docs:
     @./mvnw javadoc:javadoc
 
 # static code analysis with infer (requires https://github.com/facebook/infer)
+[group("development")]
 infer:
     @infer run -- ./mvnw clean compile
 
 # format sources
+[group("development")]
 format:
     @./mvnw spotless:apply
 
 # check formatting of sources (without modifying)
+[group("development")]
 format-check:
     @./mvnw spotless:check
 
 # list outdated dependencies
+[group("development")]
 outdated:
     @./mvnw versions:display-dependency-updates
 
 # list outdated maven plugins
+[group("development")]
 outdated-plugins:
     @./mvnw versions:display-plugin-updates
 
 # package the application to create an uber jar
+[group("development")]
 package:
     @./mvnw verify package
 
 # print effective pom.xml
+[group("development")]
 pom:
     @./mvnw help:effective-pom
 
 # start the application locally with live reload
+[group("development")]
 start:
     #!/usr/bin/env bash
     declare -r JVM_ARGS="-XX:+UseZGC -XX:+ZGenerational"
@@ -115,6 +138,7 @@ start:
     ./mvnw spring-boot:run -Dspring-boot.run.jvmArguments="$JVM_ARGS"
 
 # start the application's packaged jar locally (requires 'package' step)
+[group("development")]
 start-jar:
     #!/usr/bin/env bash
     APP_JAR="{{app_uber_jar}}"
@@ -128,29 +152,35 @@ start-jar:
     java $JVM_ARGS -jar "$APP_JAR"
 
 # generate site incl. reports for spotbugs, dependencies, javadocs, licenses
+[group("development")]
 site: compile
     @./mvnw site && \
         echo "Reports are available under {{build_dir}}/site/" && \
         echo "Javadocs are available under {{build_dir}}/site/apidocs/"
 
 # send request to the app's HTTP endpoint (requires Docker and running app container)
+[group("development")]
 send-request-to-app:
     @echo curl http://localhost:${APP_PORT}/welcome
     @curl      http://localhost:${APP_PORT}/welcome
 
 # static code analysis with spotbugs
+[group("development")]
 spotbugs: compile
     @./mvnw spotbugs:check
 
 # run unit tests
+[group("development")]
 test:
     @./mvnw test
 
 # upgrade mvnw a.k.a. maven wrapper
+[group("development")]
 mvnw-upgrade:
     @./mvnw wrapper:wrapper
 
 # run unit and integration tests, plus coverage check and static code analysis
+[group("development")]
 verify:
     @./mvnw verify
 
