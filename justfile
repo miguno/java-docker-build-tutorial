@@ -111,7 +111,7 @@ format-check:
 infer:
     @infer run -- ./mvnw clean compile
 
-# upgrade mvnw a.k.a. maven wrapper
+# upgrade maven wrapper
 [group("development")]
 mvnw-upgrade:
     @./mvnw wrapper:wrapper
@@ -126,7 +126,7 @@ outdated:
 outdated-plugins:
     @./mvnw versions:display-plugin-updates
 
-# package the application to create an uber jar
+# package the app to create an uber jar
 [group("development")]
 package:
     @./mvnw verify package
@@ -136,7 +136,7 @@ package:
 pom:
     @./mvnw help:effective-pom
 
-# send request to the app's HTTP endpoint (requires Docker and running app container)
+# send request to the app's HTTP endpoint (requires running app)
 [group("development")]
 send-request-to-app:
     @echo curl http://localhost:${APP_PORT}/welcome
@@ -154,7 +154,7 @@ site: compile
 spotbugs: compile
     @./mvnw spotbugs:check
 
-# start the application locally
+# start the app
 [group("development")]
 start:
     #!/usr/bin/env bash
@@ -162,7 +162,7 @@ start:
     #./mvnw spring-boot:run $MVN_OPTS
     ./mvnw spring-boot:run -Dspring-boot.run.jvmArguments="$JVM_ARGS"
 
-# start the application's packaged jar locally (requires 'package' step)
+# start the app via its packaged jar (requires 'package' step)
 [group("development")]
 start-jar:
     #!/usr/bin/env bash
@@ -181,7 +181,7 @@ start-jar:
 test:
     @./mvnw test
 
-# run unit and integration tests, plus coverage check and static code analysis
+# run unit and integration tests, coverage check, static code analysis
 [group("development")]
 verify:
     @./mvnw verify
