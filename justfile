@@ -78,7 +78,7 @@ dependencies:
 [group("docker")]
 docker-image-create:
     @echo "Creating a docker image ..."
-    @./create_image.sh
+    @./tools/create_image.sh
 
 # size of the docker image (requires Docker)
 [group("docker")]
@@ -89,7 +89,7 @@ docker-image-size:
 [group("docker")]
 docker-image-run:
     @echo "Running container from docker image ..."
-    @./start_container.sh
+    @./tools/start_container.sh
 
 # generate Java documentation
 [group("development")]
