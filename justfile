@@ -27,7 +27,7 @@ system-info:
   @echo "os family: {{os_family()}}"
 
 # audit the code
-[group("development")]
+[group("security")]
 audit:
     #!/usr/bin/env bash
     echo "Running static code analysis with spotbugs"
