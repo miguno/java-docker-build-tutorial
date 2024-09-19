@@ -94,11 +94,6 @@ docker-image-run:
 docs:
     @./mvnw javadoc:javadoc
 
-# static code analysis with infer (requires https://github.com/facebook/infer)
-[group("development")]
-infer:
-    @infer run -- ./mvnw clean compile
-
 # format sources
 [group("development")]
 format:
@@ -108,6 +103,16 @@ format:
 [group("development")]
 format-check:
     @./mvnw spotless:check
+
+# static code analysis with infer (requires https://github.com/facebook/infer)
+[group("development")]
+infer:
+    @infer run -- ./mvnw clean compile
+
+# upgrade mvnw a.k.a. maven wrapper
+[group("development")]
+mvnw-upgrade:
+    @./mvnw wrapper:wrapper
 
 # list outdated dependencies
 [group("development")]
@@ -128,6 +133,24 @@ package:
 [group("development")]
 pom:
     @./mvnw help:effective-pom
+
+# send request to the app's HTTP endpoint (requires Docker and running app container)
+[group("development")]
+send-request-to-app:
+    @echo curl http://localhost:${APP_PORT}/welcome
+    @curl      http://localhost:${APP_PORT}/welcome
+
+# generate site incl. reports for spotbugs, dependencies, javadocs, licenses
+[group("development")]
+site: compile
+    @./mvnw site && \
+        echo "Reports are available under {{build_dir}}/site/" && \
+        echo "Javadocs are available under {{build_dir}}/site/apidocs/"
+
+# static code analysis with spotbugs
+[group("development")]
+spotbugs: compile
+    @./mvnw spotbugs:check
 
 # start the application locally with live reload
 [group("development")]
@@ -151,33 +174,10 @@ start-jar:
     declare -r JVM_ARGS="-XX:+UseZGC -XX:+ZGenerational"
     java $JVM_ARGS -jar "$APP_JAR"
 
-# generate site incl. reports for spotbugs, dependencies, javadocs, licenses
-[group("development")]
-site: compile
-    @./mvnw site && \
-        echo "Reports are available under {{build_dir}}/site/" && \
-        echo "Javadocs are available under {{build_dir}}/site/apidocs/"
-
-# send request to the app's HTTP endpoint (requires Docker and running app container)
-[group("development")]
-send-request-to-app:
-    @echo curl http://localhost:${APP_PORT}/welcome
-    @curl      http://localhost:${APP_PORT}/welcome
-
-# static code analysis with spotbugs
-[group("development")]
-spotbugs: compile
-    @./mvnw spotbugs:check
-
 # run unit tests
 [group("development")]
 test:
     @./mvnw test
-
-# upgrade mvnw a.k.a. maven wrapper
-[group("development")]
-mvnw-upgrade:
-    @./mvnw wrapper:wrapper
 
 # run unit and integration tests, plus coverage check and static code analysis
 [group("development")]
