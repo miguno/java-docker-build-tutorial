@@ -152,7 +152,7 @@ site: compile
 spotbugs: compile
     @./mvnw spotbugs:check
 
-# start the application locally with live reload
+# start the application locally
 [group("development")]
 start:
     #!/usr/bin/env bash
