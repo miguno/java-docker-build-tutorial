@@ -111,8 +111,38 @@ format-check:
 infer:
     @infer run -- ./mvnw clean compile
 
+# list active profiles
+[group("maven")]
+maven-active-profiles:
+    @./mvnw help:active-profiles
+
+# list all profiles
+[group("maven")]
+maven-all-profiles:
+    @./mvnw help:all-profiles
+
+# show maven lifecycles like 'clean', 'compile'
+[group("maven")]
+maven-lifecycles:
+    @echo "See https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html#Lifecycle_Reference"
+
+# print effective pom.xml
+[group("maven")]
+maven-pom:
+    @./mvnw help:effective-pom
+
+# show help of maven-help-plugin
+[group("maven")]
+maven-help:
+    @./mvnw help:help
+
+# print platform details like system properties, env variables
+[group("maven")]
+maven-system:
+    @./mvnw help:system
+
 # upgrade maven wrapper
-[group("development")]
+[group("maven")]
 mvnw-upgrade:
     @./mvnw wrapper:wrapper
 
@@ -130,11 +160,6 @@ outdated-plugins:
 [group("development")]
 package:
     @./mvnw verify package
-
-# print effective pom.xml
-[group("development")]
-pom:
-    @./mvnw help:effective-pom
 
 # send request to the app's HTTP endpoint (requires running app)
 [group("development")]
