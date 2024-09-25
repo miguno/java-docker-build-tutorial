@@ -19,7 +19,7 @@ Features:
 - The Docker build uses a
   [multi-stage build setup](https://docs.docker.com/build/building/multi-stage/)
   including a downsized JRE (built inside Docker via `jlink`)
-  to minimize the size of the generated Docker image, which is **157MB**.
+  to minimize the size of the generated Docker image, which is **161MB**.
 - Supports [Docker BuildKit](https://docs.docker.com/build/)
 - Java 23 (Eclipse Temurin) with the [generational ZGC garbage
   collector](https://docs.oracle.com/en/java/javase/21/gctuning/z-garbage-collector.html)
@@ -64,7 +64,7 @@ Java JDK or Maven installed.
 
 **Step 1:** Create the Docker image according to [Dockerfile](Dockerfile).
 This step uses Maven to build, test, and package the Java application according
-to [pom.xml](pom.xml). The resulting image is 157MB in size, of which 44MB are
+to [pom.xml](pom.xml). The resulting image is 161MB in size, of which 44MB are
 the underlying `alpine` image.
 
 ```shell
