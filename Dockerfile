@@ -6,6 +6,7 @@
 ###############################################################################
 # Stage 1 (to create a "build" image)                                         #
 ###############################################################################
+# https://hub.docker.com/_/eclipse-temurin
 FROM eclipse-temurin:23-jdk-alpine AS builder
 
 # Smoke test to verify if java is available.
@@ -31,6 +32,7 @@ RUN ./mvnw package
 ###############################################################################
 # Stage 2 (to create a downsized "container executable", ~161MB)              #
 ###############################################################################
+# https://hub.docker.com/_/alpine
 FROM alpine:latest
 ENV JAVA_HOME=/jre
 ENV PATH="${JAVA_HOME}/bin:${PATH}"
