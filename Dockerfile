@@ -4,7 +4,7 @@
 # (https://docs.docker.com/build/building/multi-stage/)
 
 ###############################################################################
-# Stage 1 (to create a "build" image)                                         #
+# Stage 1 of 2 (to create a "build" image)                                    #
 ###############################################################################
 # https://hub.docker.com/_/eclipse-temurin
 FROM eclipse-temurin:23-jdk-alpine AS builder
@@ -30,7 +30,7 @@ WORKDIR /usr/src/myapp/
 RUN ./mvnw package
 
 ###############################################################################
-# Stage 2 (to create a downsized "container executable", ~161MB)              #
+# Stage 2 of 2 (to create a downsized "container executable", ~161MB)         #
 ###############################################################################
 # https://hub.docker.com/_/alpine
 FROM alpine:latest
