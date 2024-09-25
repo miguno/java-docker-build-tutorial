@@ -190,36 +190,50 @@ commands above more conveniently as per this project's [justfile](justfile):
 ```shell
 $ just
 Available recipes:
-    audit               # audit the code
-    benchmark-plow      # benchmark the app's HTTP endpoint with plow (requires https://github.com/six-ddc/plow)
-    benchmark-wrk       # benchmark the app's HTTP endpoint with wrk (requires https://github.com/wg/wrk)
-    build               # alias for 'compile'
-    clean               # clean (remove) the build artifacts
-    compile             # compile the project
-    coverage            # create coverage report
-    default             # print available targets
-    dependencies        # list dependency tree of this project
-    docker-image-create # create a docker image (requires Docker)
-    docker-image-run    # run the docker image (requires Docker)
-    docker-image-size   # size of the docker image (requires Docker)
-    docs                # generate Java documentation
-    evaluate            # evaluate and print all just variables
-    format              # format sources
-    format-check        # check formatting of sources (without modifying)
-    infer               # static code analysis with infer (requires https://github.com/facebook/infer)
-    mvnw-upgrade        # upgrade mvnw a.k.a. maven wrapper
-    outdated            # list outdated dependencies
-    outdated-plugins    # list outdated maven plugins
-    package             # package the application to create an uber jar
-    pom                 # print effective pom.xml
-    send-request-to-app # send request to the app's HTTP endpoint (requires Docker and running app container)
-    site                # generate site incl. reports for spotbugs, dependencies, javadocs, licenses
-    spotbugs            # static code analysis with spotbugs
-    start               # start the application locally with live reload
-    start-jar           # start the application's packaged jar locally (requires 'package' step)
-    system-info         # print system information such as OS and architecture
-    test                # run unit tests
-    verify              # run unit and integration tests, plus coverage check and static code analysis
+    [benchmarking]
+    benchmark-plow        # benchmark the app's HTTP endpoint with plow (requires https://github.com/six-ddc/plow)
+    benchmark-wrk         # benchmark the app's HTTP endpoint with wrk (requires https://github.com/wg/wrk)
+
+    [development]
+    analyze               # perform static code analysis
+    build                 # alias for 'compile'
+    clean                 # clean (remove) the build artifacts
+    compile               # compile the project
+    coverage              # create coverage report
+    dependencies          # list dependency tree of this project
+    docs                  # generate Java documentation
+    format                # format sources
+    format-check          # check formatting of sources (without modifying)
+    infer                 # static code analysis with infer (requires https://github.com/facebook/infer)
+    outdated              # list outdated dependencies
+    outdated-plugins      # list outdated maven plugins
+    package               # package the app to create an uber jar
+    send-request-to-app   # send request to the app's HTTP endpoint (requires running app)
+    site                  # generate site incl. reports for spotbugs, dependencies, javadocs, licenses
+    spotbugs              # static code analysis with spotbugs
+    start                 # start the app
+    start-jar             # start the app via its packaged jar (requires 'package' step)
+    test                  # run unit tests
+    verify                # run unit and integration tests, coverage check, static code analysis
+
+    [docker]
+    docker-image-create   # create a docker image (requires Docker)
+    docker-image-run      # run the docker image (requires Docker)
+    docker-image-size     # size of the docker image (requires Docker)
+
+    [maven]
+    maven-active-profiles # list active profiles
+    maven-all-profiles    # list all profiles
+    maven-help            # show help of maven-help-plugin
+    maven-lifecycles      # show maven lifecycles like 'clean', 'compile'
+    maven-pom             # print effective pom.xml
+    maven-system          # print platform details like system properties, env variables
+    mvnw-upgrade          # upgrade maven wrapper
+
+    [project-agnostic]
+    default               # print available targets
+    evaluate              # evaluate and print all just variables
+    system-info           # print system information such as OS and architecture
 ```
 
 Example:
