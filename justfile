@@ -184,7 +184,6 @@ spotbugs: compile
 start:
     #!/usr/bin/env bash
     declare -r JVM_ARGS="-XX:+UseZGC -XX:+ZGenerational"
-    #./mvnw spring-boot:run $MVN_OPTS
     ./mvnw spring-boot:run -Dspring-boot.run.jvmArguments="$JVM_ARGS"
 
 # start the app via its packaged jar (requires 'package' step)
