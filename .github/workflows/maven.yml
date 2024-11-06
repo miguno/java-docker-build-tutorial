@@ -10,38 +10,38 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v4
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Set up JDK 23
-      # TODO: Switch back to actions/setup-java@v4 once they support JDK 23 for temurin
-      #uses: actions/setup-java@v4 # https://github.com/actions/setup-java
-      #with:
-      #  java-version: '23'
-      #  distribution: 'temurin'
-      #  cache: maven
-      uses: oracle-actions/setup-java@v1 # https://github.com/oracle-actions/setup-java
-      with:
-        website: jdk.java.net
-        release: 23
+      - name: Set up JDK 23
+        # TODO: Switch back to actions/setup-java@v4 once they support JDK 23 for temurin
+        #uses: actions/setup-java@v4 # https://github.com/actions/setup-java
+        #with:
+        #  java-version: '23'
+        #  distribution: 'temurin'
+        #  cache: maven
+        uses: oracle-actions/setup-java@v1 # https://github.com/oracle-actions/setup-java
+        with:
+          website: jdk.java.net
+          release: 23
 
-    - name: Print Java version
-      run: java -version
+      - name: Print Java version
+        run: java -version
 
-    - name: Verify and Package with Maven
-      run: ./mvnw --batch-mode --file pom.xml verify package
+      - name: Verify and Package with Maven
+        run: ./mvnw --batch-mode --file pom.xml verify package
 
-    # Upload the full dependency graph to GitHub to improve the quality of
-    # Dependabot alerts this repository can receive.
-    - name: Submit Dependency Snapshot
-      uses: advanced-security/maven-dependency-submission-action@v4
+      # Upload the full dependency graph to GitHub to improve the quality of
+      # Dependabot alerts this repository can receive.
+      - name: Submit Dependency Snapshot
+        uses: advanced-security/maven-dependency-submission-action@v4
