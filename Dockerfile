@@ -7,7 +7,7 @@
 # Stage 1 of 2 (to create a "build" image)                                    #
 ###############################################################################
 # https://hub.docker.com/_/eclipse-temurin
-FROM eclipse-temurin:23-jdk-alpine AS builder
+FROM eclipse-temurin:23-jdk-alpine
 
 # Smoke test to verify if java is available.
 RUN java -version
@@ -53,10 +53,10 @@ RUN mkdir $APP_DIR && \
 WORKDIR $APP_DIR
 
 # Copy downsized JRE from builder image.
-COPY --from=builder /minimal-jre $JAVA_HOME
+# COPY --from=builder /minimal-jre $JAVA_HOME
 
 # Copy packaged app from builder image.
-COPY --from=builder --chown=$USER_NAME:$GROUP_NAME /usr/src/myapp/target/app.jar ./app.jar
+# COPY --from=builder --chown=$USER_NAME:$GROUP_NAME /usr/src/myapp/target/app.jar ./app.jar
 
 # Run the application.
 USER $USER_NAME:$GROUP_NAME
