@@ -58,7 +58,7 @@
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <!-- Dependencies (other than Maven plugins) -->
-        <micrometer.version>1.14.0</micrometer.version>
+        <micrometer.version>1.14.1</micrometer.version>
         <springdoc.version>2.6.0</springdoc.version>
         <spring-boot-admin.version>3.3.5</spring-boot-admin.version>
         <!-- Maven plugins -->
