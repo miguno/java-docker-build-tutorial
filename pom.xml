@@ -60,7 +60,7 @@
         <!-- Dependencies (other than Maven plugins) -->
         <micrometer.version>1.14.1</micrometer.version>
         <springdoc.version>2.7.0</springdoc.version>
-        <spring-boot-admin.version>3.3.6</spring-boot-admin.version>
+        <spring-boot-admin.version>3.4.0</spring-boot-admin.version>
         <!-- Maven plugins -->
         <maven-project-info-reports-plugin.version>3.8.0</maven-project-info-reports-plugin.version>
         <maven-enforcer-plugin.version>3.5.0</maven-enforcer-plugin.version>
