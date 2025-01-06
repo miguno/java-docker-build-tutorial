@@ -46,8 +46,3 @@ jobs:
 
       - name: Verify and Package with Maven
         run: ./mvnw --batch-mode --file pom.xml verify package
-
-      # Upload the full dependency graph to GitHub to improve the quality of
-      # Dependabot alerts this repository can receive.
-      - name: Submit Dependency Snapshot
-        uses: advanced-security/maven-dependency-submission-action@v4
