@@ -30,16 +30,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up JDK 23
-        # TODO: Switch back to actions/setup-java@v4 once they support JDK 23 for temurin
-        #uses: actions/setup-java@v4 # https://github.com/actions/setup-java
-        #with:
-        #  java-version: '23'
-        #  distribution: 'temurin'
-        #  cache: maven
-        uses: oracle-actions/setup-java@v1 # https://github.com/oracle-actions/setup-java
+        uses: actions/setup-java@v4 # https://github.com/actions/setup-java
         with:
-          website: jdk.java.net
-          release: 23
+          java-version: '23'
+          distribution: 'temurin'
+          cache: maven
 
       - name: Print Java version
         run: java -version
