@@ -17,7 +17,8 @@ public class WelcomeControllerIT {
   @Test
   public void welcome() throws Exception {
     ResponseEntity<String> response = template.getForEntity("/welcome", String.class);
-    String expectedJson = """
+    String expectedJson =
+        """
            {"welcome":"Hello, World!"}
         """;
     JSONAssert.assertEquals(expectedJson, response.getBody(), JSONCompareMode.STRICT);

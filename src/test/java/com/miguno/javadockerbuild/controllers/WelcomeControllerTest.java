@@ -20,7 +20,8 @@ public class WelcomeControllerTest {
 
   @Test
   public void getWelcome() throws Exception {
-    String expectedJson = """
+    String expectedJson =
+        """
                 {"welcome":"Hello, World!"}
         """;
 
@@ -31,7 +32,8 @@ public class WelcomeControllerTest {
 
   @Test
   public void getWelcomeWithPathVariable() throws Exception {
-    String expectedJson = """
+    String expectedJson =
+        """
                 {"welcome":"Hello, Gandalf!"}
         """;
 
