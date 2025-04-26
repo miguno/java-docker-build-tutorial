@@ -2,6 +2,7 @@ package com.miguno.javadockerbuild.security;
 
 import java.io.IOException;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
@@ -16,6 +17,10 @@ public class CustomCsrfFilter extends OncePerRequestFilter {
 
   public static final String CSRF_COOKIE_NAME = "XSRF-TOKEN";
 
+  @SuppressFBWarnings(
+      value = "COOKIE_USAGE",
+      justification =
+          "CSRF tokens are designed to be stored in cookies with appropriate security controls")
   @Override
   protected void doFilterInternal(
       HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
