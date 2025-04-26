@@ -33,15 +33,6 @@ Features:
   at endpoint [/actuator](http://localhost:8123/actuator), e.g. for
   [healthchecks](http://localhost:8123/actuator/health) or [Prometheus
   metrics](http://localhost:8123/actuator/prometheus)
-- Integrates [Spring Boot
-  Admin](https://github.com/codecentric/spring-boot-admin) at endpoint
-  [`/admin`](http://localhost:8123/admin) to inspect the running application.
-  Login with username `admin` and password `admin`.<br />
-  <a href="https://github.com/miguno/java-docker-build-tutorial/raw/main/images/spring-boot-admin-dashboard.png"><img src="https://github.com/miguno/java-docker-build-tutorial/raw/main/images/spring-boot-admin-dashboard.png" alt="Spring Boot Admin screenshot" width="300"></a><br />
-  Note that, in production, [it is recommended to
-  separate the SBA server](https://docs.spring-boot-admin.com/current/faq.html)
-  from your application (the SBA client), unlike what this project does for
-  demonstration purposes.
 - Maven for build management (see [pom.xml](pom.xml)), using
   [Maven Wrapper](https://github.com/apache/maven-wrapper)
 - [GitHub Actions workflows](https://github.com/miguno/java-docker-build-tutorial/actions) for

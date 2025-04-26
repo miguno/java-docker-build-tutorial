@@ -2,9 +2,6 @@ package com.miguno.javadockerbuild.security;
 
 import java.util.UUID;
 
-import de.codecentric.boot.admin.server.config.AdminServerProperties;
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import jakarta.servlet.DispatcherType;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Bean;
@@ -24,15 +21,10 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.csrf.CsrfTokenRequestAttributeHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import static org.springframework.http.HttpMethod.DELETE;
-import static org.springframework.http.HttpMethod.POST;
-
 /** Secures the endpoints of this application. */
 @Configuration(proxyBeanMethods = false)
 @EnableWebSecurity
 public class AppSecurityConfiguration {
-
-  private final AdminServerProperties adminServer;
 
   @Value("${app.spring-boot-admin.role.user.name}")
   private String roleUserName;
@@ -46,10 +38,7 @@ public class AppSecurityConfiguration {
   @Value("${app.spring-boot-admin.role.admin.password}")
   private String roleAdminPassword;
 
-  @SuppressFBWarnings("EI_EXPOSE_REP2")
-  public AppSecurityConfiguration(AdminServerProperties adminServer, SecurityProperties security) {
-    this.adminServer = adminServer;
-  }
+  public AppSecurityConfiguration(SecurityProperties security) {}
 
   /**
    * Applies security policies such as authentication requirements to endpoints.
@@ -63,7 +52,7 @@ public class AppSecurityConfiguration {
     SavedRequestAwareAuthenticationSuccessHandler successHandler =
         new SavedRequestAwareAuthenticationSuccessHandler();
     successHandler.setTargetUrlParameter("redirectTo");
-    successHandler.setDefaultTargetUrl(this.adminServer.path("/"));
+    successHandler.setDefaultTargetUrl("/");
 
     // NOTE: In this project, the Spring Boot Admin server and client are colocated in the same
     //       application for demonstration purposes. In production, you would typically not do that
@@ -77,20 +66,6 @@ public class AppSecurityConfiguration {
     http.authorizeHttpRequests(
             (authorizeRequests) ->
                 authorizeRequests
-                    //// For the Spring Boot Admin server.
-                    .requestMatchers(
-                        // Permit public access to all static assets.
-                        new AntPathRequestMatcher(this.adminServer.path("/assets/**")),
-                        // Permit public access to the login page.
-                        new AntPathRequestMatcher(this.adminServer.path("/login")))
-                    .permitAll()
-                    // Permit asynchronous processing of a request without requiring authentication.
-                    // FIXME: Permitting any async requests as a workaround appears dangerous.
-                    // https://github.com/spring-projects/spring-security/issues/11027 (from 2022)
-                    .dispatcherTypeMatchers(DispatcherType.ASYNC)
-                    .permitAll()
-
-                    //// For the Spring Boot Admin client (the "real" app being developed).
                     .requestMatchers(
                         new AntPathRequestMatcher("/"),
                         // Permit public access to this app's example endpoint at `/welcome`.
@@ -103,16 +78,9 @@ public class AppSecurityConfiguration {
                         new AntPathRequestMatcher("/actuator/info"),
                         new AntPathRequestMatcher("/actuator/prometheus"))
                     .permitAll()
-
-                    //// Applies to both SBA server and clients.
                     // All other requests must be authenticated.
                     .anyRequest()
                     .authenticated())
-        // For Spring Boot Admin server: enables form-based login and logout.
-        .formLogin(
-            (formLogin) ->
-                formLogin.loginPage(this.adminServer.path("/login")).successHandler(successHandler))
-        .logout((logout) -> logout.logoutUrl(this.adminServer.path("/logout")))
         // Enables HTTP Basic Authentication support.
         .httpBasic(Customizer.withDefaults());
 
@@ -121,20 +89,7 @@ public class AppSecurityConfiguration {
         .csrf(
             (csrf) ->
                 csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-                    .csrfTokenRequestHandler(new CsrfTokenRequestAttributeHandler())
-                    .ignoringRequestMatchers(
-                        //// For the Spring Boot Admin server.
-                        // Disables CSRF-Protection for the SBA server's endpoints that the SBA
-                        // client uses to (de-)register.
-                        new AntPathRequestMatcher(
-                            this.adminServer.path("/instances"), POST.toString()),
-                        new AntPathRequestMatcher(
-                            this.adminServer.path("/instances/*"), DELETE.toString()),
-
-                        //// For the Spring Boot Admin client.
-                        // Disables CSRF-Protection for the SBA client's actuator endpoints that
-                        // the SBA server uses to collect metrics.
-                        new AntPathRequestMatcher("/actuator/**")));
+                    .csrfTokenRequestHandler(new CsrfTokenRequestAttributeHandler()));
 
     http.rememberMe(
         (rememberMe) -> rememberMe.key(UUID.randomUUID().toString()).tokenValiditySeconds(1209600));
@@ -145,14 +100,6 @@ public class AppSecurityConfiguration {
   /** Required to provide UserDetailsService for "remember functionality". */
   @Bean
   public InMemoryUserDetailsManager userDetailsService(PasswordEncoder passwordEncoder) {
-    // NOTE: Because this example project runs the Spring Boot Admin server and client in the same
-    //       application, both the server's secured (with HTTP Basic Authentication) SBA API
-    //       endpoint and the client's Spring actuator endpoints coincidentally require exactly the
-    //       same username/password combination.
-    //       In production, this is not recommended. See the recommendations of Spring Boot Admin at
-    //       https://docs.spring-boot-admin.com/current/faq.html.
-    //       Instead, in production you would separate clients from the server, and thus different
-    //       username/password combinations can be used.
     // NOTE: HTTP Basic Authentication itself is not recommended for production.
     UserDetails user =
         User.withUsername(roleUserName)

@@ -42,7 +42,6 @@ public class RootController {
           <li><a href="/welcome"><code>/welcome</code></a> &mdash; this app's example endpoint</li>
           <li><a href="/actuator/health"><code>/actuator/health</code></a> &mdash; Spring built-in feature</li>
           <li><a href="/actuator/prometheus"><code>/actuator/prometheus</code></a> &mdash; Spring built-in feature</li>
-          <li><a href="/admin">Spring Boot Admin dashboard</a> <strong>(requires login, see below)</strong></li>
           <li><a href="/swagger-ui.html">Swagger UI</a></li>
         </ul>
         <h2>User Accounts</h2>
