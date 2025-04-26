@@ -28,6 +28,8 @@ public class CustomCsrfFilter extends OncePerRequestFilter {
       if (cookie == null || token != null && !token.equals(cookie.getValue())) {
         cookie = new Cookie(CSRF_COOKIE_NAME, token);
         cookie.setPath("/");
+        cookie.setHttpOnly(true);
+        cookie.setSecure(true);
         response.addCookie(cookie);
       }
     }
