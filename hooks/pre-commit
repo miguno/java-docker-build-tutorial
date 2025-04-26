@@ -2,7 +2,7 @@
 
 # Run spotless checks on staged files only.
 # This is faster than running spotless on all files.
-./mvnw spotless:check -DspotlessFiles="$(git diff --staged --name-only | grep ".java$" | sed 's/^/.*/' | paste -sd ',' -)"
+./mvnw -q spotless:check -DspotlessFiles="$(git diff --staged --name-only | grep ".java$" | sed 's/^/.*/' | paste -sd ',' -)"
 
 declare errcode=$?
 if [ $errcode -ne 0 ]; then
