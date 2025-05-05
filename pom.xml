@@ -130,29 +130,6 @@
 
         <dependency>
             <!--
-                Server for https://github.com/codecentric/spring-boot-admin/.
-                In this example project, the server and the client of Spring
-                Boot Admin run in the same application. In production, however,
-                you will typically run the server (think: central monitoring
-                process) separately from the clients, which are your "actual"
-                applications.
-            -->
-            <groupId>de.codecentric</groupId>
-            <artifactId>spring-boot-admin-starter-server</artifactId>
-            <version>${spring-boot-admin.version}</version>
-        </dependency>
-
-        <dependency>
-            <!--
-                Client for https://github.com/codecentric/spring-boot-admin/.
-            -->
-            <groupId>de.codecentric</groupId>
-            <artifactId>spring-boot-admin-starter-client</artifactId>
-            <version>${spring-boot-admin.version}</version>
-        </dependency>
-
-        <dependency>
-            <!--
                 Exposes metrics via a Prometheus actuator endpoint.
 
                 Adds the following endpoint:
