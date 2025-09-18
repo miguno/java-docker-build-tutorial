@@ -70,7 +70,7 @@
         <git-build-hook-maven-plugin.version>3.5.0</git-build-hook-maven-plugin.version>
         <jacoco.version>0.8.13</jacoco.version>
         <spotbugs.version>4.9.4</spotbugs.version>
-        <spotbugs-maven-plugin.version>4.9.4.1</spotbugs-maven-plugin.version>
+        <spotbugs-maven-plugin.version>4.9.6.0</spotbugs-maven-plugin.version>
         <findsecbugs.version>1.14.0</findsecbugs.version> <!-- spotbugs plugin for security audits of web apps -->
         <spotless.version>2.46.1</spotless.version>
         <therapi.version>0.15.0</therapi.version>
