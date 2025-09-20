@@ -59,7 +59,7 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <!-- Dependencies (other than Maven plugins) -->
         <micrometer.version>1.15.4</micrometer.version>
-        <springdoc.version>2.8.12</springdoc.version>
+        <springdoc.version>2.8.13</springdoc.version>
         <spring-boot-admin.version>3.4.5</spring-boot-admin.version>
         <!-- Maven plugins -->
         <maven-project-info-reports-plugin.version>3.9.0</maven-project-info-reports-plugin.version>
@@ -67,10 +67,10 @@
         <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
         <maven-javadoc-plugin.version>3.11.3</maven-javadoc-plugin.version>
         <maven-surefire-plugin.version>3.5.3</maven-surefire-plugin.version>
-        <git-build-hook-maven-plugin.version>3.5.0</git-build-hook-maven-plugin.version>
+        <git-build-hook-maven-plugin.version>3.6.0</git-build-hook-maven-plugin.version>
         <jacoco.version>0.8.13</jacoco.version>
-        <spotbugs.version>4.9.4</spotbugs.version>
-        <spotbugs-maven-plugin.version>4.9.4.1</spotbugs-maven-plugin.version>
+        <spotbugs.version>4.9.6</spotbugs.version>
+        <spotbugs-maven-plugin.version>4.9.6.0</spotbugs-maven-plugin.version>
         <findsecbugs.version>1.14.0</findsecbugs.version> <!-- spotbugs plugin for security audits of web apps -->
         <spotless.version>2.46.1</spotless.version>
         <therapi.version>0.15.0</therapi.version>
