@@ -64,7 +64,7 @@
         <!-- Maven plugins -->
         <maven-project-info-reports-plugin.version>3.9.0</maven-project-info-reports-plugin.version>
         <maven-enforcer-plugin.version>3.6.1</maven-enforcer-plugin.version>
-        <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
+        <maven-compiler-plugin.version>3.14.1</maven-compiler-plugin.version>
         <maven-javadoc-plugin.version>3.11.3</maven-javadoc-plugin.version>
         <maven-surefire-plugin.version>3.5.3</maven-surefire-plugin.version>
         <git-build-hook-maven-plugin.version>3.6.0</git-build-hook-maven-plugin.version>
