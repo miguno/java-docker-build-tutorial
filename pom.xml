@@ -68,7 +68,7 @@
         <maven-javadoc-plugin.version>3.12.0</maven-javadoc-plugin.version>
         <maven-surefire-plugin.version>3.5.4</maven-surefire-plugin.version>
         <git-build-hook-maven-plugin.version>3.6.0</git-build-hook-maven-plugin.version>
-        <jacoco.version>0.8.13</jacoco.version>
+        <jacoco.version>0.8.14</jacoco.version>
         <spotbugs.version>4.9.6</spotbugs.version>
         <spotbugs-maven-plugin.version>4.9.6.0</spotbugs-maven-plugin.version>
         <findsecbugs.version>1.14.0</findsecbugs.version> <!-- spotbugs plugin for security audits of web apps -->
