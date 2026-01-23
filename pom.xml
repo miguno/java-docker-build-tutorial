@@ -72,7 +72,7 @@
         <spotbugs.version>4.9.8</spotbugs.version>
         <spotbugs-maven-plugin.version>4.9.8.2</spotbugs-maven-plugin.version>
         <findsecbugs.version>1.14.0</findsecbugs.version> <!-- spotbugs plugin for security audits of web apps -->
-        <spotless.version>3.1.0</spotless.version>
+        <spotless.version>3.2.0</spotless.version>
         <therapi.version>0.15.0</therapi.version>
         <!-- Test-related settings -->
         <skipTests>false</skipTests>    <!-- To skip all tests with `-DskipTests` on CLI. -->
