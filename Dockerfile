@@ -7,7 +7,7 @@
 # Stage 1 of 2 (to create a "build" image)                                    #
 ###############################################################################
 # https://hub.docker.com/_/eclipse-temurin
-FROM eclipse-temurin:23-jdk-alpine AS builder
+FROM eclipse-temurin:25-jdk-alpine AS builder
 
 # Smoke test to verify if java is available.
 RUN java -version
@@ -15,10 +15,14 @@ RUN java -version
 ### Build a downsized JRE
 # Required for jlink's `--strip-debug` option.
 RUN apk add --no-cache binutils
+# The Temurin images for JDK 25 no longer ship the packaged modules (`jmods`),
+# so `--add-modules ALL-MODULE-PATH` does not work anymore. Instead, we link
+# from the run-time image (https://openjdk.org/jeps/493) and add all of its
+# modules, except the two modules that a run-time image cannot provide.
 RUN jlink \
     --verbose \
-    --add-modules ALL-MODULE-PATH \
-    --compress=2 \
+    --add-modules "$(java --list-modules | sed -e 's/@.*//' | grep -Ev '^(jdk.jlink|jdk.jpackage)$' | tr '\n' ',' | sed -e 's/,$//')" \
+    --compress=zip-6 \
     --no-header-files \
     --no-man-pages \
     --strip-debug \
@@ -30,7 +34,7 @@ WORKDIR /usr/src/myapp/
 RUN ./mvnw package
 
 ###############################################################################
-# Stage 2 of 2 (to create a downsized "container executable", ~161MB)         #
+# Stage 2 of 2 (to create a downsized "container executable", ~151MB)         #
 ###############################################################################
 # https://hub.docker.com/_/alpine
 FROM alpine:latest
@@ -61,4 +65,4 @@ COPY --from=builder --chown=$USER_NAME:$GROUP_NAME /usr/src/myapp/target/app.jar
 # Run the application.
 USER $USER_NAME:$GROUP_NAME
 EXPOSE 8123
-ENTRYPOINT ["java", "-XX:+UseZGC", "-XX:+ZGenerational", "-jar", "./app.jar"]
+ENTRYPOINT ["java", "-XX:+UseZGC", "-jar", "./app.jar"]

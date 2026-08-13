@@ -51,7 +51,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <!-- Java -->
-        <java.version>22</java.version>
+        <java.version>25</java.version>
         <release.version>${java.version}</release.version>
         <maven.compiler.parameters>true</maven.compiler.parameters>
         <maven.compiler.release>${java.version}</maven.compiler.release>
@@ -340,7 +340,7 @@
                         https://www.eclemma.org/jacoco/trunk/doc/prepare-agent-mojo.html
                         https://maven.apache.org/surefire/maven-surefire-plugin/faq.html#late-property-evaluation
                     -->
-                    <argLine>@{argLine} -XX:+EnableDynamicAgentLoading</argLine>
+                    <argLine>@{argLine} -XX:+EnableDynamicAgentLoading -Xshare:off</argLine>
                     <!-- `forkCount` (default: 1) must not be zero for jacoco. -->
                     <forkCount>1</forkCount>
                     <skipTests>${skipUTs}</skipTests>
@@ -357,7 +357,7 @@
                         https://www.eclemma.org/jacoco/trunk/doc/prepare-agent-mojo.html
                         https://maven.apache.org/surefire/maven-surefire-plugin/faq.html#late-property-evaluation
                     -->
-                    <argLine>@{argLine} -XX:+EnableDynamicAgentLoading</argLine>
+                    <argLine>@{argLine} -XX:+EnableDynamicAgentLoading -Xshare:off</argLine>
                     <!-- `forkCount` (default: 1) must not be zero for jacoco. -->
                     <forkCount>1</forkCount>
                     <skipTests>${skipTests}</skipTests>

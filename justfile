@@ -183,7 +183,7 @@ spotbugs: compile
 [group("development")]
 start:
     #!/usr/bin/env bash
-    declare -r JVM_ARGS="-XX:+UseZGC -XX:+ZGenerational"
+    declare -r JVM_ARGS="-XX:+UseZGC"
     ./mvnw spring-boot:run -Dspring-boot.run.jvmArguments="$JVM_ARGS"
 
 # start the app via its packaged jar (requires 'package' step)
@@ -197,7 +197,7 @@ start-jar:
         echo "Using existing application uber jar at $APP_JAR."
         echo "If you want to recompile the uber jar, run \`./mvnw package\` (or \`just package\`) manually."
     fi
-    declare -r JVM_ARGS="-XX:+UseZGC -XX:+ZGenerational"
+    declare -r JVM_ARGS="-XX:+UseZGC"
     java $JVM_ARGS -jar "$APP_JAR"
 
 # run unit tests

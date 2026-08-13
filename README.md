@@ -19,9 +19,9 @@ Features:
 - The Docker build uses a
   [multi-stage build setup](https://docs.docker.com/build/building/multi-stage/)
   including a downsized JRE (built inside Docker via `jlink`)
-  to minimize the size of the generated Docker image, which is **161MB**.
+  to minimize the size of the generated Docker image, which is **151MB**.
 - Supports [Docker BuildKit](https://docs.docker.com/build/)
-- Java 23 (Eclipse Temurin) with the [generational ZGC garbage
+- Java 25 (Eclipse Temurin) with the [generational ZGC garbage
   collector](https://docs.oracle.com/en/java/javase/21/gctuning/z-garbage-collector.html)
 - [JUnit 5](https://github.com/junit-team/junit5) for testing,
   [Jacoco](https://github.com/jacoco/jacoco) for code coverage,
@@ -55,7 +55,7 @@ Java JDK or Maven installed.
 
 **Step 1:** Create the Docker image according to [Dockerfile](Dockerfile).
 This step uses Maven to build, test, and package the Java application according
-to [pom.xml](pom.xml). The resulting image is 161MB in size, of which 44MB are
+to [pom.xml](pom.xml). The resulting image is 151MB in size, of which 9MB are
 the underlying `alpine` image.
 
 ```shell
@@ -71,8 +71,8 @@ Optionally, you can check the size of the generated Docker image:
 
 ```shell
 $ docker images miguno/java-docker-build-tutorial
-REPOSITORY                          TAG       IMAGE ID       CREATED         SIZE
-miguno/java-docker-build-tutorial   latest    bd64d898a04e   2 minutes ago   131MB
+IMAGE                                      ID             DISK USAGE   CONTENT SIZE   EXTRA
+miguno/java-docker-build-tutorial:latest   ee890b5d4075        151MB             0B   U
 ```
 
 **Step 2:** Start a container for the Docker image.
@@ -99,16 +99,16 @@ Starting container for image 'miguno/java-docker-build-tutorial:latest', exposin
 
  :: Spring Boot ::                (v4.1.0)
 
-2026-08-13T05:53:29.594Z  INFO 1 --- [main] com.miguno.javadockerbuild.App           : Starting App v1.0.0-SNAPSHOT using Java 23.0.2 with PID 1 (/app/app.jar started by appuser in /app)
-2026-08-13T05:53:29.597Z  INFO 1 --- [main] com.miguno.javadockerbuild.App           : No active profile set, falling back to 1 default profile: "default"
-2026-08-13T05:53:30.414Z  INFO 1 --- [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8123 (http)
-2026-08-13T05:53:30.423Z  INFO 1 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2026-08-13T05:53:30.424Z  INFO 1 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.22]
-2026-08-13T05:53:30.441Z  INFO 1 --- [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 802 ms
-2026-08-13T05:53:30.905Z  INFO 1 --- [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name userDetailsService
-2026-08-13T05:53:31.318Z  INFO 1 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 13 endpoints beneath base path '/actuator'
-2026-08-13T05:53:31.365Z  INFO 1 --- [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8123 (http) with context path '/'
-2026-08-13T05:53:31.373Z  INFO 1 --- [main] com.miguno.javadockerbuild.App           : Started App in 2.064 seconds (process running for 2.464)
+2026-08-13T06:01:33.438Z  INFO 1 --- [main] com.miguno.javadockerbuild.App           : Starting App v1.0.0-SNAPSHOT using Java 25.0.3 with PID 1 (/app/app.jar started by appuser in /app)
+2026-08-13T06:01:33.442Z  INFO 1 --- [main] com.miguno.javadockerbuild.App           : No active profile set, falling back to 1 default profile: "default"
+2026-08-13T06:01:34.269Z  INFO 1 --- [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8123 (http)
+2026-08-13T06:01:34.277Z  INFO 1 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-08-13T06:01:34.278Z  INFO 1 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.22]
+2026-08-13T06:01:34.295Z  INFO 1 --- [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 813 ms
+2026-08-13T06:01:34.736Z  INFO 1 --- [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name userDetailsService
+2026-08-13T06:01:35.138Z  INFO 1 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 13 endpoints beneath base path '/actuator'
+2026-08-13T06:01:35.185Z  INFO 1 --- [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8123 (http) with context path '/'
+2026-08-13T06:01:35.195Z  INFO 1 --- [main] com.miguno.javadockerbuild.App           : Started App in 2.044 seconds (process running for 2.447)
 ```
 
 </details>
@@ -124,7 +124,7 @@ $ curl http://localhost:8123/welcome
 # Local usage without Docker
 
 You can also build, test, package, and run the Java application locally
-(without Docker) if you have JDK 22+ installed. You do not need to have Maven
+(without Docker) if you have JDK 25+ installed. You do not need to have Maven
 installed, because this repository contains the
 [Maven Wrapper](https://github.com/apache/maven-wrapper) `mvnw` (use `mvnw.cmd`
 on Windows).
@@ -134,10 +134,10 @@ on Windows).
 $ ./mvnw clean verify package
 
 # Run the application locally.
-$ ./mvnw spring-boot:run -Dspring-boot.run.jvmArguments="-XX:+UseZGC -XX:+ZGenerational"
+$ ./mvnw spring-boot:run -Dspring-boot.run.jvmArguments="-XX:+UseZGC"
 
 # Alternatively, run the application locally via its jar file.
-$ java -XX:+UseZGC -XX:+ZGenerational -jar target/app.jar
+$ java -XX:+UseZGC -jar target/app.jar
 ```
 
 # Appendix
