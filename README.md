@@ -97,18 +97,18 @@ Starting container for image 'miguno/java-docker-build-tutorial:latest', exposin
   '  |____| .__|_| |_|_| |_\__, | / / / /
  =========|_|==============|___/=/_/_/_/
 
- :: Spring Boot ::                (v3.3.3)
+ :: Spring Boot ::                (v4.1.0)
 
-2024-08-26T15:45:08.859Z  INFO 1 --- [main] com.miguno.javadockerbuild.App           : Starting App v1.0.0-SNAPSHOT using Java 22.0.2 with PID 1 (/app/app.jar started by appuser in /app)
-2024-08-26T15:45:08.868Z  INFO 1 --- [main] com.miguno.javadockerbuild.App           : No active profile set, falling back to 1 default profile: "default"
-2024-08-26T15:45:10.930Z  INFO 1 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8123 (http)
-2024-08-26T15:45:10.950Z  INFO 1 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2024-08-26T15:45:10.951Z  INFO 1 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.28]
-2024-08-26T15:45:10.991Z  INFO 1 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2024-08-26T15:45:10.992Z  INFO 1 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2004 ms
-2024-08-26T15:45:12.452Z  INFO 1 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
-2024-08-26T15:45:12.562Z  INFO 1 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8123 (http) with context path '/'
-2024-08-26T15:45:12.597Z  INFO 1 --- [main] com.miguno.javadockerbuild.App           : Started App in 5.0 seconds (process running for 6.246)
+2026-08-13T05:53:29.594Z  INFO 1 --- [main] com.miguno.javadockerbuild.App           : Starting App v1.0.0-SNAPSHOT using Java 23.0.2 with PID 1 (/app/app.jar started by appuser in /app)
+2026-08-13T05:53:29.597Z  INFO 1 --- [main] com.miguno.javadockerbuild.App           : No active profile set, falling back to 1 default profile: "default"
+2026-08-13T05:53:30.414Z  INFO 1 --- [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8123 (http)
+2026-08-13T05:53:30.423Z  INFO 1 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-08-13T05:53:30.424Z  INFO 1 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.22]
+2026-08-13T05:53:30.441Z  INFO 1 --- [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 802 ms
+2026-08-13T05:53:30.905Z  INFO 1 --- [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name userDetailsService
+2026-08-13T05:53:31.318Z  INFO 1 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 13 endpoints beneath base path '/actuator'
+2026-08-13T05:53:31.365Z  INFO 1 --- [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8123 (http) with context path '/'
+2026-08-13T05:53:31.373Z  INFO 1 --- [main] com.miguno.javadockerbuild.App           : Started App in 2.064 seconds (process running for 2.464)
 ```
 
 </details>

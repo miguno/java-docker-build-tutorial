@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.5.7</version> <!-- To set Spring version project-wide. -->
+        <version>4.1.0</version> <!-- To set Spring version project-wide. -->
         <relativePath/> <!-- Lookup parent from repository. -->
     </parent>
 
@@ -59,7 +59,7 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <!-- Dependencies (other than Maven plugins) -->
         <micrometer.version>1.17.0</micrometer.version>
-        <springdoc.version>2.8.14</springdoc.version>
+        <springdoc.version>3.1.0</springdoc.version>
         <spring-boot-admin.version>3.4.5</spring-boot-admin.version>
         <!-- Maven plugins -->
         <maven-project-info-reports-plugin.version>3.9.0</maven-project-info-reports-plugin.version>
@@ -116,6 +116,28 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <!--
+                Provides `@AutoConfigureMockMvc` and the MockMvc test support
+                for Spring MVC. Since Spring Boot 4, this is a separate module
+                and no longer part of `spring-boot-starter-test`.
+            -->
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-webmvc-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <!--
+                Provides `RestTestClient` support to call a running server in
+                integration tests. Since Spring Boot 4, this is a separate
+                module and no longer part of `spring-boot-starter-test`.
+            -->
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-resttestclient</artifactId>
             <scope>test</scope>
         </dependency>
 

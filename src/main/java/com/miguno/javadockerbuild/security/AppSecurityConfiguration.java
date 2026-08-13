@@ -3,7 +3,7 @@ package com.miguno.javadockerbuild.security;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
+import org.springframework.boot.security.autoconfigure.SecurityProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -19,7 +19,6 @@ import org.springframework.security.web.authentication.SavedRequestAwareAuthenti
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.csrf.CsrfTokenRequestAttributeHandler;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 /** Secures the endpoints of this application. */
 @Configuration(proxyBeanMethods = false)
@@ -45,10 +44,9 @@ public class AppSecurityConfiguration {
    *
    * @param http Supplied by Spring.
    * @return The applications' security filter chain.
-   * @throws Exception Unclear when that happens.
    */
   @Bean
-  protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+  protected SecurityFilterChain filterChain(HttpSecurity http) {
     SavedRequestAwareAuthenticationSuccessHandler successHandler =
         new SavedRequestAwareAuthenticationSuccessHandler();
     successHandler.setTargetUrlParameter("redirectTo");
@@ -67,16 +65,16 @@ public class AppSecurityConfiguration {
             (authorizeRequests) ->
                 authorizeRequests
                     .requestMatchers(
-                        new AntPathRequestMatcher("/"),
+                        "/",
                         // Permit public access to this app's example endpoint at `/welcome`.
-                        new AntPathRequestMatcher("/welcome/**"),
+                        "/welcome/**",
                         // Permit public access to Swagger.
-                        new AntPathRequestMatcher("/swagger-ui.html"),
-                        new AntPathRequestMatcher("/v3/api-docs"),
+                        "/swagger-ui.html",
+                        "/v3/api-docs",
                         // Permit public access to a subset of actuator endpoints.
-                        new AntPathRequestMatcher("/actuator/health"),
-                        new AntPathRequestMatcher("/actuator/info"),
-                        new AntPathRequestMatcher("/actuator/prometheus"))
+                        "/actuator/health",
+                        "/actuator/info",
+                        "/actuator/prometheus")
                     .permitAll()
                     // All other requests must be authenticated.
                     .anyRequest()
